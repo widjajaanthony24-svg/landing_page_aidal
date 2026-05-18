@@ -35,8 +35,8 @@ body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;f
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:62px;border-bottom:1px solid var(--border);background:rgba(7,8,9,0.97);backdrop-filter:blur(16px);}
 .logo{display:flex;align-items:center;text-decoration:none;}
-.logo img{height:30px;width:auto;}
-.logo-fallback{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--cream);letter-spacing:2px;display:block;line-height:1;}
+.logo img{height:38px;width:140px;object-fit:contain;object-position:left center;}
+.logo-fallback{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--cream);letter-spacing:2px;display:none;line-height:1;}
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
 .nav-links a{color:var(--cream-faint);text-decoration:none;font-size:12px;letter-spacing:0.3px;transition:color .2s;}
 .nav-links a:hover{color:var(--cream);}
@@ -292,6 +292,7 @@ h1{animation:fadeUp .6s .08s ease both;}
 <div class="sticky-header">
 <nav>
   <a href="#" class="logo">
+    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
     <span class="logo-fallback">AIDAL.</span>
   </a>
   <ul class="nav-links">

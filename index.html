@@ -34,9 +34,9 @@ body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;f
 
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:62px;border-bottom:1px solid var(--border);background:rgba(7,8,9,0.97);backdrop-filter:blur(16px);}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo img{height:40px;width:40px;object-fit:contain;mix-blend-mode:screen;flex-shrink:0;}
-.logo-fallback{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--cream);letter-spacing:2px;display:block;line-height:1;}
+.logo{display:flex;align-items:center;text-decoration:none;}
+.logo img{height:52px;width:auto;object-fit:contain;mix-blend-mode:screen;}
+.logo-fallback{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--cream);letter-spacing:2px;display:none;line-height:1;}
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
 .nav-links a{color:var(--cream-faint);text-decoration:none;font-size:12px;letter-spacing:0.3px;transition:color .2s;}
 .nav-links a:hover{color:var(--cream);}
@@ -242,9 +242,9 @@ h2 em{font-style:italic;color:var(--cream-dim);}
 .signup-note{margin-top:1.25rem;font-size:11px;color:rgba(240,235,224,.2);text-align:center;}
 
 footer{border-top:1px solid var(--border);padding:1.75rem 4rem;display:flex;justify-content:space-between;align-items:center;}
-.footer-logo{display:flex;align-items:center;gap:8px;}
-.footer-logo img{height:36px;width:36px;object-fit:contain;mix-blend-mode:screen;flex-shrink:0;}
-.footer-logo-fallback{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);letter-spacing:2px;display:block;line-height:1;}
+.footer-logo{display:flex;align-items:center;}
+.footer-logo img{height:44px;width:auto;object-fit:contain;mix-blend-mode:screen;}
+.footer-logo-fallback{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);letter-spacing:2px;display:none;line-height:1;}
 .footer-note{font-size:10px;color:rgba(240,235,224,.18);max-width:400px;text-align:center;line-height:1.6;}
 footer>p{font-size:11px;color:var(--cream-faint);}
 
@@ -294,7 +294,7 @@ h1{animation:fadeUp .6s .08s ease both;}
 <nav>
   <a href="#" class="logo">
     <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
-    <span class="logo-fallback">AIDAL.</span>
+    <span class="logo-fallback" style="display:none">AIDAL.</span>
   </a>
   <ul class="nav-links">
     <li><a href="#how">How it works</a></li>
@@ -549,8 +549,8 @@ h1{animation:fadeUp .6s .08s ease both;}
 
 <footer>
   <div class="footer-logo">
-    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="" onerror="this.style.display='none'"/>
-    <span class="footer-logo-fallback">AIDAL.</span>
+    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span class="footer-logo-fallback" style="display:none">AIDAL.</span>
   </div>
   <p class="footer-note">AIDAL provides technical audit infrastructure. Not a law firm. Not legal advice. Consult a licensed compliance lawyer.</p>
   <p>try.aidal@gmail.com &nbsp;·&nbsp; © 2026 AIDAL</p>

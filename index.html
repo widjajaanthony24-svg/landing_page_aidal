@@ -913,32 +913,18 @@ function runDemo(){
   btn.textContent="SEALING...";
   btn.classList.add("sealing");
 
-  fetch("https://aidal-production.up.railway.app/decision",{
-    method:"POST",
-    headers:{"Content-Type":"application/json","Authorization":"Bearer aidal_live_enY1UiQqScHQ7bi6sVORCMgls1xb0j7Z"},
-    body:JSON.stringify({decision_type:type,model_used:"demo-model-v1",input_features:{company:company,demo:true},output:{approved:true,confidence:0.91},jurisdiction:jur})
-  })
-  .then(function(r){return r.json();})
-  .then(function(d){
+  // Generate realistic fake data locally — no API call
+  var hex="0123456789abcdef";
+  function rndHex(n){var s="";for(var i=0;i<n;i++)s+=hex[Math.floor(Math.random()*16)];return s;}
+  var auditId="aud_"+rndHex(8);
+  var hash="sha256:"+rndHex(32);
+  var compLabel="COMPLIANT — "+(jurLabel[jur]||jur);
+
+  // Short artificial delay so the SEALING... animation feels real (~800ms)
+  setTimeout(function(){
     btn.disabled=false;
     btn.textContent="SEAL THIS DECISION";
     btn.classList.remove("sealing");
-
-    // Log full response so we can see every field name the API returns
-    console.log("[AIDAL demo] API response:", JSON.stringify(d));
-
-    // Audit ID — try every common field name the API might use
-    var auditId = d.audit_id || d.id || d.record_id || d.auditId || d.audit_record_id || "";
-    if(!auditId && d.data) auditId = d.data.audit_id || d.data.id || "";
-    if(!auditId) auditId = "not returned by API";
-
-    // Hash — try every common field name
-    var rawHash = d.hash || d.sha256 || d.record_hash || d.checksum || "";
-    if(!rawHash && d.data) rawHash = d.data.hash || d.data.sha256 || "";
-    var hash = rawHash ? rawHash.slice(0,20)+"..." : "not returned by API";
-
-    var comp=(d.compliance&&d.compliance.status)?d.compliance.status:(d.compliance_status||"COMPLIANT");
-    var compLabel=comp+" — "+(jurLabel[jur]||jur);
 
     res.style.display="block";
 
@@ -951,7 +937,7 @@ function runDemo(){
 
     // Step 3 (900ms): hash typewriter
     demoVis("dr-row-hash",900);
-    demoTypeWriter("dr-hash",hash,920,25);
+    demoTypeWriter("dr-hash",hash,920,18);
 
     // Step 4 (1200ms): sealed checkmark
     demoVis("dr-sealed",1200);
@@ -967,19 +953,7 @@ function runDemo(){
 
     // Step 7 (2100ms): verify link
     demoVis("dr-verify",2100);
-  })
-  .catch(function(){
-    btn.disabled=false;
-    btn.textContent="SEAL THIS DECISION";
-    btn.classList.remove("sealing");
-    res.style.display="block";
-    demoVis("dr-sweep",0);
-    setTimeout(function(){
-      var el=document.getElementById("dr-error");
-      el.textContent="SEAL FAILED — check connection";
-      el.classList.add("vis");
-    },400);
-  });
+  },800);
 }
 
 function copyKey(){

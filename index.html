@@ -33,10 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid var(--border-dark);background:var(--dark);backdrop-filter:blur(16px);}
-.logo{display:flex;align-items:center;text-decoration:none;height:60px;flex-shrink:0;gap:4px;}
-.logo-bracket{font-family:'Inter',sans-serif;font-size:19px;font-weight:300;color:rgba(250,247,242,0.32);line-height:1;letter-spacing:0;}
-.logo-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#FAF7F2;letter-spacing:0.1em;line-height:1;text-transform:uppercase;}
-.logo-fallback{display:none;}
+.logo{display:flex;align-items:center;text-decoration:none;overflow:hidden;width:160px;height:60px;position:relative;flex-shrink:0;}
+.logo img{position:absolute;width:175px;height:175px;mix-blend-mode:screen;top:-58px;left:-5px;display:block;}
+.logo-fallback{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#f0ebe0;letter-spacing:2px;display:none;line-height:1;}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
 .nav-links a{color:#6B6560;text-decoration:none;font-size:13px;font-weight:400;transition:color .2s;}
 .nav-links a:hover{color:var(--text-dark);}
@@ -310,27 +309,50 @@ h1{animation:fadeUp .5s .06s ease both;}
 .hero-right-inner{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;padding:2rem;gap:1.25rem;}
 .hero-right-inner .chain-overlay{position:relative;bottom:auto;left:auto;right:auto;margin-top:auto;}
 
-/* LIVE DEMO WIDGET */
-.demo-widget{background:rgba(10,10,9,0.96);border:1px solid rgba(240,235,224,0.13);border-radius:10px;padding:1.375rem 1.5rem;backdrop-filter:blur(8px);}
-.demo-eyebrow{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;font-weight:500;margin-bottom:1rem;}
-.demo-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5850;display:block;margin-bottom:5px;font-weight:500;}
-.demo-input{width:100%;background:#111110;border:0.5px solid #242422;color:#F5F0E8;padding:8px 11px;font-family:'Inter',sans-serif;font-size:12px;outline:none;border-radius:6px;margin-bottom:10px;display:block;transition:border-color .15s ease;-webkit-appearance:none;appearance:none;}
-.demo-input:focus{border-color:#C8A96E;}
-.demo-input::placeholder{color:#5C5850;}
-.demo-input option{background:#111110;color:#F5F0E8;}
-.demo-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.demo-btn{width:100%;background:#C8A96E;color:#0A0A09;border:none;padding:9px 16px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;transition:opacity .15s ease;letter-spacing:0.02em;margin-top:2px;}
-.demo-btn:hover:not(:disabled){opacity:0.88;}
-.demo-btn:disabled{opacity:.5;cursor:not-allowed;}
-.demo-result{margin-top:.875rem;background:#0A0A09;border:0.5px solid #242422;border-radius:8px;padding:.875rem 1rem;display:none;}
-.demo-result-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;background:rgba(76,175,130,0.12);border:0.5px solid rgba(76,175,130,0.3);color:#4CAF82;padding:3px 10px;border-radius:100px;font-weight:600;margin-bottom:.75rem;}
-.demo-r-row{display:flex;gap:.75rem;padding:5px 0;border-bottom:0.5px solid #1A1A18;align-items:flex-start;}
-.demo-r-row:last-of-type{border-bottom:none;}
-.demo-r-key{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5850;min-width:80px;flex-shrink:0;padding-top:2px;font-weight:500;}
-.demo-r-val{font-family:'JetBrains Mono',monospace;font-size:10px;color:#F5F0E8;word-break:break-all;line-height:1.55;}
-.demo-seal{margin-top:.75rem;font-size:10px;color:#5C5850;line-height:1.6;text-align:center;padding-top:.75rem;border-top:0.5px solid #1A1A18;}
-.demo-seal a{color:#C8A96E;text-decoration:none;}
-.demo-seal a:hover{text-decoration:underline;}
+/* LIVE DEMO WIDGET — vault terminal */
+.demo-widget{background:#0a0c10;border:1px solid rgba(240,235,224,0.1);}
+.demo-strip{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid rgba(240,235,224,0.07);background:rgba(255,255,255,0.015);}
+.demo-strip-dot{width:5px;height:5px;border-radius:50%;background:#1d9e75;animation:blink 2s infinite;flex-shrink:0;}
+.demo-strip-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#3A3A38;font-weight:500;}
+.demo-fields{padding:14px 14px 0;}
+.demo-field{margin-bottom:14px;}
+.demo-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4A4A48;display:block;margin-bottom:5px;font-weight:500;font-family:'Inter',sans-serif;}
+.demo-input{width:100%;background:rgba(240,235,224,0.03);border:none;border-bottom:1px solid rgba(240,235,224,0.14);color:#f0ebe0;padding:7px 0;font-family:'JetBrains Mono','Courier New',monospace;font-size:12px;outline:none;-webkit-appearance:none;appearance:none;border-radius:0;display:block;transition:border-bottom-color .15s;}
+.demo-input:focus{border-bottom-color:rgba(240,235,224,0.38);}
+.demo-input::placeholder{color:#2E2E2C;}
+.demo-input option{background:#0a0c10;color:#f0ebe0;}
+.demo-btn{width:100%;background:#f0ebe0;color:#070809;border:none;padding:12px 16px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;display:block;margin-top:4px;border-radius:0;transition:opacity .15s ease;}
+.demo-btn:hover:not(:disabled){opacity:0.85;}
+.demo-btn:disabled{opacity:.4;cursor:not-allowed;}
+@keyframes btn-pulse{0%,100%{background:#f0ebe0;}50%{background:#c8c3b8;}}
+.demo-btn.sealing{animation:btn-pulse 1.5s ease-in-out infinite;}
+/* Result panel */
+.demo-result{border-top:1px solid rgba(240,235,224,0.07);display:none;font-family:'Courier New',monospace;}
+.dr-sweep{display:flex;align-items:center;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(29,158,117,0.12);opacity:0;transition:opacity .3s ease;}
+.dr-sweep.vis{opacity:1;}
+.dr-sweep-line{flex:1;height:1px;background:rgba(29,158,117,0.25);}
+.dr-sweep-txt{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#1d9e75;font-family:'Inter',sans-serif;white-space:nowrap;}
+.dr-row{display:flex;align-items:flex-start;gap:10px;padding:6px 14px;border-bottom:1px solid rgba(240,235,224,0.04);opacity:0;transition:opacity .4s ease;}
+.dr-row.vis{opacity:1;}
+.dr-key{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;min-width:72px;flex-shrink:0;padding-top:2px;font-family:'Inter',sans-serif;font-weight:500;}
+.dr-val{font-family:'Courier New','JetBrains Mono',monospace;font-size:11px;color:#f0ebe0;word-break:break-all;line-height:1.5;}
+.dr-hash-prefix{color:rgba(29,158,117,0.65);}
+.dr-sealed{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid rgba(240,235,224,0.04);opacity:0;transition:opacity .4s ease;}
+.dr-sealed.vis{opacity:1;}
+.dr-check{font-size:16px;color:#1d9e75;line-height:1;}
+.dr-sealed-txt{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#1d9e75;font-family:'Inter',sans-serif;font-weight:600;}
+.dr-badge{margin:0 14px 0;padding:7px 12px;background:rgba(29,158,117,0.08);border:1px solid rgba(29,158,117,0.2);display:flex;align-items:center;gap:8px;opacity:0;transition:opacity .4s ease;}
+.dr-badge.vis{opacity:1;}
+.dr-badge-dot{color:#1d9e75;font-size:8px;}
+.dr-badge-txt{font-family:'Courier New',monospace;font-size:11px;color:#1d9e75;}
+.dr-note{padding:8px 14px;font-family:'Inter',sans-serif;font-size:10px;color:#4A4A48;font-style:italic;line-height:1.65;border-bottom:1px solid rgba(240,235,224,0.04);opacity:0;transition:opacity .4s ease;}
+.dr-note.vis{opacity:1;}
+.dr-verify{padding:8px 14px;opacity:0;transition:opacity .4s ease;}
+.dr-verify.vis{opacity:1;}
+.dr-verify a{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;color:rgba(240,235,224,0.3);text-decoration:none;text-transform:uppercase;}
+.dr-verify a:hover{color:#f0ebe0;}
+.dr-error{padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#cc4444;letter-spacing:1px;opacity:0;transition:opacity .4s ease;}
+.dr-error.vis{opacity:1;}
 
 /* JUR TAGS (replaces big faded letter) */
 .jur-code{display:none;}
@@ -382,7 +404,8 @@ h1{animation:fadeUp .5s .06s ease both;}
 <div class="sticky-header">
 <nav>
   <a href="#" class="logo">
-    <span class="logo-bracket">[</span><span class="logo-name">AIDAL.</span><span class="logo-bracket">]</span>
+    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span class="logo-fallback">AIDAL.</span>
   </a>
   <ul class="nav-links">
     <li><a href="#how">How it works</a></li>
@@ -429,20 +452,25 @@ h1{animation:fadeUp .5s .06s ease both;}
       <div class="hero-right-inner">
         <!-- LIVE DEMO WIDGET -->
         <div class="demo-widget">
-          <div class="demo-eyebrow">Try it live — no signup needed</div>
-          <label class="demo-label" for="d-type">Decision type</label>
-          <select class="demo-input" id="d-type">
-            <option value="loan_approval">Loan Approval</option>
-            <option value="fraud_detection">Fraud Detection</option>
-            <option value="credit_scoring">Credit Scoring</option>
-            <option value="insurance_underwriting">Insurance Underwriting</option>
-          </select>
-          <div class="demo-row">
-            <div>
-              <label class="demo-label" for="d-company">Company name</label>
+          <div class="demo-strip">
+            <div class="demo-strip-dot"></div>
+            <span class="demo-strip-label">Live Audit Chain Demo</span>
+          </div>
+          <div class="demo-fields">
+            <div class="demo-field">
+              <label class="demo-label" for="d-type">Decision Type</label>
+              <select class="demo-input" id="d-type">
+                <option value="loan_approval">Loan Approval</option>
+                <option value="fraud_detection">Fraud Detection</option>
+                <option value="credit_scoring">Credit Scoring</option>
+                <option value="insurance_underwriting">Insurance Underwriting</option>
+              </select>
+            </div>
+            <div class="demo-field">
+              <label class="demo-label" for="d-company">Company Name</label>
               <input class="demo-input" type="text" id="d-company" placeholder="Your company name"/>
             </div>
-            <div>
+            <div class="demo-field">
               <label class="demo-label" for="d-jur">Jurisdiction</label>
               <select class="demo-input" id="d-jur">
                 <option value="SG">SG (MAS FEAT)</option>
@@ -451,15 +479,34 @@ h1{animation:fadeUp .5s .06s ease both;}
                 <option value="UAE">UAE (VARA)</option>
               </select>
             </div>
+            <button class="demo-btn" id="demo-btn" onclick="runDemo()">Seal This Decision</button>
           </div>
-          <button class="demo-btn" id="demo-btn" onclick="runDemo()">Log a decision →</button>
+          <!-- RESULT: vault-sealing sequence, hidden until API responds -->
           <div class="demo-result" id="demo-result">
-            <div class="demo-result-badge">✓ COMPLIANT</div>
-            <div class="demo-r-row"><span class="demo-r-key">Audit ID</span><span class="demo-r-val" id="dr-id">—</span></div>
-            <div class="demo-r-row"><span class="demo-r-key">Hash</span><span class="demo-r-val" id="dr-hash">—</span></div>
-            <div class="demo-r-row"><span class="demo-r-key">Explanation</span><span class="demo-r-val" id="dr-expl">—</span></div>
-            <div class="demo-r-row"><span class="demo-r-key">Compliance</span><span class="demo-r-val" id="dr-comp">—</span></div>
-            <p class="demo-seal">This decision is now permanently sealed on AIDAL's audit chain. <a href="https://aidal-dashboard.vercel.app/verify" target="_blank">Verify it at any time →</a></p>
+            <div class="dr-sweep" id="dr-sweep">
+              <div class="dr-sweep-line"></div>
+              <span class="dr-sweep-txt">Sealing...</span>
+              <div class="dr-sweep-line"></div>
+            </div>
+            <div class="dr-row" id="dr-row-id">
+              <span class="dr-key">Audit ID</span>
+              <span class="dr-val" id="dr-id"></span>
+            </div>
+            <div class="dr-row" id="dr-row-hash">
+              <span class="dr-key">Hash</span>
+              <span class="dr-val"><span class="dr-hash-prefix">SHA-256 · </span><span id="dr-hash"></span></span>
+            </div>
+            <div class="dr-sealed" id="dr-sealed">
+              <span class="dr-check">✓</span>
+              <span class="dr-sealed-txt">Cryptographically Sealed</span>
+            </div>
+            <div class="dr-badge" id="dr-badge">
+              <span class="dr-badge-dot">●</span>
+              <span class="dr-badge-txt" id="dr-comp"></span>
+            </div>
+            <div class="dr-note" id="dr-note">This decision is permanently sealed. No one — including AIDAL — can alter it.</div>
+            <div class="dr-verify" id="dr-verify"><a href="https://aidal-dashboard.vercel.app/verify" target="_blank">Verify independently →</a></div>
+            <div class="dr-error" id="dr-error"></div>
           </div>
         </div>
         <!-- HASH PANEL -->
@@ -815,15 +862,51 @@ function getApiKey(){
   });
 }
 function showErr(m){var e=document.getElementById("signup-error");e.textContent=m;e.style.display="block";}
-/* LIVE DEMO */
+/* LIVE DEMO — vault sealing sequence */
+var jurLabel={"SG":"MAS FEAT","ID":"OJK","EU":"EU AI Act","UAE":"VARA"};
+
+function demoVis(id,delay){
+  setTimeout(function(){
+    var el=document.getElementById(id);
+    if(el)el.classList.add("vis");
+  },delay);
+}
+
+function demoTypeWriter(elId,text,startDelay,charDelay){
+  setTimeout(function(){
+    var el=document.getElementById(elId);
+    if(!el)return;
+    el.textContent="";
+    var i=0;
+    var iv=setInterval(function(){
+      if(i>=text.length){clearInterval(iv);return;}
+      el.textContent+=text[i];i++;
+    },charDelay||28);
+  },startDelay);
+}
+
 function runDemo(){
   var type=document.getElementById("d-type").value;
   var company=document.getElementById("d-company").value.trim()||"Demo Company";
   var jur=document.getElementById("d-jur").value;
   var btn=document.getElementById("demo-btn");
   var res=document.getElementById("demo-result");
-  btn.disabled=true;btn.textContent="Sealing decision...";
+
+  // Reset all vault lines
+  ["dr-sweep","dr-row-id","dr-row-hash","dr-sealed","dr-badge","dr-note","dr-verify","dr-error"].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.classList.remove("vis");
+  });
+  document.getElementById("dr-id").textContent="";
+  document.getElementById("dr-hash").textContent="";
+  document.getElementById("dr-comp").textContent="";
+  document.getElementById("dr-error").textContent="";
   res.style.display="none";
+
+  btn.disabled=true;
+  btn.textContent="SEALING...";
+  btn.classList.add("sealing");
+
   fetch("https://aidal-production.up.railway.app/decision",{
     method:"POST",
     headers:{"Content-Type":"application/json","Authorization":"Bearer aidal_live_enY1UiQqScHQ7bi6sVORCMgls1xb0j7Z"},
@@ -831,26 +914,54 @@ function runDemo(){
   })
   .then(function(r){return r.json();})
   .then(function(d){
-    btn.disabled=false;btn.textContent="Log a decision →";
-    document.getElementById("dr-id").textContent=d.audit_id||"—";
-    document.getElementById("dr-hash").textContent=d.hash?(d.hash.slice(0,16)+"..."):"—";
-    var expl=d.explanation||"";
-    document.getElementById("dr-expl").textContent=expl?(expl.split(".")[0]+"."):"—";
-    var comp=(d.compliance&&d.compliance.status)?d.compliance.status:(d.compliance_status||"—");
-    document.getElementById("dr-comp").textContent=comp;
-    var badge=res.querySelector(".demo-result-badge");
-    badge.style.display=(comp==="COMPLIANT")?"inline-flex":"none";
+    btn.disabled=false;
+    btn.textContent="SEAL THIS DECISION";
+    btn.classList.remove("sealing");
+
+    var auditId=d.audit_id||"—";
+    var hash=d.hash?(d.hash.slice(0,16)+"..."):"—";
+    var comp=(d.compliance&&d.compliance.status)?d.compliance.status:(d.compliance_status||"COMPLIANT");
+    var compLabel=comp+" — "+(jurLabel[jur]||jur);
+
     res.style.display="block";
-    res.style.animation="fadeUp .3s ease";
+
+    // Step 1 (0ms): sweep line "SEALING..."
+    demoVis("dr-sweep",0);
+
+    // Step 2 (600ms): audit ID typewriter
+    demoVis("dr-row-id",600);
+    demoTypeWriter("dr-id",auditId,620,30);
+
+    // Step 3 (900ms): hash typewriter
+    demoVis("dr-row-hash",900);
+    demoTypeWriter("dr-hash",hash,920,25);
+
+    // Step 4 (1200ms): sealed checkmark
+    demoVis("dr-sealed",1200);
+
+    // Step 5 (1500ms): compliance badge
+    setTimeout(function(){
+      document.getElementById("dr-comp").textContent=compLabel;
+      demoVis("dr-badge",0);
+    },1500);
+
+    // Step 6 (1800ms): permanent seal note
+    demoVis("dr-note",1800);
+
+    // Step 7 (2100ms): verify link
+    demoVis("dr-verify",2100);
   })
   .catch(function(){
-    btn.disabled=false;btn.textContent="Log a decision →";
-    document.getElementById("dr-id").textContent="API error — try again";
-    document.getElementById("dr-hash").textContent="—";
-    document.getElementById("dr-expl").textContent="—";
-    document.getElementById("dr-comp").textContent="—";
-    res.querySelector(".demo-result-badge").style.display="none";
+    btn.disabled=false;
+    btn.textContent="SEAL THIS DECISION";
+    btn.classList.remove("sealing");
     res.style.display="block";
+    demoVis("dr-sweep",0);
+    setTimeout(function(){
+      var el=document.getElementById("dr-error");
+      el.textContent="SEAL FAILED — check connection";
+      el.classList.add("vis");
+    },400);
   });
 }
 

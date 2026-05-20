@@ -924,8 +924,19 @@ function runDemo(){
     btn.textContent="SEAL THIS DECISION";
     btn.classList.remove("sealing");
 
-    var auditId=d.audit_id||"—";
-    var hash=d.hash?(d.hash.slice(0,16)+"..."):"—";
+    // Log full response so we can see every field name the API returns
+    console.log("[AIDAL demo] API response:", JSON.stringify(d));
+
+    // Audit ID — try every common field name the API might use
+    var auditId = d.audit_id || d.id || d.record_id || d.auditId || d.audit_record_id || "";
+    if(!auditId && d.data) auditId = d.data.audit_id || d.data.id || "";
+    if(!auditId) auditId = "not returned by API";
+
+    // Hash — try every common field name
+    var rawHash = d.hash || d.sha256 || d.record_hash || d.checksum || "";
+    if(!rawHash && d.data) rawHash = d.data.hash || d.data.sha256 || "";
+    var hash = rawHash ? rawHash.slice(0,20)+"..." : "not returned by API";
+
     var comp=(d.compliance&&d.compliance.status)?d.compliance.status:(d.compliance_status||"COMPLIANT");
     var compLabel=comp+" — "+(jurLabel[jur]||jur);
 

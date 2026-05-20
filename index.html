@@ -39,8 +39,8 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
 .nav-links a{color:#6B6560;text-decoration:none;font-size:13px;font-weight:400;transition:color .2s;}
 .nav-links a:hover{color:var(--text-dark);}
-.nav-cta{background:var(--accent)!important;color:var(--dark)!important;border:none!important;padding:8px 20px!important;border-radius:6px!important;font-size:13px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;transition:background .2s!important;}
-.nav-cta:hover{background:var(--accent-hover)!important;color:var(--text-dark)!important;}
+.nav-cta{background:#f0ebe0!important;color:#070809!important;border:none!important;padding:8px 20px!important;border-radius:6px!important;font-size:13px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;transition:background .2s!important;}
+.nav-cta:hover{background:#ddd8ce!important;color:#070809!important;}
 
 /* HERO — dark */
 .hero-wrapper{position:relative;min-height:100vh;overflow:hidden;background:var(--dark);}
@@ -74,8 +74,8 @@ h1{font-family:'Inter',system-ui,sans-serif;font-size:clamp(2.5rem,5vw,4rem);fon
 h1 em{font-style:normal;color:#4A4A48;}
 .hero-sub{font-size:1.0625rem;color:#6B6560;max-width:420px;line-height:1.75;margin-bottom:2.5rem;font-weight:400;}
 .hero-actions{display:flex;gap:1rem;align-items:center;margin-bottom:3rem;flex-wrap:wrap;}
-.btn-primary{background:var(--accent);color:var(--dark);border:none;padding:0.8rem 1.75rem;border-radius:6px;font-size:0.9375rem;font-weight:600;letter-spacing:0;text-transform:none;text-decoration:none;cursor:pointer;transition:background .2s,color .2s;display:inline-block;font-family:'Inter',sans-serif;line-height:1;}
-.btn-primary:hover{background:var(--accent-hover);color:var(--text-dark);}
+.btn-primary{background:#f0ebe0;color:#070809;border:none;padding:0.8rem 1.75rem;border-radius:6px;font-size:0.9375rem;font-weight:600;letter-spacing:0;text-transform:none;text-decoration:none;cursor:pointer;transition:background .2s,color .2s;display:inline-block;font-family:'Inter',sans-serif;line-height:1;}
+.btn-primary:hover{background:#ddd8ce;color:#070809;}
 .btn-ghost{color:#6B6560;font-size:0.9375rem;text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;font-weight:400;}
 .btn-ghost:hover{color:var(--text-dark);}
 .btn-ghost::after{content:'→';transition:transform .2s;}
@@ -239,8 +239,8 @@ section#pricing p[style]{color:rgba(250,247,242,0.2)!important;}
 .price-features li{font-size:0.875rem;color:#6B6560;padding:7px 0;border-bottom:1px solid var(--border-dark);display:flex;align-items:center;gap:8px;}
 .price-features li:last-child{border-bottom:none;}
 .price-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);min-width:4px;}
-.price-btn{display:block;text-align:center;padding:11px 16px;background:var(--accent);color:var(--dark);text-decoration:none;font-size:0.875rem;font-weight:600;letter-spacing:0;text-transform:none;border-radius:6px;transition:background .2s,color .2s;cursor:pointer;border:none;width:100%;font-family:'Inter',sans-serif;}
-.price-btn:hover{background:var(--accent-hover);color:var(--text-dark);}
+.price-btn{display:block;text-align:center;padding:11px 16px;background:#f0ebe0;color:#070809;text-decoration:none;font-size:0.875rem;font-weight:600;letter-spacing:0;text-transform:none;border-radius:6px;transition:background .2s,color .2s;cursor:pointer;border:none;width:100%;font-family:'Inter',sans-serif;}
+.price-btn:hover{background:#ddd8ce;color:#070809;}
 
 /* SIGNUP */
 .signup-section{text-align:center;padding:9rem 4rem;max-width:720px;margin:0 auto;}
@@ -253,8 +253,8 @@ section#pricing p[style]{color:rgba(250,247,242,0.2)!important;}
 .signup-input{width:100%;background:#ffffff;border:0.5px solid #DDD8CE;color:#0F0F0E;padding:11px 14px;font-size:14px;border-radius:6px;outline:none;margin-bottom:9px;display:block;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
 .signup-input::placeholder{color:#9C9690;}
 .signup-input:focus{border-color:#C8A96E;box-shadow:0 0 0 3px rgba(200,169,110,0.08),inset 3px 0 0 #1d9e75;}
-.signup-btn{width:100%;background:var(--accent);color:var(--dark);border:none;padding:14px;font-size:0.9375rem;font-weight:600;border-radius:6px;cursor:pointer;transition:background .2s,color .2s;margin-top:4px;font-family:'Inter',sans-serif;}
-.signup-btn:hover{background:var(--accent-hover);color:var(--text-dark);}
+.signup-btn{width:100%;background:var(--dark);color:#f0ebe0;border:none;padding:14px;font-size:0.9375rem;font-weight:600;border-radius:6px;cursor:pointer;transition:background .2s,color .2s;margin-top:4px;font-family:'Inter',sans-serif;}
+.signup-btn:hover{background:#1A1A18;color:#f0ebe0;}
 .signup-btn:disabled{opacity:.45;cursor:not-allowed;}
 .key-result{display:none;margin-top:2rem;text-align:left;}
 .key-result-hdr{background:rgba(29,158,117,.06);border:1px solid rgba(29,158,117,.2);padding:.875rem 1.125rem;margin-bottom:1px;display:flex;align-items:center;gap:7px;border-radius:6px 6px 0 0;}
@@ -482,7 +482,7 @@ h1{animation:fadeUp .5s .06s ease both;}
             <button class="demo-btn" id="demo-btn" onclick="runDemo()">Seal This Decision</button>
           </div>
           <!-- RESULT: vault-sealing sequence, hidden until API responds -->
-          <div class="demo-result" id="demo-result">
+          <div class="demo-result" id="demo-result" style="display:none">
             <div class="dr-sweep" id="dr-sweep">
               <div class="dr-sweep-line"></div>
               <span class="dr-sweep-txt">Sealing...</span>

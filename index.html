@@ -33,9 +33,10 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid var(--border-dark);background:var(--dark);backdrop-filter:blur(16px);}
-.logo{display:flex;align-items:center;text-decoration:none;overflow:hidden;width:160px;height:60px;position:relative;flex-shrink:0;}
-.logo img{position:absolute;width:175px;height:175px;mix-blend-mode:screen;top:-58px;left:-5px;display:block;}
-.logo-fallback{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text-dark);letter-spacing:2px;display:none;line-height:1;}
+.logo{display:flex;align-items:center;text-decoration:none;height:60px;flex-shrink:0;gap:4px;}
+.logo-bracket{font-family:'Inter',sans-serif;font-size:19px;font-weight:300;color:rgba(250,247,242,0.32);line-height:1;letter-spacing:0;}
+.logo-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#FAF7F2;letter-spacing:0.1em;line-height:1;text-transform:uppercase;}
+.logo-fallback{display:none;}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
 .nav-links a{color:#6B6560;text-decoration:none;font-size:13px;font-weight:400;transition:color .2s;}
 .nav-links a:hover{color:var(--text-dark);}
@@ -50,7 +51,7 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem
 .hero-right{position:relative;overflow:hidden;border-left:1px solid var(--border-dark);}
 
 /* CHAIN IMAGE — restrained */
-.chain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;mix-blend-mode:luminosity;opacity:0.3;filter:contrast(1.05) brightness(0.55) saturate(0.7);}
+.chain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;mix-blend-mode:luminosity;opacity:0.15;filter:contrast(1.05) brightness(0.55) saturate(0.7);}
 .chain-fade-top{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(to bottom,var(--dark),transparent);z-index:2;}
 .chain-fade-bottom{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--dark),transparent);z-index:2;}
 .chain-fade-left{position:absolute;top:0;left:0;bottom:0;width:30%;background:linear-gradient(to right,var(--dark),transparent);z-index:2;}
@@ -252,7 +253,7 @@ section#pricing p[style]{color:rgba(250,247,242,0.2)!important;}
 .signup-trust{font-size:13px;color:#9C9690;text-align:center;margin-bottom:1rem;}
 .signup-input{width:100%;background:#ffffff;border:0.5px solid #DDD8CE;color:#0F0F0E;padding:11px 14px;font-size:14px;border-radius:6px;outline:none;margin-bottom:9px;display:block;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
 .signup-input::placeholder{color:#9C9690;}
-.signup-input:focus{border-color:#C8A96E;box-shadow:0 0 0 3px rgba(200,169,110,0.12);}
+.signup-input:focus{border-color:#C8A96E;box-shadow:0 0 0 3px rgba(200,169,110,0.08),inset 3px 0 0 #1d9e75;}
 .signup-btn{width:100%;background:var(--accent);color:var(--dark);border:none;padding:14px;font-size:0.9375rem;font-weight:600;border-radius:6px;cursor:pointer;transition:background .2s,color .2s;margin-top:4px;font-family:'Inter',sans-serif;}
 .signup-btn:hover{background:var(--accent-hover);color:var(--text-dark);}
 .signup-btn:disabled{opacity:.45;cursor:not-allowed;}
@@ -305,6 +306,59 @@ h1{animation:fadeUp .5s .06s ease both;}
 .hero-actions{animation:fadeUp .5s .18s ease both;}
 .hero-stats{animation:fadeUp .5s .24s ease both;}
 
+/* HERO RIGHT — flex content wrapper */
+.hero-right-inner{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;padding:2rem;gap:1.25rem;}
+.hero-right-inner .chain-overlay{position:relative;bottom:auto;left:auto;right:auto;margin-top:auto;}
+
+/* LIVE DEMO WIDGET */
+.demo-widget{background:rgba(10,10,9,0.96);border:1px solid rgba(240,235,224,0.13);border-radius:10px;padding:1.375rem 1.5rem;backdrop-filter:blur(8px);}
+.demo-eyebrow{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;font-weight:500;margin-bottom:1rem;}
+.demo-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5850;display:block;margin-bottom:5px;font-weight:500;}
+.demo-input{width:100%;background:#111110;border:0.5px solid #242422;color:#F5F0E8;padding:8px 11px;font-family:'Inter',sans-serif;font-size:12px;outline:none;border-radius:6px;margin-bottom:10px;display:block;transition:border-color .15s ease;-webkit-appearance:none;appearance:none;}
+.demo-input:focus{border-color:#C8A96E;}
+.demo-input::placeholder{color:#5C5850;}
+.demo-input option{background:#111110;color:#F5F0E8;}
+.demo-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.demo-btn{width:100%;background:#C8A96E;color:#0A0A09;border:none;padding:9px 16px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;transition:opacity .15s ease;letter-spacing:0.02em;margin-top:2px;}
+.demo-btn:hover:not(:disabled){opacity:0.88;}
+.demo-btn:disabled{opacity:.5;cursor:not-allowed;}
+.demo-result{margin-top:.875rem;background:#0A0A09;border:0.5px solid #242422;border-radius:8px;padding:.875rem 1rem;display:none;}
+.demo-result-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;background:rgba(76,175,130,0.12);border:0.5px solid rgba(76,175,130,0.3);color:#4CAF82;padding:3px 10px;border-radius:100px;font-weight:600;margin-bottom:.75rem;}
+.demo-r-row{display:flex;gap:.75rem;padding:5px 0;border-bottom:0.5px solid #1A1A18;align-items:flex-start;}
+.demo-r-row:last-of-type{border-bottom:none;}
+.demo-r-key{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5850;min-width:80px;flex-shrink:0;padding-top:2px;font-weight:500;}
+.demo-r-val{font-family:'JetBrains Mono',monospace;font-size:10px;color:#F5F0E8;word-break:break-all;line-height:1.55;}
+.demo-seal{margin-top:.75rem;font-size:10px;color:#5C5850;line-height:1.6;text-align:center;padding-top:.75rem;border-top:0.5px solid #1A1A18;}
+.demo-seal a{color:#C8A96E;text-decoration:none;}
+.demo-seal a:hover{text-decoration:underline;}
+
+/* JUR TAGS (replaces big faded letter) */
+.jur-code{display:none;}
+.jur-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 9px;border-radius:4px;margin-bottom:.875rem;font-family:'JetBrains Mono',monospace;}
+.jur-tag-id{background:rgba(200,169,110,0.1);color:#C8A96E;border:0.5px solid rgba(200,169,110,0.25);}
+.jur-tag-sg{background:rgba(29,158,117,0.1);color:#1d9e75;border:0.5px solid rgba(29,158,117,0.25);}
+.jur-tag-eu{background:rgba(100,140,210,0.1);color:#6699DD;border:0.5px solid rgba(100,140,210,0.25);}
+.jur-tag-uae{background:rgba(180,100,60,0.1);color:#CC7744;border:0.5px solid rgba(180,100,60,0.25);}
+
+/* COMPARISON TABLE */
+.comparison-table{border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin-top:3rem;}
+.cmp-thead{display:grid;grid-template-columns:1.4fr 1fr 1fr;background:var(--bg-alt);border-bottom:1px solid var(--border-light);padding:.875rem 1.5rem;gap:0;}
+.cmp-thead-empty{font-size:11px;color:transparent;}
+.cmp-thead-aidal{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);font-weight:600;}
+.cmp-thead-alt{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.cmp-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;padding:1rem 1.5rem;border-bottom:1px solid var(--border-light);align-items:center;transition:background .15s;}
+.cmp-row:last-child{border-bottom:none;}
+.cmp-row:hover{background:var(--bg-alt);}
+.cmp-row-label{font-size:.875rem;color:var(--text);font-weight:500;}
+.cmp-row-aidal{font-size:.875rem;color:var(--text);display:flex;align-items:center;gap:7px;}
+.cmp-row-aidal::before{content:'✓';color:var(--green);font-weight:700;font-size:13px;}
+.cmp-row-alt{font-size:.875rem;color:var(--muted);}
+.cmp-row-alt small{font-size:11px;color:var(--cream-faint);display:block;margin-top:1px;}
+
+/* SIGNUP TRUST SIGNALS */
+.signup-trust-signals{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;font-size:11px;color:#9C9690;flex-wrap:wrap;}
+.signup-trust-signals .ts-sep{color:#DDD8CE;}
+
 @media(max-width:960px){
   .top-deadline{padding:8px 1.5rem;font-size:10px;gap:1rem;}
   nav{padding:0 1.5rem;height:52px;}
@@ -328,8 +382,7 @@ h1{animation:fadeUp .5s .06s ease both;}
 <div class="sticky-header">
 <nav>
   <a href="#" class="logo">
-    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
-    <span class="logo-fallback">AIDAL.</span>
+    <span class="logo-bracket">[</span><span class="logo-name">AIDAL.</span><span class="logo-bracket">]</span>
   </a>
   <ul class="nav-links">
     <li><a href="#how">How it works</a></li>
@@ -373,15 +426,53 @@ h1{animation:fadeUp .5s .06s ease both;}
       <div class="chain-fade-top"></div>
       <div class="chain-fade-bottom"></div>
       <div class="chain-fade-left"></div>
-      <div class="chain-overlay">
-        <div class="chain-overlay-row">
-          <span class="chain-overlay-title">Audit chain</span>
-          <span class="live-badge"><div class="live-dot"></div>Live</span>
+      <div class="hero-right-inner">
+        <!-- LIVE DEMO WIDGET -->
+        <div class="demo-widget">
+          <div class="demo-eyebrow">Try it live — no signup needed</div>
+          <label class="demo-label" for="d-type">Decision type</label>
+          <select class="demo-input" id="d-type">
+            <option value="loan_approval">Loan Approval</option>
+            <option value="fraud_detection">Fraud Detection</option>
+            <option value="credit_scoring">Credit Scoring</option>
+            <option value="insurance_underwriting">Insurance Underwriting</option>
+          </select>
+          <div class="demo-row">
+            <div>
+              <label class="demo-label" for="d-company">Company name</label>
+              <input class="demo-input" type="text" id="d-company" placeholder="Your company name"/>
+            </div>
+            <div>
+              <label class="demo-label" for="d-jur">Jurisdiction</label>
+              <select class="demo-input" id="d-jur">
+                <option value="SG">SG (MAS FEAT)</option>
+                <option value="ID">ID (OJK)</option>
+                <option value="EU">EU (EU AI Act)</option>
+                <option value="UAE">UAE (VARA)</option>
+              </select>
+            </div>
+          </div>
+          <button class="demo-btn" id="demo-btn" onclick="runDemo()">Log a decision →</button>
+          <div class="demo-result" id="demo-result">
+            <div class="demo-result-badge">✓ COMPLIANT</div>
+            <div class="demo-r-row"><span class="demo-r-key">Audit ID</span><span class="demo-r-val" id="dr-id">—</span></div>
+            <div class="demo-r-row"><span class="demo-r-key">Hash</span><span class="demo-r-val" id="dr-hash">—</span></div>
+            <div class="demo-r-row"><span class="demo-r-key">Explanation</span><span class="demo-r-val" id="dr-expl">—</span></div>
+            <div class="demo-r-row"><span class="demo-r-key">Compliance</span><span class="demo-r-val" id="dr-comp">—</span></div>
+            <p class="demo-seal">This decision is now permanently sealed on AIDAL's audit chain. <a href="https://aidal-dashboard.vercel.app/verify" target="_blank">Verify it at any time →</a></p>
+          </div>
         </div>
-        <div class="hash-list" id="hash-list">
-          <div class="hash-row"><div class="hash-row-dot"></div><span>a7f3c9b2e4d81f06c3a9...</span></div>
-          <div class="hash-row"><div class="hash-row-dot"></div><span>3e8b2a91c7f04d22b185...</span></div>
-          <div class="hash-row active" id="latest-hash"><div class="hash-row-dot"></div><span>f2c7a3e9b1d58031e742...</span></div>
+        <!-- HASH PANEL -->
+        <div class="chain-overlay">
+          <div class="chain-overlay-row">
+            <span class="chain-overlay-title">Audit chain</span>
+            <span class="live-badge"><div class="live-dot"></div>Live</span>
+          </div>
+          <div class="hash-list" id="hash-list">
+            <div class="hash-row"><div class="hash-row-dot"></div><span>a7f3c9b2e4d81f06c3a9...</span></div>
+            <div class="hash-row"><div class="hash-row-dot"></div><span>3e8b2a91c7f04d22b185...</span></div>
+            <div class="hash-row active" id="latest-hash"><div class="hash-row-dot"></div><span>f2c7a3e9b1d58031e742...</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -456,10 +547,10 @@ h1{animation:fadeUp .5s .06s ease both;}
   <h2 class="reveal delay-1">Built for your<br><em>specific regulator.</em></h2>
   <p class="reveal delay-2" style="font-size:14px;color:var(--cream-faint);max-width:500px;margin-bottom:1rem;line-height:1.8;">Pass your jurisdiction code and AIDAL automatically checks compliance, flags missing fields, and tells you exactly what your regulator requires.</p>
   <div class="grid-4">
-    <div class="grid-4-card reveal"><span class="jur-code">ID</span><h3>OJK Indonesia</h3><p>POJK No. 11/POJK.03/2022. AI decisions must be explainable and retained for 5 years.</p><span class="badge">5 yr retention</span></div>
-    <div class="grid-4-card reveal delay-1"><span class="jur-code">SG</span><h3>MAS FEAT Singapore</h3><p>Fairness, Ethics, Accountability, Transparency. All financial AI must be auditable.</p><span class="badge">5 yr retention</span></div>
-    <div class="grid-4-card reveal delay-2"><span class="jur-code">EU</span><h3>EU AI Act</h3><p>Articles 9–17. Automatic logging mandatory. Plain-language explanations required. Fines up to €30M.</p><span class="badge">10 yr retention</span></div>
-    <div class="grid-4-card reveal delay-3"><span class="jur-code">UAE</span><h3>VARA UAE</h3><p>AI decisions for crypto and fintech must be risk-classified and auditable.</p><span class="badge">7 yr retention</span></div>
+    <div class="grid-4-card reveal"><div class="jur-tag jur-tag-id">ID</div><h3>OJK Indonesia</h3><p>POJK No. 11/POJK.03/2022. AI decisions must be explainable and retained for 5 years.</p><span class="badge">5 yr retention</span></div>
+    <div class="grid-4-card reveal delay-1"><div class="jur-tag jur-tag-sg">SG</div><h3>MAS FEAT Singapore</h3><p>Fairness, Ethics, Accountability, Transparency. All financial AI must be auditable.</p><span class="badge">5 yr retention</span></div>
+    <div class="grid-4-card reveal delay-2"><div class="jur-tag jur-tag-eu">EU</div><h3>EU AI Act</h3><p>Articles 9–17. Automatic logging mandatory. Plain-language explanations required. Fines up to €30M.</p><span class="badge">10 yr retention</span></div>
+    <div class="grid-4-card reveal delay-3"><div class="jur-tag jur-tag-uae">UAE</div><h3>VARA UAE</h3><p>AI decisions for crypto and fintech must be risk-classified and auditable.</p><span class="badge">7 yr retention</span></div>
   </div>
 </section>
 
@@ -468,10 +559,28 @@ h1{animation:fadeUp .5s .06s ease both;}
 <section class="section">
   <div class="section-eyebrow reveal">Why AIDAL</div>
   <h2 class="reveal delay-1">Cheaper, faster,<br><em>already built.</em></h2>
-  <div class="grid-3">
-    <div class="grid-3-card reveal"><span class="big-num">30</span><h3>Minutes to integrate</h3><p>One API call. Any language. IBM OpenPages takes 6 months and $50k. AIDAL takes 30 minutes and $299/month.</p></div>
-    <div class="grid-3-card reveal delay-1"><span class="big-num">4</span><h3>Jurisdictions auto-checked</h3><p>OJK, MAS FEAT, EU AI Act, VARA — every decision is checked against the right rules automatically.</p></div>
-    <div class="grid-3-card reveal delay-2"><span class="big-num" id="days-stat2">74</span><h3>Days until EU AI Act</h3><p>The deadline is August 2026. AIDAL is live now. Your competitors are still planning.</p></div>
+  <span id="days-stat2" style="display:none"></span>
+  <div class="comparison-table reveal delay-1">
+    <div class="cmp-thead">
+      <span class="cmp-thead-empty"></span>
+      <span class="cmp-thead-aidal">AIDAL</span>
+      <span class="cmp-thead-alt">Alternative</span>
+    </div>
+    <div class="cmp-row">
+      <span class="cmp-row-label">Integration time</span>
+      <span class="cmp-row-aidal">30 minutes</span>
+      <span class="cmp-row-alt">6 months<small>IBM OpenPages</small></span>
+    </div>
+    <div class="cmp-row">
+      <span class="cmp-row-label">Cost</span>
+      <span class="cmp-row-aidal">$299/mo</span>
+      <span class="cmp-row-alt">$50k+<small>Building in-house</small></span>
+    </div>
+    <div class="cmp-row">
+      <span class="cmp-row-label">Proof type</span>
+      <span class="cmp-row-aidal">Cryptographic proof</span>
+      <span class="cmp-row-alt">Database testimony<small>No dedicated solution</small></span>
+    </div>
   </div>
 </section>
 
@@ -502,8 +611,8 @@ h1{animation:fadeUp .5s .06s ease both;}
   <div class="verify-inner">
     <div>
       <div class="section-eyebrow reveal">Independent verification</div>
-      <h2 class="reveal delay-1" style="font-size:clamp(30px,3.5vw,48px);">Anyone can verify.<br><em>No account needed.</em></h2>
-      <p class="reveal delay-2" style="font-size:14px;color:var(--cream-faint);line-height:1.8;margin-bottom:2.5rem;">Every AI decision logged in AIDAL can be independently verified by anyone — regulators, auditors, customers, or courts. No login. No API key. Just math.</p>
+      <h2 class="reveal delay-1" style="font-size:clamp(30px,3.5vw,48px);">Your database is testimony.<br><em>This is proof.</em></h2>
+      <p class="reveal delay-2" style="font-size:14px;color:var(--cream-faint);line-height:1.8;margin-bottom:2.5rem;">A regulator doesn't trust what you control. AIDAL's SHA-256 hash chain is mathematically verifiable by anyone, independent of AIDAL's servers. That is the difference between passing an audit and failing one.</p>
       <div class="reveal delay-3" style="display:flex;gap:1rem;flex-wrap:wrap;">
         <a href="https://aidal-dashboard.vercel.app/verify" target="_blank" class="btn-primary">Verify a record →</a>
         <a href="https://github.com/widjajaanthony24-svg/aidal-anchors" target="_blank" style="color:var(--cream-faint);padding:13px 24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:1px solid var(--border-mid);">View anchor log →</a>
@@ -565,8 +674,15 @@ h1{animation:fadeUp .5s .06s ease both;}
   <div class="signup-card reveal delay-3">
     <input id="s-name" class="signup-input" type="text" placeholder="Company name"/>
     <input id="s-email" class="signup-input" type="email" placeholder="Work email"/>
-    <p class="signup-trust">No credit card. No manual approval. Start logging decisions immediately.</p>
+    <p class="signup-trust">Your key is generated instantly. Start logging decisions in 30 minutes.</p>
     <button class="signup-btn" id="signup-btn" onclick="getApiKey()">Get My API Key →</button>
+    <div class="signup-trust-signals">
+      <span>🔒 SHA-256 sealed</span>
+      <span class="ts-sep">·</span>
+      <span>⚡ Instant key</span>
+      <span class="ts-sep">·</span>
+      <span>✓ No credit card</span>
+    </div>
     <div class="signup-error" id="signup-error"></div>
     <div class="key-result" id="key-result">
       <div class="key-result-hdr"><span style="font-size:13px;color:#7ec8a0">✓</span><span class="key-result-title">Your API key is live — save it now</span></div>
@@ -579,7 +695,6 @@ h1{animation:fadeUp .5s .06s ease both;}
         <a href="mailto:try.aidal@gmail.com?subject=AIDAL%20integration%20help" class="nsc-card"><div class="nsc-n">3</div><div><div class="nsc-label">Need help?</div><div class="nsc-text">Email us. We'll personally help you log your first decision — free.</div></div></a>
       </div>
     </div>
-    <p class="signup-note">Beta is free. No commitment. We respond within 24 hours.</p>
   </div>
 </section>
 
@@ -700,6 +815,45 @@ function getApiKey(){
   });
 }
 function showErr(m){var e=document.getElementById("signup-error");e.textContent=m;e.style.display="block";}
+/* LIVE DEMO */
+function runDemo(){
+  var type=document.getElementById("d-type").value;
+  var company=document.getElementById("d-company").value.trim()||"Demo Company";
+  var jur=document.getElementById("d-jur").value;
+  var btn=document.getElementById("demo-btn");
+  var res=document.getElementById("demo-result");
+  btn.disabled=true;btn.textContent="Sealing decision...";
+  res.style.display="none";
+  fetch("https://aidal-production.up.railway.app/decision",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Authorization":"Bearer aidal_live_enY1UiQqScHQ7bi6sVORCMgls1xb0j7Z"},
+    body:JSON.stringify({decision_type:type,model_used:"demo-model-v1",input_features:{company:company,demo:true},output:{approved:true,confidence:0.91},jurisdiction:jur})
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
+    btn.disabled=false;btn.textContent="Log a decision →";
+    document.getElementById("dr-id").textContent=d.audit_id||"—";
+    document.getElementById("dr-hash").textContent=d.hash?(d.hash.slice(0,16)+"..."):"—";
+    var expl=d.explanation||"";
+    document.getElementById("dr-expl").textContent=expl?(expl.split(".")[0]+"."):"—";
+    var comp=(d.compliance&&d.compliance.status)?d.compliance.status:(d.compliance_status||"—");
+    document.getElementById("dr-comp").textContent=comp;
+    var badge=res.querySelector(".demo-result-badge");
+    badge.style.display=(comp==="COMPLIANT")?"inline-flex":"none";
+    res.style.display="block";
+    res.style.animation="fadeUp .3s ease";
+  })
+  .catch(function(){
+    btn.disabled=false;btn.textContent="Log a decision →";
+    document.getElementById("dr-id").textContent="API error — try again";
+    document.getElementById("dr-hash").textContent="—";
+    document.getElementById("dr-expl").textContent="—";
+    document.getElementById("dr-comp").textContent="—";
+    res.querySelector(".demo-result-badge").style.display="none";
+    res.style.display="block";
+  });
+}
+
 function copyKey(){
   if(!generatedKey)return;
   navigator.clipboard.writeText(generatedKey).then(function(){

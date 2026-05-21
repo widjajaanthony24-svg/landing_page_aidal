@@ -338,6 +338,8 @@ h1{animation:fadeUp .5s .06s ease both;}
 .dr-sweep.vis{display:flex;align-items:center;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(29,158,117,0.12);animation:dr-fadein .3s ease forwards;}
 .dr-sweep-line{flex:1;height:1px;background:rgba(29,158,117,0.25);}
 .dr-sweep-txt{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#1d9e75;font-family:'Inter',sans-serif;white-space:nowrap;}
+.dr-demo-label{display:none;}
+.dr-demo-label.vis{display:block;padding:6px 14px 2px;font-family:'JetBrains Mono','Courier New',monospace;font-size:9px;color:rgba(200,80,60,0.55);letter-spacing:1.5px;text-transform:uppercase;animation:dr-fadein .3s ease forwards;}
 .dr-row{display:none;}
 .dr-row.vis{display:flex;align-items:flex-start;gap:10px;padding:6px 14px;border-bottom:1px solid rgba(240,235,224,0.04);animation:dr-fadein .4s ease forwards;}
 .dr-key{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;min-width:72px;flex-shrink:0;padding-top:2px;font-family:'Inter',sans-serif;font-weight:500;}
@@ -495,6 +497,7 @@ h1{animation:fadeUp .5s .06s ease both;}
               <span class="dr-sweep-txt">Sealing...</span>
               <div class="dr-sweep-line"></div>
             </div>
+            <div class="dr-demo-label" id="dr-demo-label">DEMO — for illustration only</div>
             <div class="dr-row" id="dr-row-id">
               <span class="dr-key">Audit ID</span>
               <span class="dr-val" id="dr-id"></span>
@@ -512,7 +515,7 @@ h1{animation:fadeUp .5s .06s ease both;}
               <span class="dr-badge-txt" id="dr-comp"></span>
             </div>
             <div class="dr-note" id="dr-note">This decision is permanently sealed. No one — including AIDAL — can alter it.</div>
-            <div class="dr-verify" id="dr-verify"><a href="#get-key">Sign up for a free API key to generate real, verifiable decisions.</a></div>
+            <div class="dr-verify" id="dr-verify"><a href="#get-key">Want a real verifiable audit ID? Sign up for a free API key →</a></div>
             <div class="dr-error" id="dr-error"></div>
           </div>
         </div>
@@ -902,7 +905,7 @@ function runDemo(){
   var res=document.getElementById("demo-result");
 
   // Reset all vault lines — remove .vis AND force display:none on every child
-  ["dr-sweep","dr-row-id","dr-row-hash","dr-sealed","dr-badge","dr-note","dr-verify","dr-error"].forEach(function(id){
+  ["dr-demo-label","dr-sweep","dr-row-id","dr-row-hash","dr-sealed","dr-badge","dr-note","dr-verify","dr-error"].forEach(function(id){
     var el=document.getElementById(id);
     if(!el)return;
     el.classList.remove("vis");
@@ -936,7 +939,8 @@ function runDemo(){
     // Step 1 (0ms): sweep line "SEALING..."
     demoVis("dr-sweep",0);
 
-    // Step 2 (600ms): audit ID typewriter
+    // Step 2 (600ms): demo label then audit ID typewriter
+    demoVis("dr-demo-label",580);
     demoVis("dr-row-id",600);
     demoTypeWriter("dr-id",auditId,620,30);
 

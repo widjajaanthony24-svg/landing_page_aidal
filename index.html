@@ -355,8 +355,8 @@ h1{animation:fadeUp .5s .06s ease both;}
 .dr-note.vis{display:block;padding:8px 14px;font-family:'Inter',sans-serif;font-size:10px;color:#4A4A48;font-style:italic;line-height:1.65;border-bottom:1px solid rgba(240,235,224,0.04);animation:dr-fadein .4s ease forwards;}
 .dr-verify{display:none;}
 .dr-verify.vis{display:block;padding:8px 14px;animation:dr-fadein .4s ease forwards;}
-.dr-verify a{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;color:rgba(240,235,224,0.3);text-decoration:none;text-transform:uppercase;}
-.dr-verify a:hover{color:#f0ebe0;}
+.dr-verify a{font-family:'Inter',sans-serif;font-size:10px;color:rgba(240,235,224,0.35);text-decoration:underline;text-decoration-color:rgba(240,235,224,0.15);font-style:italic;line-height:1.65;letter-spacing:0;}
+.dr-verify a:hover{color:rgba(240,235,224,0.65);text-decoration-color:rgba(240,235,224,0.4);}
 .dr-error{display:none;}
 .dr-error.vis{display:block;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#cc4444;letter-spacing:1px;animation:dr-fadein .4s ease forwards;}
 
@@ -512,7 +512,7 @@ h1{animation:fadeUp .5s .06s ease both;}
               <span class="dr-badge-txt" id="dr-comp"></span>
             </div>
             <div class="dr-note" id="dr-note">This decision is permanently sealed. No one — including AIDAL — can alter it.</div>
-            <div class="dr-verify" id="dr-verify"><a href="https://aidal-dashboard.vercel.app/verify" target="_blank">Verify independently →</a></div>
+            <div class="dr-verify" id="dr-verify"><a href="#get-key">Sign up for a free API key to generate real, verifiable decisions.</a></div>
             <div class="dr-error" id="dr-error"></div>
           </div>
         </div>

@@ -4,297 +4,424 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AIDAL. — AI Decision Accountability Layer</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  /* ── FINANCIAL INFRASTRUCTURE DESIGN TOKENS ── */
-  --bg:#F0F4F8;          /* cold blue-white — light section bg */
-  --bg-alt:#E4EAF2;      /* slightly darker cold blue-white */
-  --dark:#0A0F1E;        /* deep navy — dark sections */
-  --dark-surface:#111827;/* dark panel */
-  --text:#1A2030;        /* primary text on light bg */
-  --text-dark:#F0F4F8;   /* primary text on dark bg */
-  --muted:#6B7A8D;       /* secondary text */
-  --accent:#00D37F;      /* green accent */
-  --accent-hover:#00B86B;
-  --amber:#F59E0B;       /* amber / warning */
-  --red:#EF4444;
-  --green:#00D37F;
-  --border-light:#D4D8E2;/* border on light bg */
-  --border-dark:#1E2A3A; /* border on dark bg */
-  /* legacy aliases */
-  --black:#0A0F1E;--black2:#111827;--black3:#131D2E;
-  --cream:#F0F4F8;--cream-dim:#8A95A0;--cream-faint:#6B7A8D;
-  --border:#D4D8E2;--border-mid:#D4D8E2;
+:root {
+  --bg: #FFFFFF;
+  --bg-alt: #F8F9FA;
+  --bg-section: #F0F4F8;
+  --text: #0D1117;
+  --text-secondary: #4A5568;
+  --navy: #1A2B4A;
+  --green: #0A6E4F;
+  --border: #E2E8F0;
+  --muted: #718096;
+  /* dark section aliases */
+  --dark: #0D1117;
+  --dark-surface: #111827;
+  --text-dark: #F8F9FA;
+  --accent: #1A2B4A;
+  --amber: #F59E0B;
+  --red: #EF4444;
+  --border-light: #E2E8F0;
+  --border-dark: #1E2A3A;
+  --border-mid: #E2E8F0;
+  --cream: #F8F9FA;
+  --cream-dim: #718096;
+  --cream-faint: #718096;
+  --accent-hover: #122035;
+  --bg-alt2: #E8EDF5;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:1.0625rem;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:1.0625rem;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
 /* STICKY HEADER */
 .sticky-header{position:sticky;top:0;left:0;right:0;z-index:100;}
 
-/* COUNTDOWN BAR — dark surface, gold number */
-.top-deadline{background:var(--dark-surface);border-bottom:1px solid var(--border-dark);padding:9px 4rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;font-size:12px;}
-.top-deadline-label{color:#4A4A48;letter-spacing:1.5px;text-transform:uppercase;font-size:10px;font-weight:500;}
-.top-deadline-count{color:var(--accent);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:-0.01em;}
-.top-deadline-text{color:#4A4A48;font-size:11px;}
-.top-deadline-sep{color:#2A2A28;}
-.top-deadline-cta{color:var(--accent);text-decoration:none;font-size:11px;font-weight:500;border-bottom:1px solid rgba(200,169,110,0.3);}
+/* COUNTDOWN BAR */
+.top-deadline{background:var(--bg-section);border-bottom:1px solid var(--border);padding:8px 4rem;display:flex;align-items:center;justify-content:center;gap:1.25rem;font-size:12px;}
+.top-deadline-label{color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-size:10px;font-weight:500;}
+.top-deadline-count{color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;}
+.top-deadline-text{color:var(--muted);font-size:11px;}
+.top-deadline-sep{color:#CBD5E0;}
+.top-deadline-cta{color:#fff;background:var(--navy);text-decoration:none;font-size:11px;font-weight:600;padding:4px 12px;border-radius:4px;}
+.top-deadline-cta:hover{background:var(--accent-hover);}
 
 /* NAV */
-nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid var(--border-dark);background:var(--dark);backdrop-filter:blur(16px);}
+nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid var(--border);background:#fff;}
 .logo{display:flex;align-items:center;text-decoration:none;overflow:hidden;width:160px;height:60px;position:relative;flex-shrink:0;}
 .logo img{position:absolute;width:175px;height:175px;mix-blend-mode:screen;top:-58px;left:-5px;display:block;}
-.logo-fallback{font-family:'IBM Plex Sans',sans-serif;font-size:22px;font-weight:600;color:#F0F4F8;letter-spacing:1px;display:none;line-height:1;}
+.logo-fallback{font-family:'Inter',sans-serif;font-size:22px;font-weight:700;color:var(--text);letter-spacing:-0.02em;display:none;line-height:1;}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
-.nav-links a{color:#6B6560;text-decoration:none;font-size:13px;font-weight:400;transition:color .2s;}
-.nav-links a:hover{color:var(--text-dark);}
-.nav-cta{background:#f0ebe0!important;color:#070809!important;border:none!important;padding:8px 20px!important;border-radius:6px!important;font-size:13px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;transition:background .2s!important;}
-.nav-cta:hover{background:#ddd8ce!important;color:#070809!important;}
+.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:400;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-signin{color:var(--text-secondary)!important;font-weight:500!important;}
+.nav-cta{background:var(--navy)!important;color:#fff!important;border:none!important;padding:8px 20px!important;border-radius:6px!important;font-size:13px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;transition:background .2s!important;}
+.nav-cta:hover{background:var(--accent-hover)!important;color:#fff!important;}
 
-/* HERO — dark */
-.hero-wrapper{position:relative;min-height:100vh;overflow:hidden;background:var(--dark);}
-#ambient-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+/* HERO */
+.hero-wrapper{position:relative;min-height:100vh;overflow:hidden;background:#fff;}
+#ambient-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.4;}
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 104px);max-width:1400px;margin:0 auto;}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 5rem;}
-.hero-right{position:relative;overflow:hidden;border-left:1px solid var(--border-dark);}
+.hero-right{position:relative;overflow:hidden;border-left:1px solid var(--border);}
 
-/* CHAIN IMAGE — restrained */
-.chain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;mix-blend-mode:luminosity;opacity:0.15;filter:contrast(1.05) brightness(0.55) saturate(0.7);}
-.chain-fade-top{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(to bottom,var(--dark),transparent);z-index:2;}
-.chain-fade-bottom{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--dark),transparent);z-index:2;}
-.chain-fade-left{position:absolute;top:0;left:0;bottom:0;width:30%;background:linear-gradient(to right,var(--dark),transparent);z-index:2;}
+/* CHAIN IMAGE */
+.chain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;mix-blend-mode:luminosity;opacity:0.06;filter:contrast(1.05) brightness(0.55) saturate(0.7);}
+.chain-fade-top{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(to bottom,rgba(10,12,16,1),transparent);z-index:2;}
+.chain-fade-bottom{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(10,12,16,1),transparent);z-index:2;}
+.chain-fade-left{position:absolute;top:0;left:0;bottom:0;width:30%;background:linear-gradient(to right,rgba(10,12,16,1),transparent);z-index:2;}
 
 /* HERO WIDGET */
-.chain-overlay{position:absolute;bottom:2rem;left:2rem;right:2rem;z-index:5;background:rgba(26,26,24,0.92);border:1px solid var(--border-dark);padding:1rem 1.25rem;backdrop-filter:blur(12px);border-radius:8px;}
+.chain-overlay{position:absolute;bottom:2rem;left:2rem;right:2rem;z-index:5;background:rgba(17,24,39,0.97);border:1px solid #1E2A3A;padding:1rem 1.25rem;border-radius:6px;}
 .chain-overlay-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.chain-overlay-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;font-weight:500;}
-.live-badge{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);font-weight:500;}
-.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+.chain-overlay-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#4A5668;font-weight:500;}
+.live-badge{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#00D37F;font-weight:500;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:#00D37F;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .hash-list{display:flex;flex-direction:column;gap:4px;}
-.hash-row{font-family:'JetBrains Mono','Courier New',monospace;font-size:10px;color:#3A3A38;display:flex;align-items:center;gap:8px;transition:color .3s;}
-.hash-row.active{color:var(--accent);}
+.hash-row{font-family:'JetBrains Mono','Courier New',monospace;font-size:10px;color:#2E3A4E;display:flex;align-items:center;gap:8px;transition:color .3s;}
+.hash-row.active{color:#00D37F;}
 .hash-row-dot{width:3px;height:3px;border-radius:50%;background:currentColor;flex-shrink:0;}
 
 /* HERO TYPOGRAPHY */
-.hero-eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A4A48;margin-bottom:1.75rem;display:flex;align-items:center;gap:12px;font-weight:500;}
-.eyebrow-line{display:block;width:20px;height:1px;background:#2A2A28;}
-h1{font-family:'Inter',system-ui,sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:600;line-height:1.08;letter-spacing:-0.02em;color:var(--text-dark);margin-bottom:1.5rem;}
-h1 em{font-style:normal;color:#4A4A48;}
-.hero-sub{font-size:1.0625rem;color:#6B6560;max-width:420px;line-height:1.75;margin-bottom:2.5rem;font-weight:400;}
+.hero-eyebrow{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.75rem;display:flex;align-items:center;gap:12px;font-weight:500;}
+.eyebrow-line{display:block;width:20px;height:1px;background:var(--border);}
+h1{font-family:'Inter',system-ui,sans-serif;font-size:clamp(2.5rem,5vw,3.75rem);font-weight:600;line-height:1.1;letter-spacing:-0.025em;color:var(--text);margin-bottom:1.5rem;}
+h1 em{font-style:normal;color:var(--muted);}
+.hero-sub{font-size:1.0625rem;color:var(--text-secondary);max-width:440px;line-height:1.75;margin-bottom:2.5rem;font-weight:400;}
 .hero-actions{display:flex;gap:1rem;align-items:center;margin-bottom:3rem;flex-wrap:wrap;}
-.btn-primary{background:#f0ebe0;color:#070809;border:none;padding:0.8rem 1.75rem;border-radius:6px;font-size:0.9375rem;font-weight:600;letter-spacing:0;text-transform:none;text-decoration:none;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s,transform .18s;display:inline-block;font-family:'Inter',sans-serif;line-height:1;}
-.btn-primary:hover{background:#ddd8ce;color:#070809;box-shadow:0 4px 14px rgba(15,15,14,0.18);transform:translateY(-1px);}
-.btn-primary:active{transform:translateY(0);box-shadow:none;}
-.btn-ghost{color:#6B6560;font-size:0.9375rem;text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;font-weight:400;}
-.btn-ghost:hover{color:var(--text-dark);}
+.btn-primary{background:var(--navy);color:#fff;border:none;padding:0.8rem 1.75rem;border-radius:6px;font-size:0.9375rem;font-weight:600;letter-spacing:0;text-transform:none;text-decoration:none;cursor:pointer;transition:background .2s,box-shadow .2s;display:inline-block;font-family:'Inter',sans-serif;line-height:1;}
+.btn-primary:hover{background:var(--accent-hover);color:#fff;box-shadow:0 2px 12px rgba(26,43,74,0.2);}
+.btn-primary:active{box-shadow:none;}
+.btn-ghost{color:var(--text-secondary);font-size:0.9375rem;text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;font-weight:500;}
+.btn-ghost:hover{color:var(--text);}
 .btn-ghost::after{content:'→';transition:transform .2s;}
 .btn-ghost:hover::after{transform:translateX(4px);}
 
-/* HERO STATS — unified pill */
-.hero-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,0.13);border-radius:8px;overflow:hidden;width:fit-content;margin-top:2rem;background:rgba(255,255,255,0.03);}
-.hero-stat{padding:20px 32px;border-right:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.025);}
+/* HERO STATS */
+.hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;width:fit-content;background:var(--bg-alt);}
+.hero-stat{padding:18px 28px;border-right:1px solid var(--border);background:transparent;}
 .hero-stat:last-child{border-right:none;}
-.hero-stat-num{font-size:2.75rem;font-weight:700;color:#F5F0E8;line-height:1;margin-bottom:6px;display:block;letter-spacing:-0.03em;}
-.hero-stat-label{font-size:11px;letter-spacing:0.08em;color:rgba(245,240,232,0.4);text-transform:uppercase;}
+.hero-stat-num{font-size:2.25rem;font-weight:700;color:var(--navy);line-height:1;margin-bottom:5px;display:block;letter-spacing:-0.03em;font-family:'JetBrains Mono',monospace;}
+.hero-stat-label{font-size:11px;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;}
 
-/* TRUST BAR — dark surface */
-.trust-bar{padding:1rem 4rem;border-bottom:1px solid var(--border-dark);display:flex;align-items:center;gap:2rem;overflow-x:auto;background:var(--dark-surface);}
-.trust-item{display:flex;align-items:center;gap:9px;white-space:nowrap;font-size:12px;color:#4A4A48;font-weight:400;}
-.trust-icon{width:22px;height:22px;border-radius:50%;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.trust-icon svg{width:11px;height:11px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.trust-sep{width:1px;height:14px;background:var(--border-dark);flex-shrink:0;}
+/* CREDIBILITY BAR */
+.credibility-bar{background:var(--bg-section);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:11px 4rem;}
+.credibility-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.credibility-label{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;}
+.credibility-items{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+.credibility-items span{font-size:12px;color:var(--text-secondary);font-weight:500;}
+.credibility-dot{color:#CBD5E0!important;}
 
-/* SECTION BASE — light background */
+/* TRUST BAR */
+.trust-bar{padding:1rem 4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:2rem;overflow-x:auto;background:var(--bg-alt);}
+.trust-item{display:flex;align-items:center;gap:9px;white-space:nowrap;font-size:12px;color:var(--text-secondary);font-weight:400;}
+.trust-icon{width:22px;height:22px;border-radius:50%;background:rgba(10,110,79,0.06);border:1px solid rgba(10,110,79,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.trust-icon svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.trust-sep{width:1px;height:14px;background:var(--border);flex-shrink:0;}
+
+/* SECTION BASE */
 .section{max-width:1200px;margin:0 auto;padding:8rem 4rem;}
-.section-eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;display:flex;align-items:center;gap:12px;font-weight:500;}
-.section-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--border-light);}
-h2{font-family:'Inter',system-ui,sans-serif;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
+.section-eyebrow{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;display:flex;align-items:center;gap:12px;font-weight:500;}
+.section-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--border);}
+h2{font-family:'Inter',system-ui,sans-serif;font-size:clamp(1.75rem,3vw,2.375rem);font-weight:600;line-height:1.18;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
 h2 em{font-style:normal;color:var(--muted);}
-.divider{border:none;border-top:1px solid var(--border-light);}
+.divider{border:none;border-top:1px solid var(--border);}
 
-/* PROBLEM SECTION — light */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-light);margin-top:4rem;border:1px solid var(--border-light);border-radius:10px;overflow:hidden;}
-.grid-cell{background:var(--bg);padding:2.5rem;transition:background .2s;}
+/* PROBLEM SECTION */
+section#problem{background:#fff;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:4rem;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.grid-cell{background:#fff;padding:2.5rem;transition:background .2s;}
 .grid-cell:hover{background:var(--bg-alt);}
 .grid-cell.dark{background:var(--bg-alt);}
-.cell-num{font-family:'Inter',sans-serif;font-size:2.75rem;font-weight:700;color:var(--border-light);display:block;margin-bottom:1rem;line-height:1;letter-spacing:-0.03em;}
+.gap-badge{display:inline-block;background:var(--navy);color:#fff;font-size:10px;font-weight:600;letter-spacing:0.04em;padding:3px 10px;border-radius:4px;margin-bottom:1rem;font-family:'Inter',sans-serif;}
+.gap-badge.solution{background:var(--green);}
+.cell-num{display:none;}
 .grid-cell h3{font-size:1.0625rem;font-weight:600;color:var(--text);margin-bottom:.5rem;}
 .grid-cell p{font-size:0.9375rem;color:var(--muted);line-height:1.75;}
-/* "AIDAL solves all three" — dark accent card */
-.grid-2 .grid-cell:last-child{background:var(--dark)!important;border-left:3px solid var(--accent);}
-.grid-2 .grid-cell:last-child:hover{background:#181816!important;}
-.grid-2 .grid-cell:last-child h3{color:var(--text-dark)!important;}
-.grid-2 .grid-cell:last-child p{color:#6B6560!important;}
-.grid-2 .grid-cell:last-child .cell-num{color:rgba(200,169,110,0.2)!important;}
+.grid-2 .grid-cell:last-child{background:var(--navy)!important;border-left:none;}
+.grid-2 .grid-cell:last-child:hover{background:#122035!important;}
+.grid-2 .grid-cell:last-child h3{color:#fff!important;}
+.grid-2 .grid-cell:last-child p{color:rgba(255,255,255,0.6)!important;}
 
-/* HOW IT WORKS — alt cream */
+/* HOW IT WORKS */
 section#how{background:var(--bg-alt);}
 .how-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:4rem;}
-.step{display:flex;gap:1.25rem;margin-bottom:2.25rem;padding-bottom:2.25rem;border-bottom:1px solid var(--border-light);}
+.step{display:flex;gap:1.25rem;margin-bottom:2.25rem;padding-bottom:2.25rem;border-bottom:1px solid var(--border);}
 .step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
-.step-n{width:30px;height:30px;border-radius:50%;background:var(--dark);color:var(--text-dark);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;}
+.step-n{width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;}
 .step h3{font-size:1.0625rem;font-weight:600;color:var(--text);margin-bottom:5px;}
 .step p{font-size:0.9375rem;color:var(--muted);line-height:1.75;}
-.code-block{background:var(--dark-surface);border:1px solid var(--border-dark);padding:1.75rem;font-family:'JetBrains Mono','Courier New',monospace;font-size:11.5px;line-height:1.9;color:#6B6560;position:sticky;top:120px;border-radius:8px;overflow-x:auto;max-width:100%;}
-.cc{color:#323230;}
-.ck{color:var(--accent);}
-.cv{color:rgba(200,169,110,0.6);}
-.cs{color:#6B6560;}
-.ch{color:var(--text-dark);}
+.code-block-wrapper{position:sticky;top:120px;}
+.code-block-header{background:#1A2030;border:1px solid #1E2A3A;border-bottom:none;border-radius:8px 8px 0 0;padding:9px 1.75rem;display:flex;align-items:center;justify-content:space-between;}
+.code-block-lang{font-size:10px;color:#6B7A8D;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;}
+.code-block-dots{display:flex;gap:5px;}
+.code-block-dots span{width:8px;height:8px;border-radius:50%;background:#1E2A3A;}
+.code-block{background:#0D1117;border:1px solid #1E2A3A;border-top:none;padding:1.75rem;font-family:'JetBrains Mono','Courier New',monospace;font-size:11.5px;line-height:1.9;color:#6B7A8D;border-radius:0 0 8px 8px;overflow-x:auto;max-width:100%;}
+.cc{color:#3A4558;}
+.ck{color:#7DD3FC;}
+.cv{color:#86EFAC;}
+.cs{color:#FCA5A5;}
+.ch{color:#F1F5F9;}
 
-/* JURISDICTION CARDS — light, rounded, dark pill */
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:transparent;margin-top:4rem;border:none;}
-.grid-4-card{background:var(--bg);padding:1.875rem;transition:background .2s,box-shadow .25s,transform .25s,border-color .2s;border:1px solid var(--border-light);border-radius:10px;}
-.grid-4-card:hover{background:var(--bg-alt);box-shadow:0 8px 28px rgba(15,15,14,0.1);transform:translateY(-3px);border-color:var(--border-mid);}
-.jur-code{font-size:2.5rem;font-weight:700;color:var(--border-light);display:block;line-height:1;margin-bottom:.75rem;letter-spacing:-0.03em;}
-.grid-4-card h3{font-size:0.9375rem;font-weight:600;color:var(--text);margin-bottom:5px;}
-.grid-4-card p{font-size:0.875rem;color:var(--muted);line-height:1.7;margin-bottom:.875rem;}
-.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;background:var(--dark);color:var(--text-dark);padding:3px 10px;border-radius:100px;border:none;}
+/* JURISDICTION CARDS */
+section#jurisdictions{background:#fff;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:4rem;}
+.grid-4-card{background:#fff;padding:1.875rem;transition:background .2s,box-shadow .2s;border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--navy);}
+.grid-4-card:hover{background:var(--bg-alt);box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.grid-4-card:nth-child(1){border-left-color:#F59E0B;}
+.grid-4-card:nth-child(2){border-left-color:#0A6E4F;}
+.grid-4-card:nth-child(3){border-left-color:#3B82F6;}
+.grid-4-card:nth-child(4){border-left-color:#8B5CF6;}
+.jur-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.875rem;}
+.jur-flag{font-size:1.75rem;line-height:1;}
+.jur-active{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--green);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
+.jur-active-dot{width:5px;height:5px;border-radius:50%;background:var(--green);}
+.grid-4-card h3{font-size:0.9375rem;font-weight:600;color:var(--text);margin-bottom:.625rem;}
+.jur-checklist{list-style:none;padding:0;margin:0 0 .875rem;}
+.jur-checklist li{font-size:12.5px;color:var(--text-secondary);padding:4px 0 4px 1.25rem;position:relative;border-bottom:1px solid var(--bg-section);}
+.jur-checklist li:last-child{border-bottom:none;}
+.jur-checklist li::before{content:'✓';position:absolute;left:0;color:var(--green);font-size:11px;font-weight:700;}
+.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;background:var(--bg-section);color:var(--text-secondary);padding:3px 10px;border-radius:4px;border:1px solid var(--border);}
+/* legacy jur-tag — hide */
+.jur-code{display:none;}
+.jur-tag{display:none;}
 
-/* STATS GRID (Why AIDAL) */
+/* COMPARISON TABLE */
+section:has(.comparison-table){background:var(--bg-alt);}
+.comparison-table{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:3rem;}
+.cmp-thead{display:grid;grid-template-columns:1.5fr 1fr 1fr;background:var(--bg-alt);border-bottom:1px solid var(--border);padding:.875rem 1.75rem;gap:0;align-items:center;}
+.cmp-thead-empty{font-size:11px;color:transparent;}
+.cmp-thead-aidal{display:inline-block;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#fff;font-weight:600;background:var(--navy);padding:4px 12px;border-radius:4px;}
+.cmp-thead-alt{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.cmp-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;padding:1.25rem 1.75rem;border-bottom:1px solid var(--border);align-items:center;transition:background .15s;gap:0;}
+.cmp-row:last-child{border-bottom:none;}
+.cmp-row:nth-child(odd){background:var(--bg-alt);}
+.cmp-row:nth-child(even){background:#fff;}
+.cmp-row:hover{background:var(--bg-section);}
+.cmp-row-label{font-size:.875rem;color:var(--text);font-weight:500;}
+.cmp-row-aidal{font-size:.875rem;color:var(--text);display:flex;align-items:center;gap:7px;font-weight:500;}
+.cmp-row-aidal::before{content:'●';color:var(--green);font-weight:800;font-size:11px;}
+.cmp-row-alt{font-size:.875rem;color:var(--muted);}
+.cmp-row-alt small{font-size:11px;color:var(--muted);opacity:0.7;display:block;margin-top:1px;}
+
+/* STATS GRID (Why section) */
 section:has(.grid-3){background:var(--bg-alt);}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;background:transparent;margin-top:4rem;border:none;}
-.grid-3-card{background:var(--bg);padding:2rem;transition:background .2s,box-shadow .2s;border:1px solid var(--border-light);border-radius:10px;}
-.grid-3-card:hover{background:var(--bg-alt);box-shadow:0 2px 16px rgba(15,15,14,0.06);}
-.big-num{font-size:2.75rem;font-weight:700;color:var(--border-light);line-height:1;margin-bottom:.75rem;display:block;letter-spacing:-0.03em;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4rem;}
+.grid-3-card{background:#fff;padding:2rem;transition:background .2s,box-shadow .2s;border:1px solid var(--border);border-radius:8px;border-top:2px solid var(--navy);}
+.grid-3-card:hover{background:var(--bg-alt);box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+.big-num{font-size:2.5rem;font-weight:700;color:var(--border);line-height:1;margin-bottom:.75rem;display:block;letter-spacing:-0.03em;font-family:'JetBrains Mono',monospace;}
 .grid-3-card h3{font-size:1.0625rem;color:var(--text);margin-bottom:.5rem;font-weight:600;}
 .grid-3-card p{font-size:0.9375rem;color:var(--muted);line-height:1.75;}
 
 /* CLIENTS */
-.clients-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border-light);margin-top:4rem;border-radius:10px;overflow:hidden;}
-.client-card{padding:2.25rem;border-right:1px solid var(--border-light);transition:background .2s;}
+.clients-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);margin-top:4rem;border-radius:8px;overflow:hidden;}
+.client-card{padding:2.25rem;border-right:1px solid var(--border);transition:background .2s;background:#fff;}
 .client-card:last-child{border-right:none;}
 .client-card:hover{background:var(--bg-alt);}
-.client-icon{width:36px;height:36px;border:1px solid var(--border-light);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;}
-.client-icon svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:1.5;}
+.client-icon{width:36px;height:36px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;}
+.client-icon svg{width:16px;height:16px;stroke:var(--green);fill:none;stroke-width:1.5;}
 .client-card h3{font-size:1.0625rem;font-weight:600;color:var(--text);margin-bottom:.5rem;}
 .client-card p{font-size:0.9375rem;color:var(--muted);line-height:1.75;}
 
 /* DEADLINE CTA — dark */
-.deadline-cta{position:relative;overflow:hidden;background:var(--dark);border-top:1px solid var(--border-dark);}
+.deadline-cta{position:relative;overflow:hidden;background:#0D1117;border-top:1px solid #1E2A3A;}
 #dcv{position:absolute;inset:0;width:100%;height:100%;}
 .deadline-cta-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:8rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
-.big-date{font-size:clamp(4rem,8vw,6.5rem);font-weight:700;color:var(--text-dark);line-height:1;margin-bottom:1rem;letter-spacing:-0.03em;}
-.big-date-sub{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;font-weight:500;}
-.deadline-cta-inner p{color:#6B6560!important;}
+.big-date{font-size:clamp(4rem,8vw,6.5rem);font-weight:700;color:#F8F9FA;line-height:1;margin-bottom:1rem;letter-spacing:-0.03em;font-family:'JetBrains Mono',monospace;}
+.big-date-sub{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#4A5668;font-weight:500;}
+.deadline-cta-inner p{color:#4A5668!important;}
 
-/* VERIFY — light alt */
-.verify-section{background:var(--bg-alt);border-top:1px solid var(--border-light);}
+/* VERIFY */
+.verify-section{background:var(--bg-alt);border-top:1px solid var(--border);}
 .verify-inner{max-width:1200px;margin:0 auto;padding:7rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
-.verify-section .section-eyebrow{color:var(--muted);}
-.verify-section .section-eyebrow::before{background:var(--border-light);}
-.verify-section h2{color:var(--text);}
-.verify-section h2 em{color:var(--muted);}
-.verify-inner p{color:var(--muted)!important;}
-.verify-cards{display:flex;flex-direction:column;border:1px solid var(--border-light);border-radius:10px;overflow:hidden;}
-.verify-card{padding:1.5rem;border-bottom:1px solid var(--border-light);transition:background .2s;background:var(--bg);}
+.verify-cards{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.verify-card{padding:1.5rem;border-bottom:1px solid var(--border);transition:background .2s;background:#fff;}
 .verify-card:last-child{border-bottom:none;}
 .verify-card:hover{background:var(--bg-alt);}
-.verify-card-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:600;}
+.verify-card-tag{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;font-weight:600;}
 .verify-card p{font-size:0.875rem;color:var(--muted);line-height:1.75;}
 
-/* LEGAL */
-.legal-section{background:var(--bg-alt);border-top:1px solid var(--border-light);}
+/* LEGAL / SOCIAL PROOF */
+.legal-section{background:var(--bg-section);border-top:1px solid var(--border);}
 .legal-inner{max-width:1200px;margin:0 auto;padding:7rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
-.legal-section h2{color:var(--text);}
-.legal-section h2 em{color:var(--muted);}
-.legal-badge{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(29,158,117,.2);color:var(--green);padding:5px 12px;border-radius:100px;margin-bottom:2rem;font-weight:600;}
+.legal-badge{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(10,110,79,.25);color:var(--green);padding:5px 12px;border-radius:100px;margin-bottom:2rem;font-weight:600;}
 .legal-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.legal-cards{display:flex;flex-direction:column;border:1px solid var(--border-light);border-radius:10px;overflow:hidden;}
-.legal-card{background:var(--bg);border-bottom:1px solid var(--border-light);padding:1.125rem 1.375rem;transition:background .2s;}
+.legal-cards{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.legal-card{background:#fff;border-bottom:1px solid var(--border);padding:1.25rem 1.5rem;transition:background .2s;}
 .legal-card:last-child{border-bottom:none;}
 .legal-card:hover{background:var(--bg-alt);}
-.legal-card-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
+.legal-card-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;}
 .legal-card h4{font-size:0.9375rem;color:var(--text);font-weight:600;}
-.legal-tag{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:100px;font-weight:600;border:none;}
-.legal-tag.p{background:rgba(186,117,23,.1);color:#8A6F3E;}
-.legal-tag.d{background:rgba(29,158,117,.1);color:#1d9e75;}
+.legal-tag{font-size:9px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;font-weight:600;border:none;}
+.legal-tag.p{background:rgba(245,158,11,0.1);color:#92610A;}
+.legal-tag.d{background:rgba(10,110,79,0.1);color:#0A6E4F;}
 .legal-card p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
 .legal-body p{font-size:1.0625rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;}
-.legal-link{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);}
+.legal-link{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(26,43,74,0.3);transition:border-color .2s;}
+.legal-link:hover{border-color:var(--navy);}
+
+/* PDF SHOWCASE */
+.pdf-showcase-section{background:var(--bg-section);border-top:1px solid var(--border);padding:8rem 0;}
+.pdf-showcase-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.pdf-callouts{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem;}
+.pdf-callout{display:flex;gap:1rem;align-items:flex-start;}
+.pdf-callout-icon{color:var(--green);font-size:14px;font-weight:700;margin-top:2px;flex-shrink:0;width:18px;}
+.pdf-callout strong{color:var(--text);font-size:0.9375rem;display:block;margin-bottom:3px;font-weight:600;}
+.pdf-callout p{color:var(--muted);font-size:0.875rem;line-height:1.7;margin:0;}
+.pdf-mockup-browser{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);}
+.pdf-mockup-bar{background:var(--bg-alt);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:12px;}
+.pdf-browser-dots{display:flex;gap:5px;}
+.pdf-browser-dots span{width:10px;height:10px;border-radius:50%;background:var(--border);}
+.pdf-browser-url{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.pdf-mockup-content{padding:1.5rem;}
+.pdf-mock-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:.875rem;border-bottom:1px solid var(--border);margin-bottom:.875rem;font-size:12px;color:var(--text-secondary);}
+.pdf-mock-header strong{color:var(--text);font-size:15px;font-weight:700;}
+.pdf-mock-date{color:var(--muted);font-size:11px;}
+.pdf-mock-company{font-size:15px;font-weight:600;color:var(--text);margin-bottom:1.25rem;}
+.pdf-mock-section-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.625rem;font-weight:500;}
+.pdf-mock-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bg-section);font-size:12.5px;color:var(--text-secondary);}
+.pdf-mock-row:last-of-type{border-bottom:none;}
+.pdf-mock-green{color:var(--green);font-weight:600;}
+.pdf-mock-cert{margin-top:1.25rem;background:var(--bg-section);border:1px solid var(--border);padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:center;border-radius:4px;font-size:11px;color:var(--green);font-weight:600;letter-spacing:0.04em;}
+.pdf-mock-cert-id{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
 
 /* FAQ */
-section#faq{background:var(--bg);}
-section#faq h2{color:var(--text);}
-section#faq h2 em{color:var(--muted);}
-.faq-list{margin-top:3rem;border:1px solid var(--border-light);border-radius:10px;overflow:hidden;}
-.faq-item{border-bottom:1px solid var(--border-light);}
+section#faq{background:#fff;}
+.faq-list{margin-top:3rem;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.faq-item{border-bottom:1px solid var(--border);}
 .faq-item:last-child{border-bottom:none;}
 .faq-q{width:100%;background:transparent;border:none;color:var(--text);font-family:'Inter',sans-serif;font-size:1.0625rem;font-weight:500;text-align:left;padding:1.375rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background .15s;}
 .faq-q:hover{background:var(--bg-alt);}
 .faq-item.open .faq-q{font-weight:600;}
-.faq-arr{font-size:20px;color:var(--accent);transition:transform .2s;flex-shrink:0;line-height:1;}
+.faq-arr{font-size:20px;color:var(--navy);transition:transform .2s;flex-shrink:0;line-height:1;}
 .faq-item.open .faq-arr{transform:rotate(45deg);}
 .faq-a{display:none;padding:0 1.5rem 1.375rem;font-size:0.9375rem;color:var(--muted);line-height:1.75;background:var(--bg-alt);}
 .faq-item.open .faq-a{display:block;}
 .faq-a strong{color:var(--text);}
 
-/* PRICING — dark */
-section#pricing{background:var(--dark);}
-section#pricing .section-eyebrow{color:#4A4A48;}
-section#pricing .section-eyebrow::before{background:var(--border-dark);}
-section#pricing h2{color:var(--text-dark);}
-section#pricing h2 em{color:#4A4A48;}
-section#pricing p[style]{color:rgba(250,247,242,0.2)!important;}
-.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-dark);margin-top:4rem;border:1px solid var(--border-dark);border-radius:10px;overflow:hidden;}
-.price-card{background:var(--dark-surface);padding:2rem;transition:background .2s;}
-.price-card:hover{background:#222220;}
-.price-card.featured{background:var(--dark-surface);border:1.5px solid var(--accent)!important;z-index:1;position:relative;}
-.price-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;margin-bottom:1.5rem;display:block;font-weight:600;}
-.price-amt{font-family:'Inter',sans-serif;font-size:2.25rem;font-weight:700;color:var(--text-dark);display:block;line-height:1;margin-bottom:4px;letter-spacing:-0.02em;}
-.price-unit{font-size:12px;color:#4A4A48;display:block;margin-bottom:1.5rem;}
+/* PRICING */
+section#pricing{background:#fff;}
+section#pricing .section-eyebrow{color:var(--muted);}
+section#pricing h2{color:var(--text);}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:4rem;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.price-card{background:#fff;padding:2rem;transition:background .2s;position:relative;}
+.price-card:hover{background:var(--bg-alt);}
+.price-card.featured{background:#fff;border:2px solid var(--navy)!important;z-index:1;border-radius:8px;margin:-1px;}
+.price-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;display:block;font-weight:600;}
+.price-amt{font-family:'JetBrains Mono',monospace;font-size:2.25rem;font-weight:600;color:var(--text);display:block;line-height:1;margin-bottom:4px;letter-spacing:-0.02em;}
+.price-unit{font-size:12px;color:var(--muted);display:block;margin-bottom:.5rem;}
+.price-integration{font-size:11px;color:var(--green);display:block;margin-bottom:1.5rem;font-weight:500;}
 .price-features{list-style:none;margin-bottom:1.5rem;}
-.price-features li{font-size:0.875rem;color:#6B6560;padding:7px 0;border-bottom:1px solid var(--border-dark);display:flex;align-items:center;gap:8px;}
+.price-features li{font-size:0.875rem;color:var(--text-secondary);padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
 .price-features li:last-child{border-bottom:none;}
-.price-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);min-width:4px;}
-.price-btn{display:block;text-align:center;padding:11px 16px;background:#f0ebe0;color:#070809;text-decoration:none;font-size:0.875rem;font-weight:600;letter-spacing:0;text-transform:none;border-radius:6px;transition:background .2s,color .2s;cursor:pointer;border:none;width:100%;font-family:'Inter',sans-serif;}
-.price-btn:hover{background:#ddd8ce;color:#070809;}
+.price-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--green);min-width:4px;}
+.price-btn{display:block;text-align:center;padding:11px 16px;background:var(--navy);color:#fff;text-decoration:none;font-size:0.875rem;font-weight:600;letter-spacing:0;text-transform:none;border-radius:6px;transition:background .2s;cursor:pointer;border:none;width:100%;font-family:'Inter',sans-serif;}
+.price-btn:hover{background:var(--accent-hover);color:#fff;}
+.price-btn.ghost-btn{background:transparent;color:var(--navy);border:1px solid var(--border);}
+.price-btn.ghost-btn:hover{background:var(--bg-alt);}
+.most-requested{display:inline-block;background:var(--navy);color:#fff;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:.75rem;}
 
 /* SIGNUP */
 .signup-section{text-align:center;padding:9rem 4rem;max-width:720px;margin:0 auto;}
+section#get-key{background:var(--bg-alt);}
 .signup-section h2{margin-bottom:1rem;color:var(--text);}
-.signup-section h2 em{color:var(--muted);}
 .signup-section>p{font-size:1.0625rem;color:var(--muted);margin-bottom:2rem;}
 .signup-section .section-eyebrow{justify-content:center;}
-.signup-card{background:#ffffff08;border:0.5px solid #DDD8CE;border-radius:12px;padding:2.5rem;max-width:520px;margin:0 auto;text-align:left;}
-.signup-trust{font-size:13px;color:#9C9690;text-align:center;margin-bottom:1rem;}
-.signup-input{width:100%;background:#ffffff;border:0.5px solid #DDD8CE;color:#0F0F0E;padding:11px 14px;font-size:14px;border-radius:6px;outline:none;margin-bottom:9px;display:block;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
-.signup-input::placeholder{color:#9C9690;}
-.signup-input:focus{border-color:#C8A96E;box-shadow:0 0 0 3px rgba(200,169,110,0.08),inset 3px 0 0 #1d9e75;}
-.signup-btn{width:100%;background:var(--dark);color:#f0ebe0;border:none;padding:14px;font-size:0.9375rem;font-weight:600;border-radius:6px;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s;margin-top:4px;font-family:'Inter',sans-serif;}
-.signup-btn:hover{background:#1A1A18;color:#f0ebe0;box-shadow:0 4px 16px rgba(15,15,14,0.22);}
-.signup-btn:active{box-shadow:none;}
+.signup-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:2.5rem;max-width:520px;margin:0 auto;text-align:left;}
+.signup-trust{font-size:13px;color:var(--muted);text-align:center;margin-bottom:1rem;}
+.signup-input{width:100%;background:#fff;border:1px solid var(--border);color:var(--text);padding:11px 14px;font-size:14px;border-radius:6px;outline:none;margin-bottom:9px;display:block;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
+.signup-input::placeholder{color:#A0AEC0;}
+.signup-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,43,74,0.08);}
+.signup-btn{width:100%;background:var(--navy);color:#fff;border:none;padding:14px;font-size:0.9375rem;font-weight:600;border-radius:6px;cursor:pointer;transition:background .2s,box-shadow .2s;margin-top:4px;font-family:'Inter',sans-serif;}
+.signup-btn:hover{background:var(--accent-hover);box-shadow:0 2px 12px rgba(26,43,74,0.2);}
 .signup-btn:disabled{opacity:.45;cursor:not-allowed;}
 .key-result{display:none;margin-top:2rem;text-align:left;}
-.key-result-hdr{background:rgba(29,158,117,.06);border:1px solid rgba(29,158,117,.2);padding:.875rem 1.125rem;margin-bottom:1px;display:flex;align-items:center;gap:7px;border-radius:6px 6px 0 0;}
-.key-result-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);font-weight:600;}
-.key-display{font-family:'JetBrains Mono','Courier New',monospace;font-size:12px;color:var(--text);background:var(--bg-alt);border:1px solid var(--border-light);border-top:none;padding:12px 15px;word-break:break-all;margin-bottom:7px;border-radius:0 0 6px 6px;}
-.copy-btn{background:transparent;border:1px solid var(--border-light);color:var(--muted);padding:7px 18px;font-size:12px;border-radius:6px;cursor:pointer;transition:all .2s;margin-bottom:1.25rem;font-family:'Inter',sans-serif;}
-.copy-btn:hover{border-color:var(--accent);color:var(--accent);}
-.key-warn{font-size:12px;color:#9C9690;line-height:1.7;margin-bottom:1.5rem;}
-.key-warn strong{color:var(--muted);}
-.nsc{display:flex;flex-direction:column;gap:8px;padding-top:1.25rem;border-top:1px solid var(--border-light);}
-.nsc-card{display:flex;gap:.875rem;align-items:flex-start;padding:.875rem 1rem;border:1px solid var(--border-light);border-radius:8px;text-decoration:none;transition:background .15s;}
+.key-result-hdr{background:rgba(10,110,79,.06);border:1px solid rgba(10,110,79,.2);padding:.875rem 1.125rem;margin-bottom:1px;display:flex;align-items:center;gap:7px;border-radius:6px 6px 0 0;}
+.key-result-title{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);font-weight:600;}
+.key-display{font-family:'JetBrains Mono','Courier New',monospace;font-size:12px;color:var(--text);background:var(--bg-alt);border:1px solid var(--border);border-top:none;padding:12px 15px;word-break:break-all;margin-bottom:7px;border-radius:0 0 6px 6px;}
+.copy-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:7px 18px;font-size:12px;border-radius:6px;cursor:pointer;transition:all .2s;margin-bottom:1.25rem;font-family:'Inter',sans-serif;}
+.copy-btn:hover{border-color:var(--navy);color:var(--navy);}
+.key-warn{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;}
+.key-warn strong{color:var(--text-secondary);}
+.nsc{display:flex;flex-direction:column;gap:8px;padding-top:1.25rem;border-top:1px solid var(--border);}
+.nsc-card{display:flex;gap:.875rem;align-items:flex-start;padding:.875rem 1rem;border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:background .15s;}
 .nsc-card:hover{background:var(--bg-alt);}
-.nsc-n{font-size:1.25rem;font-weight:700;color:var(--border-light);line-height:1;min-width:20px;}
-.nsc-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:2px;font-weight:600;}
+.nsc-n{font-size:1.25rem;font-weight:700;color:var(--border);line-height:1;min-width:20px;font-family:'JetBrains Mono',monospace;}
+.nsc-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);margin-bottom:2px;font-weight:600;}
 .nsc-text{font-size:0.875rem;color:var(--muted);line-height:1.5;}
 .signup-error{display:none;margin-top:9px;font-size:0.9375rem;color:#b91c1c;background:rgba(185,28,28,.06);border:1px solid rgba(185,28,28,.18);padding:10px 14px;border-radius:6px;}
-.signup-note{margin-top:1.25rem;font-size:12px;color:#9C9690;text-align:center;}
+.signup-note{margin-top:1.25rem;font-size:12px;color:var(--muted);text-align:center;}
+.signup-trust-signals{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;font-size:11px;color:var(--muted);flex-wrap:wrap;}
+.signup-trust-signals .ts-sep{color:var(--border);}
 
-/* FOOTER — dark */
-footer{background:var(--dark);border-top:1px solid var(--border-dark);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+/* FOOTER */
+footer{background:#fff;border-top:1px solid var(--border);padding:3rem 4rem;}
+.footer-main{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;}
+.footer-left{display:flex;flex-direction:column;gap:.75rem;}
 .footer-logo{display:flex;align-items:center;overflow:hidden;width:140px;height:52px;position:relative;}
 .footer-logo img{position:absolute;width:155px;height:155px;mix-blend-mode:screen;top:-52px;left:-5px;display:block;}
-.footer-logo-fallback{font-family:'IBM Plex Sans',sans-serif;font-size:18px;font-weight:600;color:var(--text-dark);letter-spacing:1px;display:none;line-height:1;}
-.footer-note{font-size:12px;color:#3A3A38;max-width:400px;text-align:center;line-height:1.6;}
-footer>p{font-size:12px;color:#3A3A38;}
-footer a{color:#6B6560;text-decoration:none;transition:color .2s;}
-footer a:hover{color:var(--text-dark);}
+.footer-logo-fallback{font-family:'Inter',sans-serif;font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.02em;display:none;line-height:1;}
+.footer-address{font-size:12px;color:var(--muted);line-height:1.7;}
+.footer-right{display:flex;flex-direction:column;gap:.5rem;text-align:right;}
+.footer-links{display:flex;gap:1.5rem;justify-content:flex-end;}
+footer a{color:var(--text-secondary);text-decoration:none;font-size:13px;transition:color .2s;}
+footer a:hover{color:var(--text);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;}
+.footer-note{font-size:11px;color:var(--muted);max-width:560px;line-height:1.65;}
+.footer-copy{font-size:12px;color:var(--muted);white-space:nowrap;}
+
+/* LIVE DEMO WIDGET */
+.hero-right-inner{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:2.5rem 2rem;gap:1.25rem;}
+.hero-right-inner .chain-overlay{position:relative;bottom:auto;left:auto;right:auto;margin-top:0;}
+.demo-widget{background:#0a0c10;border:1px solid rgba(255,255,255,0.08);}
+.demo-strip{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.015);}
+.demo-strip-dot{width:5px;height:5px;border-radius:50%;background:#0A6E4F;animation:blink 2s infinite;flex-shrink:0;}
+.demo-strip-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#3A3A38;font-weight:500;}
+.demo-fields{padding:14px 14px 0;}
+.demo-field{margin-bottom:14px;}
+.demo-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4A4A48;display:block;margin-bottom:5px;font-weight:500;font-family:'Inter',sans-serif;}
+.demo-input{width:100%;background:rgba(255,255,255,0.03);border:none;border-bottom:1px solid rgba(255,255,255,0.12);color:#f0ebe0;padding:7px 0;font-family:'JetBrains Mono','Courier New',monospace;font-size:12px;outline:none;-webkit-appearance:none;appearance:none;border-radius:0;display:block;transition:border-bottom-color .15s;}
+.demo-input:focus{border-bottom-color:rgba(255,255,255,0.35);}
+.demo-input::placeholder{color:#2E2E2C;}
+.demo-input option{background:#0a0c10;color:#f0ebe0;}
+.demo-btn{width:100%;background:#f0ebe0;color:#070809;border:none;padding:12px 16px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;display:block;margin-top:4px;border-radius:0;transition:opacity .15s ease;}
+.demo-btn:hover:not(:disabled){opacity:0.85;}
+.demo-btn:disabled{opacity:.4;cursor:not-allowed;}
+@keyframes btn-pulse{0%,100%{background:#f0ebe0;}50%{background:#c8c3b8;}}
+.demo-btn.sealing{animation:btn-pulse 1.5s ease-in-out infinite;}
+.demo-result{border-top:1px solid rgba(255,255,255,0.06);display:none;font-family:'Courier New',monospace;}
+@keyframes dr-fadein{from{opacity:0}to{opacity:1}}
+.dr-sweep{display:none;}
+.dr-sweep.vis{display:flex;align-items:center;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(10,110,79,0.12);animation:dr-fadein .3s ease forwards;}
+.dr-sweep-line{flex:1;height:1px;background:rgba(10,110,79,0.25);}
+.dr-sweep-txt{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#0A6E4F;font-family:'Inter',sans-serif;white-space:nowrap;}
+.dr-demo-label{display:none;}
+.dr-demo-label.vis{display:block;padding:6px 14px 2px;font-family:'JetBrains Mono','Courier New',monospace;font-size:9px;color:rgba(200,80,60,0.55);letter-spacing:1.5px;text-transform:uppercase;animation:dr-fadein .3s ease forwards;}
+.dr-row{display:none;}
+.dr-row.vis{display:flex;align-items:flex-start;gap:10px;padding:6px 14px;border-bottom:1px solid rgba(255,255,255,0.04);animation:dr-fadein .4s ease forwards;}
+.dr-key{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;min-width:72px;flex-shrink:0;padding-top:2px;font-family:'Inter',sans-serif;font-weight:500;}
+.dr-val{font-family:'Courier New','JetBrains Mono',monospace;font-size:11px;color:#f0ebe0;word-break:break-all;line-height:1.5;}
+.dr-hash-prefix{color:rgba(10,110,79,0.65);}
+.dr-sealed{display:none;}
+.dr-sealed.vis{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.04);animation:dr-fadein .4s ease forwards;}
+.dr-check{font-size:16px;color:#0A6E4F;line-height:1;}
+.dr-sealed-txt{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#0A6E4F;font-family:'Inter',sans-serif;font-weight:600;}
+.dr-badge{display:none;}
+.dr-badge.vis{display:flex;align-items:center;gap:8px;margin:0 14px;padding:7px 12px;background:rgba(10,110,79,0.08);border:1px solid rgba(10,110,79,0.2);animation:dr-fadein .4s ease forwards;}
+.dr-badge-dot{color:#0A6E4F;font-size:8px;}
+.dr-badge-txt{font-family:'Courier New',monospace;font-size:11px;color:#0A6E4F;}
+.dr-note{display:none;}
+.dr-note.vis{display:block;padding:8px 14px;font-family:'Inter',sans-serif;font-size:10px;color:#4A4A48;font-style:italic;line-height:1.65;border-bottom:1px solid rgba(255,255,255,0.04);animation:dr-fadein .4s ease forwards;}
+.dr-verify{display:none;}
+.dr-verify.vis{display:block;padding:8px 14px;animation:dr-fadein .4s ease forwards;}
+.dr-verify a{font-family:'Inter',sans-serif;font-size:10px;color:rgba(240,235,224,0.35);text-decoration:underline;text-decoration-color:rgba(240,235,224,0.15);font-style:italic;line-height:1.65;letter-spacing:0;}
+.dr-verify a:hover{color:rgba(240,235,224,0.65);text-decoration-color:rgba(240,235,224,0.4);}
+.dr-error{display:none;}
+.dr-error.vis{display:block;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#cc4444;letter-spacing:1px;animation:dr-fadein .4s ease forwards;}
 
 /* SCROLL ANIMATIONS */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
@@ -320,375 +447,27 @@ h1{animation:fadeUp .5s .06s ease both;}
 .hero-actions{animation:fadeUp .5s .18s ease both;}
 .hero-stats{animation:fadeUp .5s .24s ease both;}
 
-/* HERO RIGHT — flex content wrapper */
-.hero-right-inner{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:2.5rem 2rem;gap:1.25rem;}
-.hero-right-inner .chain-overlay{position:relative;bottom:auto;left:auto;right:auto;margin-top:0;}
+/* LOGO — hide PNG on light bg, show text fallback */
+nav .logo img{display:none!important;}
+nav .logo .logo-fallback{display:block!important;color:var(--text)!important;}
+.footer-logo img{display:none!important;}
+.footer-logo-fallback{display:block!important;color:var(--text)!important;}
+.footer-logo{width:auto!important;height:auto!important;overflow:visible!important;}
 
-/* LIVE DEMO WIDGET — vault terminal */
-.demo-widget{background:#0a0c10;border:1px solid rgba(240,235,224,0.1);}
-.demo-strip{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid rgba(240,235,224,0.07);background:rgba(255,255,255,0.015);}
-.demo-strip-dot{width:5px;height:5px;border-radius:50%;background:#1d9e75;animation:blink 2s infinite;flex-shrink:0;}
-.demo-strip-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#3A3A38;font-weight:500;}
-.demo-fields{padding:14px 14px 0;}
-.demo-field{margin-bottom:14px;}
-.demo-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4A4A48;display:block;margin-bottom:5px;font-weight:500;font-family:'Inter',sans-serif;}
-.demo-input{width:100%;background:rgba(240,235,224,0.03);border:none;border-bottom:1px solid rgba(240,235,224,0.14);color:#f0ebe0;padding:7px 0;font-family:'JetBrains Mono','Courier New',monospace;font-size:12px;outline:none;-webkit-appearance:none;appearance:none;border-radius:0;display:block;transition:border-bottom-color .15s;}
-.demo-input:focus{border-bottom-color:rgba(240,235,224,0.38);}
-.demo-input::placeholder{color:#2E2E2C;}
-.demo-input option{background:#0a0c10;color:#f0ebe0;}
-.demo-btn{width:100%;background:#f0ebe0;color:#070809;border:none;padding:12px 16px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;display:block;margin-top:4px;border-radius:0;transition:opacity .15s ease;}
-.demo-btn:hover:not(:disabled){opacity:0.85;}
-.demo-btn:disabled{opacity:.4;cursor:not-allowed;}
-@keyframes btn-pulse{0%,100%{background:#f0ebe0;}50%{background:#c8c3b8;}}
-.demo-btn.sealing{animation:btn-pulse 1.5s ease-in-out infinite;}
-/* Result panel — parent AND every child display:none until JS reveals them */
-.demo-result{border-top:1px solid rgba(240,235,224,0.07);display:none;font-family:'Courier New',monospace;}
-@keyframes dr-fadein{from{opacity:0}to{opacity:1}}
-/* Each child: display:none by default; .vis switches on display + plays fade */
-.dr-sweep{display:none;}
-.dr-sweep.vis{display:flex;align-items:center;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(29,158,117,0.12);animation:dr-fadein .3s ease forwards;}
-.dr-sweep-line{flex:1;height:1px;background:rgba(29,158,117,0.25);}
-.dr-sweep-txt{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#1d9e75;font-family:'Inter',sans-serif;white-space:nowrap;}
-.dr-demo-label{display:none;}
-.dr-demo-label.vis{display:block;padding:6px 14px 2px;font-family:'JetBrains Mono','Courier New',monospace;font-size:9px;color:rgba(200,80,60,0.55);letter-spacing:1.5px;text-transform:uppercase;animation:dr-fadein .3s ease forwards;}
-.dr-row{display:none;}
-.dr-row.vis{display:flex;align-items:flex-start;gap:10px;padding:6px 14px;border-bottom:1px solid rgba(240,235,224,0.04);animation:dr-fadein .4s ease forwards;}
-.dr-key{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4A4A48;min-width:72px;flex-shrink:0;padding-top:2px;font-family:'Inter',sans-serif;font-weight:500;}
-.dr-val{font-family:'Courier New','JetBrains Mono',monospace;font-size:11px;color:#f0ebe0;word-break:break-all;line-height:1.5;}
-.dr-hash-prefix{color:rgba(29,158,117,0.65);}
-.dr-sealed{display:none;}
-.dr-sealed.vis{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid rgba(240,235,224,0.04);animation:dr-fadein .4s ease forwards;}
-.dr-check{font-size:16px;color:#1d9e75;line-height:1;}
-.dr-sealed-txt{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#1d9e75;font-family:'Inter',sans-serif;font-weight:600;}
-.dr-badge{display:none;}
-.dr-badge.vis{display:flex;align-items:center;gap:8px;margin:0 14px;padding:7px 12px;background:rgba(29,158,117,0.08);border:1px solid rgba(29,158,117,0.2);animation:dr-fadein .4s ease forwards;}
-.dr-badge-dot{color:#1d9e75;font-size:8px;}
-.dr-badge-txt{font-family:'Courier New',monospace;font-size:11px;color:#1d9e75;}
-.dr-note{display:none;}
-.dr-note.vis{display:block;padding:8px 14px;font-family:'Inter',sans-serif;font-size:10px;color:#4A4A48;font-style:italic;line-height:1.65;border-bottom:1px solid rgba(240,235,224,0.04);animation:dr-fadein .4s ease forwards;}
-.dr-verify{display:none;}
-.dr-verify.vis{display:block;padding:8px 14px;animation:dr-fadein .4s ease forwards;}
-.dr-verify a{font-family:'Inter',sans-serif;font-size:10px;color:rgba(240,235,224,0.35);text-decoration:underline;text-decoration-color:rgba(240,235,224,0.15);font-style:italic;line-height:1.65;letter-spacing:0;}
-.dr-verify a:hover{color:rgba(240,235,224,0.65);text-decoration-color:rgba(240,235,224,0.4);}
-.dr-error{display:none;}
-.dr-error.vis{display:block;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#cc4444;letter-spacing:1px;animation:dr-fadein .4s ease forwards;}
+/* VERIFY SECTION — light */
+.verify-section h2{color:var(--text)!important;}
+.verify-section .section-eyebrow{color:var(--muted)!important;}
+.verify-inner p{color:var(--muted)!important;}
 
-/* JUR TAGS (replaces big faded letter) */
-.jur-code{display:none;}
-.jur-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:0.1em;padding:4px 11px;border-radius:5px;margin-bottom:.875rem;font-family:'JetBrains Mono',monospace;}
-.jur-tag-id{background:rgba(200,169,110,0.12);color:#C8A96E;border:1px solid rgba(200,169,110,0.3);}
-.jur-tag-sg{background:rgba(29,158,117,0.12);color:#1d9e75;border:1px solid rgba(29,158,117,0.3);}
-.jur-tag-eu{background:rgba(100,140,210,0.12);color:#6699DD;border:1px solid rgba(100,140,210,0.3);}
-.jur-tag-uae{background:rgba(180,100,60,0.12);color:#CC7744;border:1px solid rgba(180,100,60,0.3);}
+/* LEGAL SECTION */
+.legal-section h2{color:var(--text)!important;}
+.legal-body p{color:var(--muted)!important;}
 
-/* COMPARISON TABLE */
-.comparison-table{border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin-top:3rem;}
-.cmp-thead{display:grid;grid-template-columns:1.4fr 1fr 1fr;background:var(--bg-alt);border-bottom:1px solid var(--border-light);padding:.875rem 1.5rem;gap:0;}
-.cmp-thead-empty{font-size:11px;color:transparent;}
-.cmp-thead-aidal{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);font-weight:600;}
-.cmp-thead-alt{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:500;}
-.cmp-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;padding:1.375rem 1.75rem;border-bottom:1px solid var(--border-light);align-items:center;transition:background .15s;}
-.cmp-row:last-child{border-bottom:none;}
-.cmp-row:nth-child(odd){background:var(--bg-alt);}
-.cmp-row:hover{background:#EDE8DF;}
-.cmp-row-label{font-size:.875rem;color:var(--text);font-weight:500;}
-.cmp-row-aidal{font-size:.875rem;color:var(--text);display:flex;align-items:center;gap:7px;}
-.cmp-row-aidal::before{content:'✓';color:var(--green);font-weight:800;font-size:15px;}
-.cmp-row-alt{font-size:.875rem;color:var(--muted);}
-.cmp-row-alt small{font-size:11px;color:var(--cream-faint);display:block;margin-top:1px;}
+/* DEADLINE CTA btn */
+.deadline-cta .btn-primary{background:var(--navy)!important;color:#fff!important;}
+.deadline-cta .btn-primary:hover{background:var(--accent-hover)!important;}
 
-/* SIGNUP TRUST SIGNALS */
-.signup-trust-signals{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;font-size:11px;color:#9C9690;flex-wrap:wrap;}
-.signup-trust-signals .ts-sep{color:#DDD8CE;}
-
-/* ══════════════════════════════════════════════════════════════════
-   FINANCIAL INFRASTRUCTURE — VISUAL DESIGN SYSTEM
-   IBM Plex Sans · IBM Plex Mono · Deep Navy · Zero Radius
-   ══════════════════════════════════════════════════════════════════ */
-
-/* ── TYPOGRAPHY ── */
-body{font-family:'IBM Plex Sans',system-ui,sans-serif;}
-h1,h2,h3,h4{font-family:'IBM Plex Sans',system-ui,sans-serif;}
-.logo-fallback,.footer-logo-fallback{font-family:'IBM Plex Sans',sans-serif;font-weight:600;letter-spacing:0.5px;}
-.nav-links a,.btn-primary,.btn-ghost,.price-btn,.signup-btn,.faq-q,.demo-btn,.signup-input{font-family:'IBM Plex Sans',sans-serif;}
-.code-block,.demo-input,.dr-val,.hash-row,.key-display,.top-deadline-count,.hero-stat-num,.jur-tag,.badge,code,pre{font-family:'IBM Plex Mono','Courier New',monospace;}
-
-/* ── ZERO BORDER-RADIUS — cards, containers, buttons ── */
-.comparison-table,.grid-2,.grid-4-card,.grid-3-card,.clients-row,.client-card,
-.verify-cards,.verify-card,.legal-cards,.legal-card,.faq-list,.faq-q,.pricing-grid,
-.price-card,.signup-card,.chain-overlay,.code-block,.btn-primary,.btn-ghost,
-.price-btn,.signup-btn,.signup-input,.signup-error,.nav-cta,.copy-btn,.nsc-card,
-.key-result-hdr,.key-display,.hero-stats,.hero-stat,.jur-tag,.badge,.legal-tag,
-.legal-badge,.trust-icon,.step-n,.client-icon{border-radius:0!important;}
-
-/* ── HERO — deep navy + grid overlay ── */
-.hero-wrapper{background:#0A0F1E!important;}
-.hero-wrapper::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background-image:repeating-linear-gradient(0deg,rgba(30,42,58,0.45) 0,rgba(30,42,58,0.45) 1px,transparent 1px,transparent 64px),
-    repeating-linear-gradient(90deg,rgba(30,42,58,0.45) 0,rgba(30,42,58,0.45) 1px,transparent 1px,transparent 64px);}
-.hero-inner,.hero-left{position:relative;z-index:2;}
-h1{color:#F0F4F8!important;}
-.hero-sub{color:#6B7A8D!important;}
-.hero-eyebrow{color:#6B7A8D!important;}
-.eyebrow-line{background:#1E2A3A!important;}
-.hero-stats{background:rgba(17,24,39,0.85)!important;border-color:#1E2A3A!important;}
-.hero-stat{background:transparent!important;border-right-color:#1E2A3A!important;}
-.hero-stat-num{color:#00D37F!important;font-family:'IBM Plex Mono',monospace!important;font-size:2.5rem!important;}
-.hero-stat-label{color:#6B7A8D!important;letter-spacing:0.12em!important;}
-.hero-stat:last-child .hero-stat-label::before{content:'●';color:#00D37F;margin-right:5px;font-size:8px;vertical-align:middle;animation:blink 2s infinite;}
-
-/* ── BUTTONS ── */
-.btn-primary{background:#F59E0B!important;color:#0A0F1E!important;font-weight:600!important;}
-.btn-primary:hover{background:#D97706!important;color:#0A0F1E!important;box-shadow:0 2px 8px rgba(245,158,11,0.25)!important;transform:none!important;}
-.btn-primary:active{box-shadow:none!important;}
-.btn-ghost{color:#6B7A8D!important;}
-.btn-ghost:hover{color:#F0F4F8!important;}
-.nav-cta{background:#F59E0B!important;color:#0A0F1E!important;border:none!important;}
-.nav-cta:hover{background:#D97706!important;color:#0A0F1E!important;}
-.top-deadline-cta{background:#F59E0B!important;color:#0A0F1E!important;padding:4px 12px!important;font-weight:600!important;text-decoration:none!important;border-bottom:none!important;border-radius:0!important;font-size:11px!important;}
-.top-deadline-cta:hover{background:#D97706!important;color:#0A0F1E!important;}
-
-/* ── TICKER BAR — market-status style ── */
-.top-deadline{background:#0A0F1E!important;border-bottom:1px solid #1E2A3A!important;}
-.top-deadline-label{color:#6B7A8D!important;font-family:'IBM Plex Mono',monospace!important;}
-.top-deadline-count{color:#F59E0B!important;font-family:'IBM Plex Mono',monospace!important;font-size:12px!important;letter-spacing:0.05em!important;}
-.top-deadline-text{color:#6B7A8D!important;}
-.top-deadline-sep{color:#1E2A3A!important;}
-/* .top-deadline-cta green override removed — amber rule above applies */
-
-/* ── NAV ── */
-nav{background:#0A0F1E!important;border-bottom:1px solid #1E2A3A!important;}
-.nav-links a{color:#6B7A8D!important;}
-.nav-links a:hover{color:#F0F4F8!important;}
-
-/* ── TRUST BAR ── */
-.trust-bar{background:#111827!important;border-bottom:1px solid #1E2A3A!important;}
-.trust-icon{background:rgba(0,211,127,0.05)!important;border-color:rgba(0,211,127,0.12)!important;}
-.trust-icon svg{stroke:#00D37F!important;}
-.trust-item{color:#6B7A8D!important;}
-.trust-sep{background:#1E2A3A!important;}
-
-/* ── LIVE DEMO WIDGET ── */
-.demo-widget{background:#0A0F1E!important;border-color:#1E2A3A!important;}
-.demo-strip{border-bottom-color:#1E2A3A!important;background:rgba(17,24,39,0.9)!important;}
-.demo-strip-dot{background:#00D37F!important;}
-.demo-strip-label{color:#6B7A8D!important;letter-spacing:3px!important;}
-.demo-label{color:#4A5668!important;}
-.demo-btn{background:#F0F4F8!important;color:#0A0F1E!important;}
-.chain-overlay{background:rgba(17,24,39,0.95)!important;border-color:#1E2A3A!important;}
-.chain-overlay-title{color:#6B7A8D!important;}
-.live-badge{color:#00D37F!important;}
-.live-dot{background:#00D37F!important;}
-.hash-row.active{color:#00D37F!important;}
-
-/* ── SECTION EYEBROWS ── */
-.section-eyebrow{color:#6B7A8D!important;}
-.section-eyebrow::before{background:#1E2A3A!important;}
-h2 em{color:#6B7A8D!important;}
-
-/* ── DIVIDERS ── */
-.divider{border-top-color:#D4D8E2!important;}
-hr.divider{border-top-color:#D4D8E2!important;}
-
-/* ── PROBLEM SECTION — cold blue-white ── */
-section#problem{background:#F0F4F8!important;}
-section#problem h2{color:#1A2030!important;}
-.grid-2{background:#D4D8E2!important;border-color:#D4D8E2!important;}
-.grid-cell{background:#F0F4F8!important;}
-.grid-cell:hover{background:#E4EAF2!important;}
-.grid-cell.dark{background:#E4EAF2!important;}
-.cell-num{color:#D4D8E2!important;font-family:'IBM Plex Mono',monospace!important;}
-.grid-cell h3{color:#1A2030!important;}
-.grid-cell p{color:#6B7A8D!important;}
-.grid-2 .grid-cell:last-child{background:#0A0F1E!important;border-left:3px solid #00D37F!important;}
-.grid-2 .grid-cell:last-child:hover{background:#111827!important;}
-.grid-2 .grid-cell:last-child h3{color:#F0F4F8!important;}
-.grid-2 .grid-cell:last-child p{color:#6B7A8D!important;}
-.grid-2 .grid-cell:last-child .cell-num{color:rgba(0,211,127,0.12)!important;}
-
-/* ── HOW IT WORKS — terminal code block ── */
-section#how{background:#E4EAF2!important;}
-section#how h2{color:#1A2030!important;}
-.step{border-bottom-color:#C8D0DC!important;}
-.step-n{background:#0A0F1E!important;color:#F0F4F8!important;}
-.step h3{color:#1A2030!important;}
-.step p{color:#6B7A8D!important;}
-.code-block{background:#111827!important;border-color:#1E2A3A!important;border-top:2px solid #00D37F!important;}
-.cc{color:#4A5668!important;}
-.ck{color:#F59E0B!important;}
-.cv{color:#00D37F!important;}
-.cs{color:#60A5FA!important;}
-.ch{color:#F0F4F8!important;}
-
-/* ── JURISDICTIONS — exchange listing ── */
-section#jurisdictions h2{color:#1A2030!important;}
-section#jurisdictions>div>p{color:#6B7A8D!important;}
-.grid-4-card{background:#F0F4F8!important;border-color:#D4D8E2!important;border-left-width:3px!important;}
-.grid-4-card:hover{background:#E4EAF2!important;box-shadow:none!important;transform:none!important;border-color:#D4D8E2!important;}
-.grid-4-card:nth-child(1){border-left-color:#F59E0B!important;}
-.grid-4-card:nth-child(2){border-left-color:#00D37F!important;}
-.grid-4-card:nth-child(3){border-left-color:#60A5FA!important;}
-.grid-4-card:nth-child(4){border-left-color:#A78BFA!important;}
-.grid-4-card h3{color:#1A2030!important;}
-.grid-4-card p{color:#6B7A8D!important;}
-.jur-tag{font-family:'IBM Plex Mono',monospace!important;border-radius:0!important;}
-.jur-tag-id{background:rgba(245,158,11,0.08)!important;color:#F59E0B!important;border-color:rgba(245,158,11,0.25)!important;}
-.jur-tag-sg{background:rgba(0,211,127,0.08)!important;color:#00D37F!important;border-color:rgba(0,211,127,0.25)!important;}
-.jur-tag-eu{background:rgba(96,165,250,0.08)!important;color:#60A5FA!important;border-color:rgba(96,165,250,0.25)!important;}
-.jur-tag-uae{background:rgba(167,139,250,0.08)!important;color:#A78BFA!important;border-color:rgba(167,139,250,0.25)!important;}
-.badge{background:#0A0F1E!important;color:#F0F4F8!important;font-family:'IBM Plex Mono',monospace!important;letter-spacing:0.08em!important;}
-
-/* ── WHY AIDAL STATS ── */
-section:has(.grid-3){background:#F0F4F8!important;}
-.grid-3-card{background:#ffffff!important;border-color:#D4D8E2!important;border-top:2px solid #1E2A3A!important;}
-.grid-3-card:hover{background:#E4EAF2!important;box-shadow:none!important;}
-.big-num{color:#D4D8E2!important;font-family:'IBM Plex Mono',monospace!important;}
-.grid-3-card h3{color:#1A2030!important;}
-.grid-3-card p{color:#6B7A8D!important;}
-
-/* ── CLIENTS ── */
-.clients-row{border-color:#D4D8E2!important;}
-.client-card{border-right-color:#D4D8E2!important;}
-.client-card:hover{background:#E4EAF2!important;}
-.client-icon{border-color:#D4D8E2!important;}
-.client-icon svg{stroke:#00D37F!important;}
-.client-card h3{color:#1A2030!important;}
-.client-card p{color:#6B7A8D!important;}
-
-/* ── COMPARISON TABLE — dark Bloomberg terminal ── */
-.comparison-table{background:#0A0F1E!important;border-color:#1E2A3A!important;}
-.cmp-thead{background:#111827!important;border-bottom-color:#1E2A3A!important;}
-.cmp-row{border-bottom-color:#1E2A3A!important;}
-.cmp-row:nth-child(odd){background:#111827!important;}
-.cmp-row:nth-child(even){background:#0A0F1E!important;}
-.cmp-row:hover{background:#131D2E!important;}
-.cmp-row-label{color:#F0F4F8!important;font-family:'IBM Plex Mono',monospace!important;font-size:12px!important;}
-.cmp-row-aidal{color:#F0F4F8!important;font-family:'IBM Plex Mono',monospace!important;font-size:12px!important;}
-.cmp-row-aidal::before{color:#00D37F!important;}
-.cmp-row-alt{color:#6B7A8D!important;font-family:'IBM Plex Mono',monospace!important;font-size:12px!important;}
-.cmp-row-alt small{color:#4A5668!important;}
-.cmp-thead-aidal{color:#00D37F!important;font-family:'IBM Plex Mono',monospace!important;}
-.cmp-thead-alt{color:#6B7A8D!important;font-family:'IBM Plex Mono',monospace!important;}
-
-/* ── DEADLINE CTA ── */
-.deadline-cta{background:#0A0F1E!important;border-top:1px solid #1E2A3A!important;}
-.big-date{color:#F0F4F8!important;font-family:'IBM Plex Mono',monospace!important;}
-.big-date-sub{color:#6B7A8D!important;}
-
-/* ── VERIFY SECTION ── */
-.verify-section{background:#E4EAF2!important;border-top-color:#D4D8E2!important;}
-.verify-section h2{color:#1A2030!important;}
-.verify-cards{border-color:#D4D8E2!important;}
-.verify-card{background:#F0F4F8!important;border-bottom-color:#D4D8E2!important;}
-.verify-card:hover{background:#E4EAF2!important;}
-.verify-card-tag{color:#00D37F!important;}
-.verify-card p{color:#6B7A8D!important;}
-.verify-inner p{color:#6B7A8D!important;}
-.verify-section .section-eyebrow{color:#6B7A8D!important;}
-
-/* ── LEGAL SECTION ── */
-.legal-section{background:#E4EAF2!important;border-top-color:#D4D8E2!important;}
-.legal-section h2{color:#1A2030!important;}
-.legal-body p{color:#6B7A8D!important;}
-.legal-cards{border-color:#D4D8E2!important;}
-.legal-card{background:#F0F4F8!important;border-bottom-color:#D4D8E2!important;}
-.legal-card:hover{background:#E4EAF2!important;}
-.legal-card h4{color:#1A2030!important;}
-.legal-card p{color:#6B7A8D!important;}
-.legal-link{color:#00D37F!important;border-bottom-color:rgba(0,211,127,0.3)!important;}
-.legal-badge{border-color:rgba(0,211,127,0.2)!important;color:#00D37F!important;}
-.legal-badge-dot{background:#00D37F!important;}
-.legal-tag.p{background:rgba(245,158,11,0.08)!important;color:#F59E0B!important;}
-.legal-tag.d{background:rgba(0,211,127,0.08)!important;color:#00D37F!important;}
-
-/* ── FAQ ── */
-section#faq{background:#F0F4F8!important;}
-section#faq h2{color:#1A2030!important;}
-.faq-list{border-color:#D4D8E2!important;}
-.faq-item{border-bottom-color:#D4D8E2!important;}
-.faq-q{color:#1A2030!important;font-family:'IBM Plex Sans',sans-serif!important;}
-.faq-q:hover{background:#E4EAF2!important;}
-.faq-arr{color:#00D37F!important;}
-.faq-a{background:#E4EAF2!important;color:#6B7A8D!important;}
-.faq-a strong{color:#1A2030!important;}
-
-/* ── PRICING — dark terminal ── */
-section#pricing{background:#0A0F1E!important;}
-section#pricing h2{color:#F0F4F8!important;}
-section#pricing .section-eyebrow{color:#6B7A8D!important;}
-section#pricing .section-eyebrow::before{background:#1E2A3A!important;}
-.pricing-grid{background:#1E2A3A!important;border-color:#1E2A3A!important;}
-.price-card{background:#111827!important;}
-.price-card:hover{background:#131D2E!important;}
-.price-card.featured{border-color:#F59E0B!important;border-width:1.5px!important;}
-.price-label{color:#6B7A8D!important;font-family:'IBM Plex Mono',monospace!important;}
-.price-amt{color:#F0F4F8!important;font-family:'IBM Plex Mono',monospace!important;}
-.price-unit{color:#6B7A8D!important;font-family:'IBM Plex Mono',monospace!important;font-size:11px!important;}
-.price-features li{color:#6B7A8D!important;border-bottom-color:#1E2A3A!important;}
-.price-features li::before{background:#00D37F!important;}
-.price-btn{background:#F0F4F8!important;color:#0A0F1E!important;font-weight:600!important;}
-.price-btn:hover{background:#D4D8E2!important;color:#0A0F1E!important;}
-
-/* ── SIGNUP ── */
-section#get-key{background:#F0F4F8!important;}
-section#get-key h2{color:#1A2030!important;}
-section#get-key h2 em{color:#6B7A8D!important;}
-section#get-key>p{color:#6B7A8D!important;}
-.signup-section .section-eyebrow{color:#6B7A8D!important;}
-.signup-card{background:#111827!important;border:1px solid #1E2A3A!important;box-shadow:none!important;}
-.signup-card h2{color:#F0F4F8!important;}
-.signup-card .section-eyebrow{color:#6B7A8D!important;}
-.signup-card>p{color:#6B7A8D!important;}
-.signup-input{background:#0A0F1E!important;color:#F0F4F8!important;border:1px solid #1E2A3A!important;font-family:'IBM Plex Mono','Courier New',monospace!important;font-size:13px!important;}
-.signup-input::placeholder{color:#4A5668!important;}
-.signup-input:focus{border-color:#F59E0B!important;box-shadow:0 0 0 2px rgba(245,158,11,0.1),inset 3px 0 0 #F59E0B!important;}
-/* Labels above inputs — make monospace uppercase */
-.signup-input+.signup-input{margin-top:2px;}
-.signup-trust{color:#4A5668!important;font-family:'IBM Plex Mono',monospace!important;font-size:11px!important;letter-spacing:0.04em!important;}
-.signup-btn{background:#F59E0B!important;color:#0A0F1E!important;font-weight:700!important;}
-.signup-btn:hover{background:#D97706!important;box-shadow:0 2px 8px rgba(245,158,11,0.25)!important;}
-.key-result-hdr{background:rgba(0,211,127,0.05)!important;border-color:rgba(0,211,127,0.2)!important;}
-.key-result-title{color:#00D37F!important;}
-.key-display{background:#0A0F1E!important;border:1px solid #1E2A3A!important;color:#F0F4F8!important;font-family:'IBM Plex Mono',monospace!important;}
-.copy-btn{border:1px solid #1E2A3A!important;color:#6B7A8D!important;background:transparent!important;}
-.copy-btn:hover{border-color:#00D37F!important;color:#00D37F!important;}
-.key-warn{color:#4A5668!important;}
-.key-warn strong{color:#6B7A8D!important;}
-.nsc-label{color:#F59E0B!important;}
-.nsc-text{color:#6B7A8D!important;}
-.nsc-n{color:#1E2A3A!important;font-family:'IBM Plex Mono',monospace!important;}
-.nsc-card{border:1px solid #1E2A3A!important;background:#0A0F1E!important;}
-.nsc-card:hover{background:#131D2E!important;}
-.signup-note,.signup-trust-signals{color:#4A5668!important;}
-.signup-trust-signals .ts-sep{color:#1E2A3A!important;}
-
-/* ── FOOTER ── */
-footer{background:#0A0F1E!important;border-top:1px solid #1E2A3A!important;}
-.footer-note,footer>p{color:#4A5668!important;}
-footer a{color:#6B7A8D!important;}
-footer a:hover{color:#F0F4F8!important;}
-
-/* ── DEMO RESULT PANEL ── */
-.demo-result{border-top-color:#1E2A3A!important;}
-.dr-sweep-txt{color:#00D37F!important;}
-.dr-sweep-line{background:rgba(0,211,127,0.2)!important;}
-.dr-sweep{border-bottom-color:rgba(0,211,127,0.1)!important;}
-.dr-key{color:#6B7A8D!important;}
-.dr-hash-prefix{color:rgba(0,211,127,0.6)!important;}
-.dr-sealed{border-bottom-color:#1E2A3A!important;}
-.dr-check{color:#00D37F!important;}
-.dr-sealed-txt{color:#00D37F!important;}
-.dr-badge{background:rgba(0,211,127,0.06)!important;border-color:rgba(0,211,127,0.2)!important;}
-.dr-badge-txt{color:#00D37F!important;}
-.dr-badge-dot{color:#00D37F!important;}
-.dr-note{border-bottom-color:#1E2A3A!important;color:#4A5668!important;}
-.dr-verify a{color:rgba(240,244,248,0.3)!important;}
-.dr-verify a:hover{color:rgba(240,244,248,0.6)!important;}
-
-/* ── VERIFY ANCHOR BUTTON ── */
-.verify-inner a[style*="border"]{border-color:#1E2A3A!important;color:#6B7A8D!important;}
-.verify-inner a[style*="border"]:hover{border-color:#00D37F!important;color:#F0F4F8!important;}
-
+/* RESPONSIVE */
 @media(max-width:960px){
   .top-deadline{padding:8px 1.5rem;font-size:10px;gap:1rem;}
   nav{padding:0 1.5rem;height:52px;}
@@ -698,16 +477,19 @@ footer a:hover{color:#F0F4F8!important;}
   .hero-left{padding:3rem 2rem;}
   .section{padding:5rem 2rem;}
   .grid-2,.how-layout,.pricing-grid,.clients-row,.grid-4,.grid-3{grid-template-columns:1fr;}
-  .verify-inner,.deadline-cta-inner,.legal-inner{grid-template-columns:1fr;gap:3rem;}
-  footer{flex-direction:column;gap:1rem;text-align:center;padding:1.75rem;}
+  .verify-inner,.deadline-cta-inner,.legal-inner,.pdf-showcase-inner{grid-template-columns:1fr;gap:3rem;}
+  footer{padding:2rem 1.5rem;}
+  .footer-main{flex-direction:column;gap:2rem;}
+  .footer-right{text-align:left;}
+  .footer-links{justify-content:flex-start;}
+  .footer-bottom{flex-direction:column;gap:1rem;}
   .signup-section{padding:5rem 2rem;}
   .trust-bar{padding:1rem 1.5rem;}
+  .credibility-bar{padding:10px 1.5rem;}
 }
 </style>
 </head>
 <body>
-
-
 
 <div class="sticky-header">
 <nav>
@@ -720,13 +502,12 @@ footer a:hover{color:#F0F4F8!important;}
     <li><a href="#jurisdictions">Jurisdictions</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="https://aidal-dashboard.vercel.app" target="_blank">Dashboard</a></li>
+    <li><a href="https://aidal-dashboard.vercel.app" target="_blank" class="nav-signin">Sign in</a></li>
     <li><a href="#get-key" class="nav-cta">Get API Key</a></li>
   </ul>
 </nav>
-<!-- DEADLINE TOP BAR -->
 <div class="top-deadline">
-  <span class="top-deadline-label">EU AI Act</span>
+  <span class="top-deadline-label">EU AI Act deadline</span>
   <span class="top-deadline-count" id="countdown">74d remaining</span>
   <span class="top-deadline-sep">·</span>
   <span class="top-deadline-text">Fines up to €30M for non-compliance</span>
@@ -739,12 +520,12 @@ footer a:hover{color:#F0F4F8!important;}
   <canvas id="ambient-canvas"></canvas>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-eyebrow"><span class="eyebrow-line"></span>EU AI Act · OJK · MAS FEAT · VARA</div>
-      <h1>Every AI<br>decision.<br><em>Accountable.</em><br>Forever.</h1>
-      <p class="hero-sub">When the regulator asks, you'll have proof in 3 seconds. Provable AI decision records — before they ask for them.</p>
+      <div class="hero-eyebrow"><span class="eyebrow-line"></span>AI compliance infrastructure</div>
+      <h1>Every AI decision,<br>audit-ready.</h1>
+      <p class="hero-sub">The only API that makes every AI decision cryptographically provable, regulator-ready, and permanently verifiable — before the auditor asks.</p>
       <div class="hero-actions">
-        <a href="#get-key" class="btn-primary">Get your API key</a>
-        <a href="#how" class="btn-ghost">See how it works</a>
+        <a href="#get-key" class="btn-primary">Get your free API key</a>
+        <a href="https://aidal-production.up.railway.app/docs" target="_blank" class="btn-ghost">See a sample report</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><span class="hero-stat-num" id="days-stat">74</span><span class="hero-stat-label">Days to deadline</span></div>
@@ -752,7 +533,7 @@ footer a:hover{color:#F0F4F8!important;}
         <div class="hero-stat"><span class="hero-stat-num">30m</span><span class="hero-stat-label">To integrate</span></div>
       </div>
     </div>
-    <div class="hero-right">
+    <div class="hero-right" style="background:#0a0c10;">
       <img class="chain-img" src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/chainn.webp" alt=""/>
       <div class="chain-fade-top"></div>
       <div class="chain-fade-bottom"></div>
@@ -766,7 +547,7 @@ footer a:hover{color:#F0F4F8!important;}
           </div>
           <div class="demo-fields">
             <div class="demo-field">
-              <label class="demo-label" for="d-type">Decision Type</label>
+              <label class="demo-label" for="d-type">Decision type</label>
               <select class="demo-input" id="d-type">
                 <option value="loan_approval">Loan Approval</option>
                 <option value="fraud_detection">Fraud Detection</option>
@@ -775,7 +556,7 @@ footer a:hover{color:#F0F4F8!important;}
               </select>
             </div>
             <div class="demo-field">
-              <label class="demo-label" for="d-company">Company Name</label>
+              <label class="demo-label" for="d-company">Company name</label>
               <input class="demo-input" type="text" id="d-company" placeholder="Your company name"/>
             </div>
             <div class="demo-field">
@@ -789,7 +570,6 @@ footer a:hover{color:#F0F4F8!important;}
             </div>
             <button class="demo-btn" id="demo-btn" onclick="runDemo()">Seal This Decision</button>
           </div>
-          <!-- RESULT: vault-sealing sequence, hidden until API responds -->
           <div class="demo-result" id="demo-result" style="display:none">
             <div class="dr-sweep" id="dr-sweep">
               <div class="dr-sweep-line"></div>
@@ -835,6 +615,22 @@ footer a:hover{color:#F0F4F8!important;}
   </div>
 </div>
 
+<!-- CREDIBILITY BAR -->
+<div class="credibility-bar">
+  <div class="credibility-inner">
+    <span class="credibility-label">Built for</span>
+    <div class="credibility-items">
+      <span>EU AI Act</span>
+      <span class="credibility-dot">·</span>
+      <span>MAS FEAT</span>
+      <span class="credibility-dot">·</span>
+      <span>OJK POJK No.11</span>
+      <span class="credibility-dot">·</span>
+      <span>VARA UAE</span>
+    </div>
+  </div>
+</div>
+
 <div class="trust-bar">
   <div class="trust-item reveal delay-1"><div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>SHA-256 tamper-proof chain</div>
   <div class="trust-sep"></div>
@@ -855,10 +651,10 @@ footer a:hover{color:#F0F4F8!important;}
   <div class="section-eyebrow reveal">The problem</div>
   <h2 class="reveal delay-1">AI makes millions of decisions.<br><em>None of them are provable.</em></h2>
   <div class="grid-2">
-    <div class="grid-cell reveal"><span class="cell-num">01</span><h3>No explanation</h3><p>When an AI denies a loan or flags a transaction, neither the company nor the customer can explain why — in a way that satisfies a regulator or stands up in court.</p></div>
-    <div class="grid-cell dark reveal delay-1"><span class="cell-num">02</span><h3>No audit trail</h3><p>AI decisions live in databases that can be edited. There is no tamper-proof record of what was decided, when, by which model, and with what confidence.</p></div>
-    <div class="grid-cell dark reveal delay-2"><span class="cell-num">03</span><h3>Regulators are arriving</h3><p>The EU AI Act, Singapore MAS FEAT, Indonesia OJK, and UAE VARA all mandate explainable, auditable AI decisions. The deadline is August 2026. Most companies have nothing.</p></div>
-    <div class="grid-cell reveal delay-3"><span class="cell-num">04</span><h3>AIDAL solves all three</h3><p>One API call logs every decision with a cryptographic proof, an AI-generated explanation, and automatic compliance checking. Regulators verify everything in seconds.</p></div>
+    <div class="grid-cell reveal"><span class="gap-badge">Gap 1</span><h3>No explanation</h3><p>When an AI denies a loan or flags a transaction, neither the company nor the customer can explain why — in a way that satisfies a regulator or stands up in court.</p></div>
+    <div class="grid-cell dark reveal delay-1"><span class="gap-badge">Gap 2</span><h3>No audit trail</h3><p>AI decisions live in databases that can be edited. There is no tamper-proof record of what was decided, when, by which model, and with what confidence.</p></div>
+    <div class="grid-cell dark reveal delay-2"><span class="gap-badge">Gap 3</span><h3>Regulators are arriving</h3><p>The EU AI Act, Singapore MAS FEAT, Indonesia OJK, and UAE VARA all mandate explainable, auditable AI decisions. The deadline is August 2026. Most companies have nothing.</p></div>
+    <div class="grid-cell reveal delay-3"><span class="gap-badge solution">Solution</span><h3>AIDAL solves all three</h3><p>One API call logs every decision with a cryptographic proof, an AI-generated explanation, and automatic compliance checking. Regulators verify everything in seconds.</p></div>
   </div>
 </section>
 
@@ -869,29 +665,35 @@ footer a:hover{color:#F0F4F8!important;}
   <h2 class="reveal delay-1">One line of code.<br><em>Full compliance.</em></h2>
   <div class="how-layout">
     <div>
-      <div class="step reveal"><span class="step-n">01.</span><div><h3>Get your API key instantly</h3><p>Sign up with your company name and email. Your unique <code style="font-family:monospace">aidal_live_xxxx</code> key is generated in seconds.</p></div></div>
-      <div class="step reveal delay-1"><span class="step-n">02.</span><div><h3>Send decisions after your model runs</h3><p>After your AI makes a decision, send it to AIDAL via one API call. Any language, any model, any cloud provider.</p></div></div>
-      <div class="step reveal delay-2"><span class="step-n">03.</span><div><h3>We lock it and check compliance</h3><p>AIDAL cryptographically hashes the decision, chains it, generates a plain-English explanation, and checks it against your regulator's requirements.</p></div></div>
-      <div class="step reveal delay-3"><span class="step-n">04.</span><div><h3>Audit anytime. Download the PDF.</h3><p>Open your dashboard. Download a regulator-ready compliance PDF in one click. Hand it to MAS, OJK, or the EU auditor. Done.</p></div></div>
+      <div class="step reveal"><span class="step-n">1</span><div><h3>Get your API key instantly</h3><p>Sign up with your company name and email. Your unique <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--bg-section);padding:1px 5px;border-radius:3px;">aidal_live_xxxx</code> key is generated in seconds.</p></div></div>
+      <div class="step reveal delay-1"><span class="step-n">2</span><div><h3>Send decisions after your model runs</h3><p>After your AI makes a decision, send it to AIDAL via one API call. Any language, any model, any cloud provider.</p></div></div>
+      <div class="step reveal delay-2"><span class="step-n">3</span><div><h3>We lock it and check compliance</h3><p>AIDAL cryptographically hashes the decision, chains it, generates a plain-English explanation, and checks it against your regulator's requirements.</p></div></div>
+      <div class="step reveal delay-3"><span class="step-n">4</span><div><h3>Audit anytime. Download the PDF.</h3><p>Open your dashboard. Download a regulator-ready compliance PDF in one click. Hand it to MAS, OJK, or the EU auditor. Done.</p></div></div>
     </div>
-    <div class="code-block reveal-right">
-      <div class="cc"># After your model runs — one call</div>
-      <span class="ch">requests.post(</span><br>
-      &nbsp;&nbsp;<span class="cs">"https://aidal-production.up.railway.app/decision"</span>,<br>
-      &nbsp;&nbsp;headers={<span class="ck">"Authorization"</span>: <span class="cs">"Bearer aidal_live_xxxx"</span>},<br>
-      &nbsp;&nbsp;json={<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"decision_type"</span>: <span class="cv">"loan_approval"</span>,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"model_used"</span>: <span class="cv">"xgboost-v2"</span>,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"input_features"</span>: <span class="cv">applicant_data</span>,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"output"</span>: <span class="cv">model_result</span>,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"jurisdiction"</span>: <span class="cv">"SG"</span><br>
-      &nbsp;&nbsp;})<br><br>
-      <div class="cc"># Response in &lt;1 second</div>
-      {<br>
-      &nbsp;&nbsp;<span class="ck">"audit_id"</span>: <span class="cs">"aud_a7f3c9b2..."</span>,<br>
-      &nbsp;&nbsp;<span class="ck">"hash"</span>: <span class="cs">"sha256:3e8b2a91..."</span>,<br>
-      &nbsp;&nbsp;<span class="ck">"explanation"</span>: <span class="cs">"Loan approved..."</span>,<br>
-      &nbsp;&nbsp;<span class="ck">"compliance"</span>: {<span class="ck">"status"</span>: <span class="cv">"COMPLIANT"</span>}<br>}
+    <div class="code-block-wrapper reveal-right">
+      <div class="code-block-header">
+        <span class="code-block-lang">Python · One API call</span>
+        <div class="code-block-dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="code-block">
+        <div class="cc"># After your model runs</div>
+        <span class="ch">requests.post(</span><br>
+        &nbsp;&nbsp;<span class="cs">"https://aidal-production.up.railway.app/decision"</span>,<br>
+        &nbsp;&nbsp;headers={<span class="ck">"Authorization"</span>: <span class="cs">"Bearer aidal_live_xxxx"</span>},<br>
+        &nbsp;&nbsp;json={<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"decision_type"</span>: <span class="cv">"loan_approval"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"model_used"</span>: <span class="cv">"xgboost-v2"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"input_features"</span>: <span class="cv">applicant_data</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"output"</span>: <span class="cv">model_result</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="ck">"jurisdiction"</span>: <span class="cv">"SG"</span><br>
+        &nbsp;&nbsp;})<br><br>
+        <div class="cc"># Response in &lt;1 second</div>
+        {<br>
+        &nbsp;&nbsp;<span class="ck">"audit_id"</span>: <span class="cs">"aud_a7f3c9b2..."</span>,<br>
+        &nbsp;&nbsp;<span class="ck">"hash"</span>: <span class="cs">"sha256:3e8b2a91..."</span>,<br>
+        &nbsp;&nbsp;<span class="ck">"explanation"</span>: <span class="cs">"Loan approved..."</span>,<br>
+        &nbsp;&nbsp;<span class="ck">"compliance"</span>: {<span class="ck">"status"</span>: <span class="cv">"COMPLIANT"</span>}<br>}
+      </div>
     </div>
   </div>
 </section>
@@ -901,12 +703,64 @@ footer a:hover{color:#F0F4F8!important;}
 <section class="section" id="jurisdictions">
   <div class="section-eyebrow reveal">Jurisdiction modules</div>
   <h2 class="reveal delay-1">Built for your<br><em>specific regulator.</em></h2>
-  <p class="reveal delay-2" style="font-size:14px;color:var(--cream-faint);max-width:500px;margin-bottom:1rem;line-height:1.8;">Pass your jurisdiction code and AIDAL automatically checks compliance, flags missing fields, and tells you exactly what your regulator requires.</p>
+  <p class="reveal delay-2" style="font-size:14px;color:var(--muted);max-width:500px;margin-bottom:1rem;line-height:1.8;">Pass your jurisdiction code and AIDAL automatically checks compliance, flags missing fields, and tells you exactly what your regulator requires.</p>
   <div class="grid-4">
-    <div class="grid-4-card reveal"><div class="jur-tag jur-tag-id">ID</div><h3>OJK Indonesia</h3><p>POJK No. 11/POJK.03/2022. AI decisions must be explainable and retained for 5 years.</p><span class="badge">5 yr retention</span></div>
-    <div class="grid-4-card reveal delay-1"><div class="jur-tag jur-tag-sg">SG</div><h3>MAS FEAT Singapore</h3><p>Fairness, Ethics, Accountability, Transparency. All financial AI must be auditable.</p><span class="badge">5 yr retention</span></div>
-    <div class="grid-4-card reveal delay-2"><div class="jur-tag jur-tag-eu">EU</div><h3>EU AI Act</h3><p>Articles 9–17. Automatic logging mandatory. Plain-language explanations required. Fines up to €30M.</p><span class="badge">10 yr retention</span></div>
-    <div class="grid-4-card reveal delay-3"><div class="jur-tag jur-tag-uae">UAE</div><h3>VARA UAE</h3><p>AI decisions for crypto and fintech must be risk-classified and auditable.</p><span class="badge">7 yr retention</span></div>
+    <div class="grid-4-card reveal">
+      <div class="jur-card-header">
+        <span class="jur-flag">🇮🇩</span>
+        <span class="jur-active"><span class="jur-active-dot"></span>Active</span>
+      </div>
+      <h3>OJK Indonesia</h3>
+      <ul class="jur-checklist">
+        <li>POJK No.11/2022 compliance</li>
+        <li>Explainability required</li>
+        <li>5-year record retention</li>
+        <li>Risk classification logging</li>
+      </ul>
+      <span class="badge">5 yr retention</span>
+    </div>
+    <div class="grid-4-card reveal delay-1">
+      <div class="jur-card-header">
+        <span class="jur-flag">🇸🇬</span>
+        <span class="jur-active"><span class="jur-active-dot"></span>Active</span>
+      </div>
+      <h3>MAS FEAT Singapore</h3>
+      <ul class="jur-checklist">
+        <li>Fairness checks per decision</li>
+        <li>Ethics documentation</li>
+        <li>Accountability trail</li>
+        <li>Transparency reporting</li>
+      </ul>
+      <span class="badge">5 yr retention</span>
+    </div>
+    <div class="grid-4-card reveal delay-2">
+      <div class="jur-card-header">
+        <span class="jur-flag">🇪🇺</span>
+        <span class="jur-active"><span class="jur-active-dot"></span>Active</span>
+      </div>
+      <h3>EU AI Act</h3>
+      <ul class="jur-checklist">
+        <li>Art 12 automatic logging</li>
+        <li>Art 13 plain-language explanation</li>
+        <li>Human oversight records</li>
+        <li>High-risk system classification</li>
+      </ul>
+      <span class="badge">10 yr retention</span>
+    </div>
+    <div class="grid-4-card reveal delay-3">
+      <div class="jur-card-header">
+        <span class="jur-flag">🇦🇪</span>
+        <span class="jur-active"><span class="jur-active-dot"></span>Active</span>
+      </div>
+      <h3>VARA UAE</h3>
+      <ul class="jur-checklist">
+        <li>AI risk classification</li>
+        <li>Crypto &amp; fintech audit trail</li>
+        <li>AI governance documentation</li>
+        <li>VARA 2024 framework mapped</li>
+      </ul>
+      <span class="badge">7 yr retention</span>
+    </div>
   </div>
 </section>
 
@@ -920,22 +774,37 @@ footer a:hover{color:#F0F4F8!important;}
     <div class="cmp-thead">
       <span class="cmp-thead-empty"></span>
       <span class="cmp-thead-aidal">AIDAL</span>
-      <span class="cmp-thead-alt">Alternative</span>
+      <span class="cmp-thead-alt">Build in-house</span>
     </div>
     <div class="cmp-row">
       <span class="cmp-row-label">Integration time</span>
       <span class="cmp-row-aidal">30 minutes</span>
-      <span class="cmp-row-alt">6 months<small>IBM OpenPages</small></span>
+      <span class="cmp-row-alt">6–12 months<small>Engineering + legal + QA</small></span>
     </div>
     <div class="cmp-row">
       <span class="cmp-row-label">Cost</span>
-      <span class="cmp-row-aidal">$299/mo</span>
-      <span class="cmp-row-alt">$50k+<small>Building in-house</small></span>
+      <span class="cmp-row-aidal">From $0/mo</span>
+      <span class="cmp-row-alt">$50k–$200k+<small>Initial build, ongoing maintenance</small></span>
     </div>
     <div class="cmp-row">
       <span class="cmp-row-label">Proof type</span>
-      <span class="cmp-row-aidal">Cryptographic proof</span>
-      <span class="cmp-row-alt">Database testimony<small>No dedicated solution</small></span>
+      <span class="cmp-row-aidal">Cryptographic hash</span>
+      <span class="cmp-row-alt">Database record<small>Editable, not independently verifiable</small></span>
+    </div>
+    <div class="cmp-row">
+      <span class="cmp-row-label">Explainability</span>
+      <span class="cmp-row-aidal">AI-generated, per decision</span>
+      <span class="cmp-row-alt">Manual write-up<small>Per incident, not per decision</small></span>
+    </div>
+    <div class="cmp-row">
+      <span class="cmp-row-label">Jurisdiction compliance</span>
+      <span class="cmp-row-aidal">4 modules live</span>
+      <span class="cmp-row-alt">Hire a lawyer per region<small>MAS FEAT ≠ OJK ≠ EU AI Act</small></span>
+    </div>
+    <div class="cmp-row">
+      <span class="cmp-row-label">Regulator PDF</span>
+      <span class="cmp-row-aidal">One-click download</span>
+      <span class="cmp-row-alt">Custom built<small>Months of compliance ops work</small></span>
     </div>
   </div>
 </section>
@@ -946,9 +815,9 @@ footer a:hover{color:#F0F4F8!important;}
   <div class="section-eyebrow reveal">Who uses AIDAL</div>
   <h2 class="reveal delay-1">Built for anyone<br><em>using AI to make decisions.</em></h2>
   <div class="clients-row">
-    <div class="client-card reveal"><div class="client-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><h3>Fintech &amp; lending</h3><p>Credit decisions, loan approvals, risk scoring. Every decision logged, every rejection explainable. OJK, MAS, and EU compliant.</p></div>
+    <div class="client-card reveal"><div class="client-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><h3>Fintech and lending</h3><p>Credit decisions, loan approvals, risk scoring. Every decision logged, every rejection explainable. OJK, MAS, and EU compliant.</p></div>
     <div class="client-card reveal delay-1"><div class="client-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Insurance</h3><p>Claims approval, underwriting, fraud flagging. Full audit trail that satisfies regulators and silences complaints.</p></div>
-    <div class="client-card reveal delay-2"><div class="client-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><h3>HR &amp; hiring</h3><p>AI screening decisions. The EU AI Act classifies these as high-risk. AIDAL makes every hiring decision contestable.</p></div>
+    <div class="client-card reveal delay-2"><div class="client-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><h3>HR and hiring</h3><p>AI screening decisions. The EU AI Act classifies these as high-risk. AIDAL makes every hiring decision contestable.</p></div>
   </div>
 </section>
 
@@ -957,7 +826,7 @@ footer a:hover{color:#F0F4F8!important;}
   <div class="deadline-cta-inner">
     <div class="reveal-left"><div class="big-date">Aug<br>2026.</div><div class="big-date-sub">EU AI Act — high-risk AI deadline</div></div>
     <div class="reveal-right">
-      <p style="font-size:14px;color:var(--cream-faint);line-height:1.9;margin-bottom:2.5rem;">Every company using AI for credit, insurance, healthcare, or employment must have audit trails, explainability, and contestation mechanisms. Non-compliance: fines up to €30M or 6% of global revenue.</p>
+      <p style="font-size:14px;color:#4A5668;line-height:1.9;margin-bottom:2.5rem;">Every company using AI for credit, insurance, healthcare, or employment must have audit trails, explainability, and contestation mechanisms. Non-compliance: fines up to €30M or 6% of global revenue.</p>
       <a href="#get-key" class="btn-primary">Get your API key now</a>
     </div>
   </div>
@@ -968,10 +837,10 @@ footer a:hover{color:#F0F4F8!important;}
     <div>
       <div class="section-eyebrow reveal">Independent verification</div>
       <h2 class="reveal delay-1" style="font-size:clamp(30px,3.5vw,48px);">Your database is testimony.<br><em>This is proof.</em></h2>
-      <p class="reveal delay-2" style="font-size:14px;color:var(--cream-faint);line-height:1.8;margin-bottom:2.5rem;">A regulator doesn't trust what you control. AIDAL's SHA-256 hash chain is mathematically verifiable by anyone, independent of AIDAL's servers. That is the difference between passing an audit and failing one.</p>
+      <p class="reveal delay-2" style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:2.5rem;">A regulator doesn't trust what you control. AIDAL's SHA-256 hash chain is mathematically verifiable by anyone, independent of AIDAL's servers. That is the difference between passing an audit and failing one.</p>
       <div class="reveal delay-3" style="display:flex;gap:1rem;flex-wrap:wrap;">
         <a href="https://aidal-dashboard.vercel.app/verify" target="_blank" class="btn-primary">Verify a record →</a>
-        <a href="https://github.com/widjajaanthony24-svg/aidal-anchors" target="_blank" style="color:var(--cream-faint);padding:13px 24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:1px solid var(--border-mid);">View anchor log →</a>
+        <a href="https://github.com/widjajaanthony24-svg/aidal-anchors" target="_blank" style="color:var(--muted);padding:13px 24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:1px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;transition:border-color .2s;">View anchor log →</a>
       </div>
     </div>
     <div class="verify-cards reveal-right">
@@ -982,18 +851,6 @@ footer a:hover{color:#F0F4F8!important;}
   </div>
 </div>
 
-<section class="section" id="faq">
-  <div class="section-eyebrow reveal">FAQ</div>
-  <h2 class="reveal delay-1">Questions we get<br><em>before people sign up.</em></h2>
-  <div class="faq-list reveal delay-2">
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is AIDAL a law firm? Does using it make us legally compliant?<span class="faq-arr">+</span></button><div class="faq-a">No. AIDAL provides <strong>technical audit infrastructure</strong> — tamper-proof logs, cryptographic proofs, and automatic compliance field-checking based on the actual regulation text. Confirm full compliance with a licensed lawyer.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens if AIDAL shuts down?<span class="faq-arr">+</span></button><div class="faq-a">Nothing. Every day AIDAL publishes a master hash to a <strong>public GitHub repository</strong> independent of AIDAL's servers. Your records can be cryptographically verified forever, even if AIDAL disappears.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">We already log decisions in our database. Why AIDAL?<span class="faq-arr">+</span></button><div class="faq-a">Your database can be edited — a regulator knows this. AIDAL's SHA-256 hash chain makes tampering <strong>mathematically detectable</strong>. It also adds AI explanations, compliance checking, and a regulator-ready PDF.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does integration actually take?<span class="faq-arr">+</span></button><div class="faq-a"><strong>Under 30 minutes.</strong> One API call after your model runs. No SDK, no infrastructure. <a href="https://aidal-production.up.railway.app/docs" target="_blank" style="color:#7ec8a0;text-decoration:none;border-bottom:1px solid rgba(29,158,117,0.3)">API docs →</a></div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">We're not regulated yet. Should we still use AIDAL?<span class="faq-arr">+</span></button><div class="faq-a">Regulation is coming. Retrofitting an audit trail after a regulator asks for it is significantly harder. Beta is free. The cost of starting today is zero.</div></div>
-  </div>
-</section>
-
 <div class="legal-section">
   <div class="legal-inner">
     <div class="legal-body">
@@ -1003,24 +860,164 @@ footer a:hover{color:#F0F4F8!important;}
       <p class="reveal delay-3">Are you a compliance lawyer with MAS FEAT or OJK expertise? <a href="https://mail.google.com/mail/?view=cm&to=try.aidal@gmail.com&subject=Legal%20Advisor%20%E2%80%94%20AIDAL" target="_blank" class="legal-link">We'd like to speak with you →</a></p>
     </div>
     <div class="legal-cards reveal-right">
-      <div class="legal-card"><div class="legal-card-row"><h4>MAS FEAT — Singapore</h4></div><p>Checks Fairness, Ethics, Accountability, and Transparency on every decision.</p></div>
-      <div class="legal-card"><div class="legal-card-row"><h4>OJK — Indonesia</h4></div><p>Enforces POJK No. 11/POJK.03/2022 required fields and 5-year retention.</p></div>
-      <div class="legal-card"><div class="legal-card-row"><h4>EU AI Act</h4><span class="legal-tag d">Articles 9–17 mapped</span></div><p>Article 12 automatic logging and Article 13 explanations on every decision.</p></div>
-      <div class="legal-card"><div class="legal-card-row"><h4>VARA — UAE</h4><span class="legal-tag d">Framework mapped</span></div><p>VARA 2024 AI &amp; Technology Governance Framework requirements implemented.</p></div>
+      <div class="legal-card">
+        <div class="legal-card-row"><h4>POJK No.11 — Indonesia</h4><span class="legal-tag p">OJK 2022</span></div>
+        <p>Enforces POJK No. 11/POJK.03/2022 required fields, explainability standard, and 5-year retention.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-card-row"><h4>MAS FEAT — Singapore</h4><span class="legal-tag d">Principles mapped</span></div>
+        <p>Checks Fairness, Ethics, Accountability, and Transparency on every financial AI decision.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-card-row"><h4>EU AI Act — Articles 9–17</h4><span class="legal-tag d">Articles mapped</span></div>
+        <p>Article 12 automatic logging and Article 13 plain-language explanations on every decision.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-card-row"><h4>VARA 2024 — UAE</h4><span class="legal-tag d">Framework mapped</span></div>
+        <p>VARA 2024 AI &amp; Technology Governance Framework requirements fully implemented.</p>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- PDF SHOWCASE -->
+<section class="pdf-showcase-section">
+  <div class="pdf-showcase-inner">
+    <div class="reveal-left">
+      <div class="section-eyebrow">Compliance report</div>
+      <h2 style="margin-bottom:1.25rem;">The document your regulator<br><em>actually wants.</em></h2>
+      <p style="font-size:1.0625rem;color:var(--muted);line-height:1.75;margin-bottom:0;">One click from your dashboard. A professional PDF with cryptographic proof, AI explanations, and a compliance certificate — ready to hand to MAS, OJK, or an EU auditor.</p>
+      <div class="pdf-callouts">
+        <div class="pdf-callout">
+          <span class="pdf-callout-icon">✓</span>
+          <div>
+            <strong>Cryptographic certificate</strong>
+            <p>SHA-256 hash chain with tamper-evident seal. Mathematically verifiable by any third party, independently of AIDAL's servers.</p>
+          </div>
+        </div>
+        <div class="pdf-callout">
+          <span class="pdf-callout-icon">✓</span>
+          <div>
+            <strong>Per-decision explanations</strong>
+            <p>Every AI decision explained in plain language. Required by EU AI Act Art 13, MAS FEAT, and OJK POJK No.11.</p>
+          </div>
+        </div>
+        <div class="pdf-callout">
+          <span class="pdf-callout-icon">✓</span>
+          <div>
+            <strong>Jurisdiction compliance mapping</strong>
+            <p>Automatically checked against your regulator's exact requirements — not a generic template.</p>
+          </div>
+        </div>
+      </div>
+      <a href="https://aidal-production.up.railway.app/docs" target="_blank" class="btn-primary reveal" style="display:inline-block;margin-top:2rem;">Download sample report →</a>
+    </div>
+    <div class="reveal-right">
+      <div class="pdf-mockup-browser">
+        <div class="pdf-mockup-bar">
+          <div class="pdf-browser-dots"><span></span><span></span><span></span></div>
+          <span class="pdf-browser-url">aidal-production.up.railway.app/report/pdf</span>
+        </div>
+        <div class="pdf-mockup-content">
+          <div class="pdf-mock-header">
+            <strong>AIDAL. Compliance Audit Report</strong>
+            <span class="pdf-mock-date">May 2026</span>
+          </div>
+          <div class="pdf-mock-company">Acme Fintech Pte Ltd</div>
+          <div class="pdf-mock-section-label">Executive summary</div>
+          <div class="pdf-mock-row"><span>Reporting period</span><span>Q1 2026</span></div>
+          <div class="pdf-mock-row"><span>Decisions logged</span><span>4,821</span></div>
+          <div class="pdf-mock-row"><span>Compliant rate</span><span class="pdf-mock-green">98.7%</span></div>
+          <div class="pdf-mock-row"><span>Jurisdiction</span><span>SG — MAS FEAT</span></div>
+          <div class="pdf-mock-cert">
+            <span>✓ Chain integrity verified</span>
+            <span class="pdf-mock-cert-id">CERT-2026-A7F3C9B2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="section-eyebrow reveal">FAQ</div>
+  <h2 class="reveal delay-1">Questions we get<br><em>before people sign up.</em></h2>
+  <div class="faq-list reveal delay-2">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is AIDAL a law firm? Does using it make us legally compliant?<span class="faq-arr">+</span></button><div class="faq-a">No. AIDAL provides <strong>technical audit infrastructure</strong> — tamper-proof logs, cryptographic proofs, and automatic compliance field-checking based on the actual regulation text. Confirm full compliance with a licensed lawyer.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Will AIDAL audit logs be accepted as evidence in regulatory proceedings?<span class="faq-arr">+</span></button><div class="faq-a">AIDAL produces cryptographically verifiable records — the same SHA-256 hash chain structure used in blockchain forensics accepted by financial regulators globally. The log is <strong>independently verifiable</strong> by any third party without relying on AIDAL's servers. Whether a specific regulator in a specific proceeding accepts it depends on jurisdiction; consult a licensed compliance lawyer. The cryptographic proof is substantively stronger than a database printout.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does AIDAL have access to our AI model's data or decision logic?<span class="faq-arr">+</span></button><div class="faq-a">No. You control what you send to AIDAL. The API accepts the <strong>output and metadata</strong> of your AI decisions — not your model weights, training data, or internal logic. You can pseudonymise customer identifiers before sending. We never have access to your underlying model or its training data.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does AIDAL interact with our existing data governance framework?<span class="faq-arr">+</span></button><div class="faq-a">AIDAL is a <strong>lightweight append-only logger</strong> — it sits downstream of your model and upstream of your compliance team. It does not replace your data warehouse, model registry, or DPO processes. Most teams integrate it in one afternoon without touching existing infrastructure.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can we self-host AIDAL for data sovereignty requirements?<span class="faq-arr">+</span></button><div class="faq-a"><strong>Yes — on the Enterprise plan.</strong> We offer an on-premise deployment option for organisations with data residency requirements (e.g. Indonesia POJK data localisation, EU data sovereignty mandates). Contact us at try.aidal@gmail.com to discuss your requirements.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens if AIDAL shuts down?<span class="faq-arr">+</span></button><div class="faq-a">Nothing. Every day AIDAL publishes a master hash to a <strong>public GitHub repository</strong> independent of AIDAL's servers. Your records can be cryptographically verified forever, even if AIDAL disappears.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">We already log decisions in our database. Why AIDAL?<span class="faq-arr">+</span></button><div class="faq-a">Your database can be edited — a regulator knows this. AIDAL's SHA-256 hash chain makes tampering <strong>mathematically detectable</strong>. It also adds AI explanations, compliance checking, and a regulator-ready PDF.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does integration actually take?<span class="faq-arr">+</span></button><div class="faq-a"><strong>Under 30 minutes.</strong> One API call after your model runs. No SDK, no infrastructure. <a href="https://aidal-production.up.railway.app/docs" target="_blank" style="color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(26,43,74,0.3)">API docs →</a></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">We're not regulated yet. Should we still use AIDAL?<span class="faq-arr">+</span></button><div class="faq-a">Regulation is coming. Retrofitting an audit trail after a regulator asks for it is significantly harder. Beta is free. The cost of starting today is zero.</div></div>
+  </div>
+</section>
 
 <section class="section" id="pricing">
   <div class="section-eyebrow reveal">Pricing</div>
   <h2 class="reveal delay-1">Start free.<br><em>Scale when you're ready.</em></h2>
   <div class="pricing-grid">
-    <div class="price-card reveal"><span class="price-label">Free</span><span class="price-amt">$0</span><span class="price-unit">forever · 1,000 decisions/month</span><ul class="price-features"><li>Full API access</li><li>AI-generated explanations</li><li>Tamper-proof audit log</li><li>4 jurisdiction modules</li><li>Public verify page</li></ul><button class="price-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get API key free</button></div>
-    <div class="price-card reveal delay-1"><span class="price-label">Starter</span><span class="price-amt">$299</span><span class="price-unit">per month · 50,000 decisions</span><ul class="price-features"><li>Everything in Free</li><li>Compliance dashboard</li><li>Human oversight tracking</li><li>Model registry</li><li>Email support</li></ul><button class="price-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get started</button></div>
-    <div class="price-card featured reveal delay-2"><span class="price-label">Professional</span><span class="price-amt">$2,500</span><span class="price-unit">per month · 500,000 decisions</span><ul class="price-features"><li>Everything in Starter</li><li>Regulator-ready PDF reports</li><li>Fairness detection</li><li>Incident reporting</li><li>Priority support + SLA</li></ul><button class="price-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get started</button></div>
-    <div class="price-card reveal delay-3"><span class="price-label">Enterprise</span><span class="price-amt">Custom</span><span class="price-unit">unlimited · white-label · SOC2</span><ul class="price-features"><li>Everything in Professional</li><li>White-label deployment</li><li>On-premise option</li><li>Custom jurisdiction modules</li><li>Dedicated team</li></ul><a href="mailto:try.aidal@gmail.com?subject=AIDAL%20Enterprise" class="price-btn">Contact us</a></div>
+    <div class="price-card reveal">
+      <span class="price-label">Free</span>
+      <span class="price-amt">$0</span>
+      <span class="price-unit">forever · 1,000 decisions/month</span>
+      <span class="price-integration">→ Integrate in 30 minutes</span>
+      <ul class="price-features">
+        <li>Full API access</li>
+        <li>AI-generated explanations</li>
+        <li>Tamper-proof audit log</li>
+        <li>4 jurisdiction modules</li>
+        <li>Public verify page</li>
+      </ul>
+      <button class="price-btn ghost-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get API key free</button>
+    </div>
+    <div class="price-card reveal delay-1">
+      <span class="price-label">Starter</span>
+      <span class="price-amt">$299</span>
+      <span class="price-unit">per month · 50,000 decisions</span>
+      <span class="price-integration">→ Integrate in 30 minutes</span>
+      <ul class="price-features">
+        <li>Everything in Free</li>
+        <li>Compliance dashboard</li>
+        <li>Human oversight tracking</li>
+        <li>Model registry</li>
+        <li>Email support</li>
+      </ul>
+      <button class="price-btn ghost-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get started</button>
+    </div>
+    <div class="price-card featured reveal delay-2">
+      <span class="most-requested">Most requested</span>
+      <span class="price-label">Professional</span>
+      <span class="price-amt">$2,500</span>
+      <span class="price-unit">per month · 500,000 decisions</span>
+      <span class="price-integration">→ Integrate in 30 minutes</span>
+      <ul class="price-features">
+        <li>Everything in Starter</li>
+        <li>Regulator-ready PDF reports</li>
+        <li>Fairness detection</li>
+        <li>Incident reporting</li>
+        <li>Priority support + SLA</li>
+      </ul>
+      <button class="price-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get started</button>
+    </div>
+    <div class="price-card reveal delay-3">
+      <span class="price-label">Enterprise</span>
+      <span class="price-amt">Custom</span>
+      <span class="price-unit">unlimited · white-label · SOC2</span>
+      <span class="price-integration">→ Dedicated onboarding</span>
+      <ul class="price-features">
+        <li>Everything in Professional</li>
+        <li>White-label deployment</li>
+        <li>On-premise option</li>
+        <li>Custom jurisdiction modules</li>
+        <li>Dedicated team</li>
+      </ul>
+      <a href="mailto:try.aidal@gmail.com?subject=AIDAL%20Enterprise" class="price-btn ghost-btn">Contact us</a>
+    </div>
   </div>
-  <p class="reveal" style="margin-top:1rem;font-size:11px;color:rgba(240,235,224,.2);">All plans include SHA-256 tamper-proof chain and public audit trail. No credit card required.</p>
+  <p class="reveal" style="margin-top:1rem;font-size:11px;color:var(--muted);">All plans include SHA-256 tamper-proof chain and public audit trail. No credit card required for Free tier.</p>
 </section>
 
 <section class="signup-section" id="get-key">
@@ -1041,7 +1038,7 @@ footer a:hover{color:#F0F4F8!important;}
     </div>
     <div class="signup-error" id="signup-error"></div>
     <div class="key-result" id="key-result">
-      <div class="key-result-hdr"><span style="font-size:13px;color:#7ec8a0">✓</span><span class="key-result-title">Your API key is live — save it now</span></div>
+      <div class="key-result-hdr"><span style="font-size:13px;color:var(--green)">✓</span><span class="key-result-title">Your API key is live — save it now</span></div>
       <div class="key-display" id="key-display"></div>
       <button class="copy-btn" onclick="copyKey()">Copy key</button>
       <div class="key-warn"><strong>This key will not be shown again.</strong> Lost your key? Email try.aidal@gmail.com.</div>
@@ -1055,12 +1052,31 @@ footer a:hover{color:#F0F4F8!important;}
 </section>
 
 <footer>
-  <div class="footer-logo">
-    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
-    <span class="footer-logo-fallback">AIDAL.</span>
+  <div class="footer-main">
+    <div class="footer-left">
+      <div class="footer-logo">
+        <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <span class="footer-logo-fallback">AIDAL.</span>
+      </div>
+      <div class="footer-address">
+        Singapore · contact: <a href="mailto:try.aidal@gmail.com">try.aidal@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="#how">How it works</a>
+        <a href="#jurisdictions">Jurisdictions</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://aidal-dashboard.vercel.app" target="_blank">Dashboard</a>
+        <a href="https://www.linkedin.com/company/aidal" target="_blank">LinkedIn</a>
+      </div>
+    </div>
   </div>
-  <p class="footer-note">AIDAL provides technical audit infrastructure. Not a law firm. Not legal advice. Consult a licensed compliance lawyer.</p>
-  <p>try.aidal@gmail.com &nbsp;·&nbsp; © 2026 AIDAL</p>
+  <div class="footer-bottom">
+    <p class="footer-note">AIDAL provides technical audit infrastructure for AI decision logging. Not a law firm. Not legal advice. AIDAL audit records are cryptographically verifiable but do not constitute legal compliance certification. Consult a licensed compliance lawyer for your jurisdiction.</p>
+    <p class="footer-copy">© 2026 AIDAL</p>
+  </div>
 </footer>
 
 <script>
@@ -1178,8 +1194,8 @@ function demoVis(id,delay){
   setTimeout(function(){
     var el=document.getElementById(id);
     if(!el)return;
-    el.style.display="";   // clear inline display:none set by reset
-    el.classList.add("vis"); // CSS .vis rule sets the correct display + animation
+    el.style.display="";
+    el.classList.add("vis");
   },delay);
 }
 
@@ -1203,7 +1219,6 @@ function runDemo(){
   var btn=document.getElementById("demo-btn");
   var res=document.getElementById("demo-result");
 
-  // Reset all vault lines — remove .vis AND force display:none on every child
   ["dr-demo-label","dr-sweep","dr-row-id","dr-row-hash","dr-sealed","dr-badge","dr-note","dr-verify","dr-error"].forEach(function(id){
     var el=document.getElementById(id);
     if(!el)return;
@@ -1220,14 +1235,12 @@ function runDemo(){
   btn.textContent="SEALING...";
   btn.classList.add("sealing");
 
-  // Generate realistic fake data locally — no API call
   var hex="0123456789abcdef";
   function rndHex(n){var s="";for(var i=0;i<n;i++)s+=hex[Math.floor(Math.random()*16)];return s;}
   var auditId="aud_"+rndHex(8);
   var hash="sha256:"+rndHex(32);
   var compLabel="COMPLIANT — "+(jurLabel[jur]||jur);
 
-  // Short artificial delay so the SEALING... animation feels real (~800ms)
   setTimeout(function(){
     btn.disabled=false;
     btn.textContent="SEAL THIS DECISION";
@@ -1235,31 +1248,18 @@ function runDemo(){
 
     res.style.display="block";
 
-    // Step 1 (0ms): sweep line "SEALING..."
     demoVis("dr-sweep",0);
-
-    // Step 2 (600ms): demo label then audit ID typewriter
     demoVis("dr-demo-label",580);
     demoVis("dr-row-id",600);
     demoTypeWriter("dr-id",auditId,620,30);
-
-    // Step 3 (900ms): hash typewriter
     demoVis("dr-row-hash",900);
     demoTypeWriter("dr-hash",hash,920,18);
-
-    // Step 4 (1200ms): sealed checkmark
     demoVis("dr-sealed",1200);
-
-    // Step 5 (1500ms): compliance badge
     setTimeout(function(){
       document.getElementById("dr-comp").textContent=compLabel;
       demoVis("dr-badge",0);
     },1500);
-
-    // Step 6 (1800ms): permanent seal note
     demoVis("dr-note",1800);
-
-    // Step 7 (2100ms): verify link
     demoVis("dr-verify",2100);
   },800);
 }

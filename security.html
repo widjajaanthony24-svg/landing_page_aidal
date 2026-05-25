@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Security — AIDAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#1A2B4A;--text:#1a1a2e;--muted:#64748b;--border:#e2e8f0;--bg:#fff;--green:#0A6E4F;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;text-decoration:none;overflow:hidden;width:160px;height:60px;position:relative;flex-shrink:0;}
+.logo img{position:absolute;width:175px;height:175px;mix-blend-mode:multiply;filter:invert(1);top:-58px;left:-5px;display:block;}
+.back-link{font-size:14px;color:var(--navy);text-decoration:none;font-weight:500;}
+.back-link:hover{text-decoration:underline;}
+.content{max-width:720px;margin:0 auto;padding:4rem 2rem 5rem;}
+.page-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;}
+h1{font-size:2rem;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:1.5rem;}
+.lead{font-size:1rem;color:var(--muted);line-height:1.75;margin-bottom:2.5rem;border-left:3px solid var(--navy);padding-left:1.25rem;}
+.cards{display:grid;gap:1rem;}
+.card{background:#F8F9FA;border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;}
+.card-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.card-body{}
+.card-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.card-text{font-size:14px;color:var(--muted);line-height:1.6;}
+.contact-block{margin-top:2.5rem;padding:1.25rem 1.5rem;border:1px solid var(--border);border-radius:10px;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.contact-label{font-size:14px;color:var(--muted);}
+.contact-link{font-size:14px;font-weight:600;color:var(--navy);text-decoration:none;}
+.contact-link:hover{text-decoration:underline;}
+.policy-footer{border-top:1px solid var(--border);padding:2rem 4rem;font-size:12px;color:var(--muted);text-align:center;}
+@media(max-width:768px){nav{padding:0 1.5rem;}.content{padding:2.5rem 1.5rem;}.policy-footer{padding:1.5rem;}.contact-block{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL."/>
+  </a>
+  <a href="/" class="back-link">← Back to tryaidal.com</a>
+</nav>
+
+<div class="content">
+  <p class="page-eyebrow">Trust &amp; Security</p>
+  <h1>AIDAL Security Overview</h1>
+
+  <p class="lead">AIDAL runs on AWS ap-southeast-1 (Singapore region) via Railway. All data is encrypted at rest (AES-256) and in transit (TLS 1.3). Decision data is isolated per company — no company can access another company's data. AI explanations are generated via Groq, which is SOC 2 Type II certified. No raw decision data is shared with any other third party. AIDAL staff access to production data requires explicit authorization.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🏗️</div>
+      <div class="card-body">
+        <div class="card-title">Infrastructure</div>
+        <div class="card-text">Hosted on AWS ap-southeast-1 (Singapore) via Railway. Regional deployment ensures data residency in Southeast Asia in compliance with MAS FEAT and OJK guidelines.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔒</div>
+      <div class="card-body">
+        <div class="card-title">Encryption</div>
+        <div class="card-text">All data encrypted at rest using AES-256. All data in transit protected by TLS 1.3. Encryption keys are managed and rotated using industry-standard practices.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <div class="card-body">
+        <div class="card-title">Data Isolation</div>
+        <div class="card-text">Decision data is strictly isolated per company. No company can access another company's data. Tenant isolation is enforced at the database and API layer.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <div class="card-body">
+        <div class="card-title">AI Processing</div>
+        <div class="card-text">AI explanations are generated via Groq, which holds SOC 2 Type II certification. No raw decision data is shared with any other third party.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-body">
+        <div class="card-title">Access Control</div>
+        <div class="card-text">AIDAL staff access to production data requires explicit authorization. Access is logged, reviewed, and granted on a least-privilege basis.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⛓️</div>
+      <div class="card-body">
+        <div class="card-title">Cryptographic Integrity</div>
+        <div class="card-text">Every decision record is sealed in a SHA-256 hash chain and anchored to the Polygon PoS network every 6 hours, creating a tamper-proof, court-admissible audit trail.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-block">
+    <span class="contact-label">Security questions or to report a vulnerability:</span>
+    <a href="mailto:anthony@tryaidal.com" class="contact-link">anthony@tryaidal.com</a>
+  </div>
+</div>
+
+<div class="policy-footer">
+  <a href="/" style="color:var(--navy);text-decoration:none;font-weight:500;">← Back to tryaidal.com</a>
+</div>
+
+</body>
+</html>

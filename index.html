@@ -51,7 +51,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid var(--border);background:#fff;}
 .logo{display:flex;align-items:center;text-decoration:none;overflow:hidden;width:160px;height:60px;position:relative;flex-shrink:0;}
-.logo img{position:absolute;width:175px;height:175px;mix-blend-mode:screen;top:-58px;left:-5px;display:block;}
+.logo img{position:absolute;width:175px;height:175px;mix-blend-mode:multiply;filter:invert(1);top:-58px;left:-5px;display:block;}
 .logo-fallback{font-family:'Inter',sans-serif;font-size:22px;font-weight:700;color:var(--text);letter-spacing:-0.02em;display:none;line-height:1;}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
 .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:400;transition:color .2s;}
@@ -363,7 +363,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:3rem 4rem;}
 .footer-main{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;}
 .footer-left{display:flex;flex-direction:column;gap:.75rem;}
 .footer-logo{display:flex;align-items:center;overflow:hidden;width:140px;height:52px;position:relative;}
-.footer-logo img{position:absolute;width:155px;height:155px;mix-blend-mode:screen;top:-52px;left:-5px;display:block;}
+.footer-logo img{position:absolute;width:155px;height:155px;mix-blend-mode:multiply;filter:invert(1);top:-52px;left:-5px;display:block;}
 .footer-logo-fallback{font-family:'Inter',sans-serif;font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.02em;display:none;line-height:1;}
 .footer-address{font-size:12px;color:var(--muted);line-height:1.7;}
 .footer-right{display:flex;flex-direction:column;gap:.5rem;text-align:right;}
@@ -447,16 +447,11 @@ h1{animation:fadeUp .5s .06s ease both;}
 .hero-actions{animation:fadeUp .5s .18s ease both;}
 .hero-stats{animation:fadeUp .5s .24s ease both;}
 
-/* LOGO — hide PNG (mix-blend-mode:screen invisible on white), show SVG+text mark */
-nav .logo img{display:none!important;}
+/* LOGO — show PNG image, hide text fallbacks */
+nav .logo .logo-mark{display:none!important;}
 nav .logo .logo-fallback{display:none!important;}
-nav .logo .logo-mark{display:flex!important;}
-.footer-logo img{display:none!important;}
+.footer-logo .logo-mark{display:none!important;}
 .footer-logo-fallback{display:none!important;}
-.footer-logo .logo-mark{display:flex!important;}
-.footer-logo{width:auto!important;height:auto!important;overflow:visible!important;}
-.logo-mark{display:flex;align-items:center;gap:8px;text-decoration:none;}
-.logo-mark-text{font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-0.02em;line-height:1;}
 
 /* VERIFY SECTION — light */
 .verify-section h2{color:var(--text)!important;}
@@ -498,7 +493,7 @@ nav .logo .logo-mark{display:flex!important;}
 <div class="sticky-header">
 <nav>
   <a href="#" class="logo">
-    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL." style="display:none"/>
+    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL."/>
     <span class="logo-fallback" style="display:none">AIDAL.</span>
     <span class="logo-mark">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1068,15 +1063,7 @@ nav .logo .logo-mark{display:flex!important;}
   <div class="footer-main">
     <div class="footer-left">
       <div class="footer-logo">
-        <span class="logo-mark" style="gap:7px;">
-          <svg width="22" height="22" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M13 1C13 1 13 9.5 13 13C9.5 13 1 13 1 13C1 13 5.5 8.5 13 1Z" fill="#8B99B5"/>
-            <path d="M25 13C25 13 16.5 13 13 13C13 9.5 13 1 13 1C13 1 17.5 5.5 25 13Z" fill="#8B99B5" opacity="0.6"/>
-            <path d="M13 25C13 25 13 16.5 13 13C16.5 13 25 13 25 13C25 13 20.5 17.5 13 25Z" fill="#8B99B5"/>
-            <path d="M1 13C1 13 9.5 13 13 13C13 16.5 13 25 13 25C13 25 8.5 20.5 1 13Z" fill="#8B99B5" opacity="0.6"/>
-          </svg>
-          <span class="logo-mark-text" style="color:#8B99B5;font-size:17px;">AIDAL.</span>
-        </span>
+        <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL."/>
       </div>
       <div class="footer-address">
         Singapore · contact: <a href="mailto:anthony@tryaidal.com">anthony@tryaidal.com</a>

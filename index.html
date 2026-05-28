@@ -500,6 +500,37 @@ nav .logo .logo-fallback{display:none!important;}
   .trust-bar{padding:1rem 1.5rem;}
   .credibility-bar{padding:10px 1.5rem;}
 }
+
+/* ── MOBILE FIXES (≤768px) ── */
+@media(max-width:768px){
+  /* Fix 1 — countdown bar: legible font sizes on mobile */
+  .top-deadline-count{font-size:13px;}
+  .top-deadline-label,.top-deadline-text{font-size:11px;}
+
+  /* Fix 2 — hero stats: equal-width 3-column grid, no overflow */
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);width:100%;}
+  .hero-stat{padding:14px 8px;border-right:1px solid #D8CFC4;}
+  .hero-stat:last-child{border-right:none;}
+  .hero-stat-num{font-size:1.625rem;}
+  .hero-stat-label{font-size:9px;letter-spacing:0.03em;white-space:normal;word-break:break-word;}
+
+  /* Fix 3 — comparison table: horizontally scrollable on mobile */
+  .comparison-table{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;}
+  .cmp-thead,.cmp-row{min-width:520px;}
+
+  /* Fix 4 — footer nav: 2-column grid instead of flex wrapping */
+  .footer-links{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 1.5rem;}
+
+  /* Fix 5 — hero paragraph: fully contained, no right-edge clip */
+  .hero-sub{max-width:100%;padding-right:0;word-break:break-word;}
+}
+
+/* ── VERY SMALL SCREENS (≤480px): strip countdown bar to essentials ── */
+@media(max-width:480px){
+  /* Fix 1 cont. — hide label, fines text, and both separators; keep only count + CTA */
+  .top-deadline-label,.top-deadline-text,.top-deadline-sep{display:none;}
+  .top-deadline{gap:0.75rem;justify-content:center;}
+}
 </style>
 </head>
 <body>

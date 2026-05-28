@@ -62,7 +62,7 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem
 .logo img{position:absolute;width:175px;height:175px;mix-blend-mode:multiply;filter:invert(1);top:-58px;left:-5px;display:block;}
 .logo-fallback{font-family:'Inter',sans-serif;font-size:22px;font-weight:700;color:var(--text);letter-spacing:-0.02em;display:none;line-height:1;}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
-.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:400;transition:color .2s;}
+.nav-links a{color:#2d3a5c;text-decoration:none;font-size:14px;font-weight:400;transition:color .2s;}
 .nav-links a:hover{color:var(--text);}
 .nav-signin{color:var(--text-secondary)!important;font-weight:500!important;}
 .nav-cta{background:var(--navy)!important;color:#fff!important;border:none!important;padding:8px 20px!important;border-radius:6px!important;font-size:13px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;transition:background .2s!important;}
@@ -339,10 +339,10 @@ section#get-key{background:var(--color-cream);}
 .signup-section h2{margin-bottom:1rem;color:var(--text);}
 .signup-section>p{font-size:1.0625rem;color:var(--muted);margin-bottom:2rem;}
 .signup-section .section-eyebrow{justify-content:center;}
-.signup-card{background:#fff;border:1px solid #D8CFC4;border-radius:8px;padding:2.5rem;max-width:520px;margin:0 auto;text-align:left;}
+.signup-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:2.5rem;max-width:520px;margin:0 auto;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
 .signup-trust{font-size:13px;color:var(--muted);text-align:center;margin-bottom:1rem;}
-.signup-input{width:100%;background:#fff;border:1px solid #D8CFC4;color:var(--text);padding:11px 14px;font-size:14px;border-radius:6px;outline:none;margin-bottom:9px;display:block;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
-.signup-input::placeholder{color:#A09890;}
+.signup-input{width:100%;background:#fff;border:1px solid #2d3a5c;color:var(--text);padding:11px 14px;font-size:14px;border-radius:6px;outline:none;margin-bottom:9px;display:block;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
+.signup-input::placeholder{color:#666666;}
 .signup-input:focus{border-color:var(--color-black);box-shadow:0 0 0 3px rgba(10,10,10,0.07);}
 .signup-btn{width:100%;background:var(--color-black);color:var(--color-cream);border:none;padding:14px;font-size:0.9375rem;font-weight:600;border-radius:6px;cursor:pointer;transition:background .2s,box-shadow .2s;margin-top:4px;font-family:'Inter',sans-serif;}
 .signup-btn:hover{background:var(--color-black-soft);box-shadow:0 2px 12px rgba(10,10,10,0.15);}
@@ -381,6 +381,7 @@ footer{background:var(--color-cream-dark);border-top:1px solid #D8CFC4;padding:3
 .footer-copy{font-size:12px;color:var(--color-text-muted);white-space:nowrap;}
 footer a{color:var(--color-black);text-decoration:none;font-size:13px;transition:color .2s;}
 footer a:hover{color:var(--color-accent);}
+.footer-address a{color:#2d3a5c;text-decoration:underline;}
 
 /* LIVE DEMO WIDGET */
 .hero-right-inner{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:2.5rem 2rem;gap:1.25rem;}
@@ -476,8 +477,8 @@ nav .logo .logo-fallback{display:none!important;}
 .legal-body p{color:var(--muted)!important;}
 
 /* DEADLINE CTA btn — dark section keeps cream text */
-.deadline-cta .btn-primary{background:var(--color-cream)!important;color:var(--color-black)!important;}
-.deadline-cta .btn-primary:hover{background:#F0E6D6!important;}
+.deadline-cta .btn-primary{background:#f0ebe0!important;color:#1a1a1a!important;}
+.deadline-cta .btn-primary:hover{background:#e8dfd0!important;}
 
 /* RESPONSIVE */
 @media(max-width:960px){

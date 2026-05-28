@@ -503,6 +503,14 @@ nav .logo .logo-fallback{display:none!important;}
 
 /* ── MOBILE FIXES (≤768px) ── */
 @media(max-width:768px){
+  /* Hero height fix — remove viewport-height enforcement so hero shrinks to content */
+  .hero-wrapper{min-height:0;height:auto;}
+  .hero-inner{min-height:0;height:auto;}
+  /* Belt-and-suspenders: ensure right demo panel has zero footprint */
+  .hero-right{display:none!important;height:0;min-height:0;overflow:hidden;padding:0;margin:0;}
+  /* Tighten hero-left bottom so stats → credibility bar gap ≤ 32px */
+  .hero-left{padding-bottom:1.5rem;}
+
   /* Fix 1 — countdown bar: legible font sizes on mobile */
   .top-deadline-count{font-size:13px;}
   .top-deadline-label,.top-deadline-text{font-size:11px;}

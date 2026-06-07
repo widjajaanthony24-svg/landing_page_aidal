@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="h4_Pl1tveXrN5n1NC7cR_L0XrjOdTRrDy20oY4_Wt6o" />
 <link rel="icon" type="image/png" href="logo.png">
+<!-- B-6: Content Security Policy
+     script-src unsafe-inline required for inline <script> blocks.
+     connect-src limited to our Railway API and Formspree only.
+     img-src allows self (logo, chainn.webp) and flagcdn.com (country flags).
+     frame-ancestors none prevents this page from being iframed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com; connect-src 'self' https://aidal-production.up.railway.app https://formspree.io; object-src 'none'; frame-ancestors 'none';" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -557,7 +563,7 @@ nav .logo .logo-fallback{display:none!important;}
 <div class="sticky-header">
 <nav>
   <a href="#" class="logo">
-    <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL."/>
+    <img src="Copy_of_AIDAL.png" alt="AIDAL."/>
     <span class="logo-fallback" style="display:none">AIDAL.</span>
     <span class="logo-mark">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -606,7 +612,7 @@ nav .logo .logo-fallback{display:none!important;}
       </div>
     </div>
     <div class="hero-right" style="background:#0a0c10;">
-      <img class="chain-img" src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/chainn.webp" alt=""/>
+      <img class="chain-img" src="chainn.webp" alt=""/>
       <div class="chain-fade-top"></div>
       <div class="chain-fade-bottom"></div>
       <div class="chain-fade-left"></div>
@@ -1127,7 +1133,7 @@ nav .logo .logo-fallback{display:none!important;}
   <div class="footer-main">
     <div class="footer-left">
       <div class="footer-logo">
-        <img src="https://raw.githubusercontent.com/tryaidal/landing_page_aidal/main/Copy_of_AIDAL.png" alt="AIDAL."/>
+        <img src="Copy_of_AIDAL.png" alt="AIDAL."/>
       </div>
       <div class="footer-address">
         Singapore · contact: <a href="mailto:anthony@tryaidal.com">anthony@tryaidal.com</a>

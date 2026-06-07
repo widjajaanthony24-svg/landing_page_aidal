@@ -1252,7 +1252,11 @@ function getApiKey(){
     document.getElementById("key-display").textContent=generatedKey;
     res.style.display="block";res.scrollIntoView({behavior:"smooth",block:"nearest"});
     document.getElementById("s-name").value="";document.getElementById("s-email").value="";
-    fetch("https://formspree.io/f/xgorddko",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({company:name,email:email,event:"api_key_created",prefix:generatedKey.slice(0,20)})}).catch(function(){});
+    // Signup notification — intentionally omits any part of the API key.
+    // Sending even a key prefix to a third-party service (Formspree) reduces
+    // key entropy and stores customer credentials on infrastructure we don't
+    // control. Company name + email is sufficient for signup notifications.
+    fetch("https://formspree.io/f/xgorddko",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({company:name,email:email,event:"api_key_created"})}).catch(function(){});
   }).catch(function(){
     btn.disabled=false;btn.textContent="Get My API Key →";
     showErr("Network error. Email anthony@tryaidal.com.");

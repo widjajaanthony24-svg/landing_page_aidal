@@ -194,13 +194,10 @@ section#how{background:var(--color-cream);}
 
 /* JURISDICTION CARDS */
 section#jurisdictions{background:var(--color-cream-dark);}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:4rem;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:4rem;}
 .grid-4-card{background:var(--color-cream);padding:1.875rem;transition:background .2s,box-shadow .2s;border:1px solid #D8CFC4;border-radius:8px;border-left:3px solid var(--color-accent);}
 .grid-4-card:hover{background:#F5EDE0;box-shadow:0 4px 16px rgba(0,0,0,0.06);}
-.grid-4-card:nth-child(1){border-left-color:var(--color-accent);}
-.grid-4-card:nth-child(2){border-left-color:var(--color-accent);}
-.grid-4-card:nth-child(3){border-left-color:var(--color-accent);}
-.grid-4-card:nth-child(4){border-left-color:var(--color-accent);}
+.grid-4-card:nth-child(n){border-left-color:var(--color-accent);}
 .jur-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.875rem;}
 .jur-flag{line-height:1;}.jur-flag img{width:36px;height:auto;border-radius:3px;display:block;box-shadow:0 1px 3px rgba(0,0,0,0.15);}
 .jur-active{display:flex;align-items:center;gap:5px;font-size:10px;background:var(--color-black);color:var(--color-cream);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;border-radius:3px;}
@@ -608,7 +605,7 @@ nav .logo .logo-fallback{display:none!important;}
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><span class="hero-stat-num" id="days-stat">74</span><span class="hero-stat-label">Days to deadline</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">4</span><span class="hero-stat-label">Jurisdictions</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">7</span><span class="hero-stat-label">Jurisdictions</span></div>
         <div class="hero-stat"><span class="hero-stat-num">30m</span><span class="hero-stat-label">To integrate</span></div>
       </div>
     </div>
@@ -706,6 +703,12 @@ nav .logo .logo-fallback{display:none!important;}
       <span>OJK POJK No.11</span>
       <span class="credibility-dot">·</span>
       <span>VARA UAE</span>
+      <span class="credibility-dot">·</span>
+      <span>FCA UK</span>
+      <span class="credibility-dot">·</span>
+      <span>CFPB US</span>
+      <span class="credibility-dot">·</span>
+      <span>APRA AU</span>
     </div>
   </div>
 </div>
@@ -713,7 +716,7 @@ nav .logo .logo-fallback{display:none!important;}
 <div class="trust-bar">
   <div class="trust-item reveal delay-1"><div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>SHA-256 tamper-proof chain</div>
   <div class="trust-sep"></div>
-  <div class="trust-item reveal delay-2"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>4 jurisdiction modules live</div>
+  <div class="trust-item reveal delay-2"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>7 jurisdiction modules live</div>
   <div class="trust-sep"></div>
   <div class="trust-item reveal delay-3"><div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>30-minute integration</div>
   <div class="trust-sep"></div>
@@ -837,6 +840,48 @@ nav .logo .logo-fallback{display:none!important;}
         <li>Crypto &amp; fintech audit trail</li>
         <li>AI governance documentation</li>
         <li>VARA 2024 framework mapped</li>
+      </ul>
+      <span class="badge">7 yr retention</span>
+    </div>
+    <div class="grid-4-card reveal delay-4">
+      <div class="jur-card-header">
+        <span class="jur-flag"><img src="https://flagcdn.com/w40/gb.png" alt="United Kingdom" loading="lazy"></span>
+        <span class="jur-active"><span class="jur-active-dot"></span>Active</span>
+      </div>
+      <h3>FCA United Kingdom</h3>
+      <ul class="jur-checklist">
+        <li>SYSC 3 explainability required</li>
+        <li>SM&amp;CR senior manager accountability</li>
+        <li>PS 22/3 bias &amp; fairness testing</li>
+        <li>SR 11/9 model documentation</li>
+      </ul>
+      <span class="badge">7 yr retention</span>
+    </div>
+    <div class="grid-4-card reveal delay-5">
+      <div class="jur-card-header">
+        <span class="jur-flag"><img src="https://flagcdn.com/w40/us.png" alt="United States" loading="lazy"></span>
+        <span class="jur-active"><span class="jur-active-dot"></span>Active</span>
+      </div>
+      <h3>CFPB United States</h3>
+      <ul class="jur-checklist">
+        <li>ECOA Reg B adverse action notice</li>
+        <li>CFPB Circular 2023-03 explainability</li>
+        <li>Disparate impact testing</li>
+        <li>Fair Credit Reporting Act (FCRA)</li>
+      </ul>
+      <span class="badge">5 yr retention</span>
+    </div>
+    <div class="grid-4-card reveal delay-6">
+      <div class="jur-card-header">
+        <span class="jur-flag"><img src="https://flagcdn.com/w40/au.png" alt="Australia" loading="lazy"></span>
+        <span class="jur-active"><span class="jur-active-dot"></span>Active</span>
+      </div>
+      <h3>APRA Australia</h3>
+      <ul class="jur-checklist">
+        <li>CPS 234 AI model inventory</li>
+        <li>CPS 230 audit trail for critical ops</li>
+        <li>Board-level AI governance</li>
+        <li>Post-deployment monitoring</li>
       </ul>
       <span class="badge">7 yr retention</span>
     </div>

@@ -107,9 +107,19 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem
 .live-dot{width:5px;height:5px;border-radius:50%;background:#00D37F;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .hash-list{display:flex;flex-direction:column;gap:4px;}
-.hash-row{font-family:'JetBrains Mono','Courier New',monospace;font-size:10px;color:#2E3A4E;display:flex;align-items:center;gap:8px;transition:color .3s;}
+.hash-row{font-family:'JetBrains Mono','Courier New',monospace;font-size:10px;color:#2E3A4E;display:flex;align-items:center;gap:8px;transition:color .3s,opacity .45s ease,transform .45s ease;opacity:1;transform:translateY(0);}
 .hash-row.active{color:#00D37F;}
+.hash-row.enter{opacity:0;transform:translateY(8px);}
+.hash-row.leaving{opacity:0;transform:translateY(-6px);}
+.hash-row.just-sealed span{animation:seal-glow 1.4s ease-out;}
+@keyframes seal-glow{0%{text-shadow:0 0 10px rgba(0,211,127,.9)}100%{text-shadow:0 0 0 rgba(0,211,127,0)}}
 .hash-row-dot{width:3px;height:3px;border-radius:50%;background:currentColor;flex-shrink:0;}
+@media (prefers-reduced-motion: no-preference){
+  .story-arrow{animation:arrow-nudge 2.2s ease-in-out infinite;}
+  .story-arrow:nth-of-type(4){animation-delay:.22s;}
+  .story-arrow:nth-of-type(6){animation-delay:.44s;}
+}
+@keyframes arrow-nudge{0%,100%{transform:translateX(0);opacity:1;}50%{transform:translateX(4px);opacity:.6;}}
 
 /* HERO TYPOGRAPHY */
 .hero-eyebrow{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.75rem;display:flex;align-items:center;gap:12px;font-weight:500;}
@@ -700,7 +710,7 @@ nav .logo .logo-fallback{display:none!important;}
           <div class="hash-list" id="hash-list">
             <div class="hash-row"><div class="hash-row-dot"></div><span>a7f3c9b2e4d81f06c3a9...</span></div>
             <div class="hash-row"><div class="hash-row-dot"></div><span>3e8b2a91c7f04d22b185...</span></div>
-            <div class="hash-row active" id="latest-hash"><div class="hash-row-dot"></div><span>f2c7a3e9b1d58031e742...</span></div>
+            <div class="hash-row active"><div class="hash-row-dot"></div><span>f2c7a3e9b1d58031e742...</span></div>
           </div>
         </div>
       </div>
@@ -1275,23 +1285,62 @@ function animD(){
 }
 window.addEventListener("resize",resizeD);resizeD();animD();
 
-/* HASH PANEL */
+/* HASH PANEL — ambient rotation and a real "Seal This Decision" both flow
+   through advanceChain() so the two widgets read as one continuous story,
+   and neither mechanism fights the other over fixed row indices/IDs. */
 var hashes=["a7f3c9b2e4d81f06c3a9","3e8b2a91c7f04d22b185","f2c7a3e9b1d58031e742","8d4f1c6a2e93b74503f1","c9b3e7f2a14d0863d529","1a8d4f7c3e2b9650a847","b5e2c8f1a7d34092fc60","4d7a3c9e2f810b56a193"];
 var hIdx=2,HC="0123456789abcdef";
 function rnd(n){var s="";for(var i=0;i<n;i++)s+=HC[Math.floor(Math.random()*16)];return s;}
-setInterval(function(){
-  hIdx++;
-  var h=hashes[hIdx%hashes.length];
-  var rows=document.getElementById("hash-list").querySelectorAll(".hash-row");
-  rows[0].querySelector("span").textContent=rows[1].querySelector("span").textContent;
-  rows[0].classList.remove("active");
-  rows[1].querySelector("span").textContent=rows[2].querySelector("span").textContent;
-  rows[1].classList.remove("active");
-  var el=document.getElementById("latest-hash");
+var lastRealSealAt=0;
+
+function advanceChain(fullHash,isReal){
+  var list=document.getElementById("hash-list");
+  if(!list)return;
+
+  var row=document.createElement("div");
+  row.className="hash-row enter";
+  row.innerHTML='<div class="hash-row-dot"></div><span></span>';
+  list.appendChild(row);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){row.classList.remove("enter");});});
+
+  var span=row.querySelector("span");
   var sc=0,iv=setInterval(function(){
-    el.querySelector("span").textContent=rnd(20)+"...";sc++;
-    if(sc>7){clearInterval(iv);el.querySelector("span").textContent=h+"...";el.classList.add("active");}
+    span.textContent=rnd(20)+"...";sc++;
+    if(sc>7){
+      clearInterval(iv);
+      span.textContent=fullHash.slice(0,20)+"...";
+      // Demote every currently-active row in the same tick this one goes active —
+      // keeps overlapping ambient/real updates from ever leaving two rows lit.
+      var actives=list.querySelectorAll(".hash-row.active");
+      for(var i=0;i<actives.length;i++){actives[i].classList.remove("active","just-sealed");}
+      row.classList.add("active");
+      if(isReal)row.classList.add("just-sealed");
+    }
   },45);
+
+  var rows=list.querySelectorAll(".hash-row");
+  if(rows.length>3){
+    trimChain();
+  }
+}
+
+function trimChain(){
+  var list=document.getElementById("hash-list");
+  if(!list)return;
+  var rows=Array.prototype.slice.call(list.querySelectorAll(".hash-row:not(.leaving)"));
+  while(rows.length>3){
+    var oldest=rows.shift();
+    oldest.classList.add("leaving");
+    (function(node){
+      setTimeout(function(){ if(node.parentNode)node.parentNode.removeChild(node); },450);
+    })(oldest);
+  }
+}
+
+setInterval(function(){
+  if(Date.now()-lastRealSealAt<4500)return; // let a real seal hold the spotlight before ambient noise resumes
+  hIdx++;
+  advanceChain(hashes[hIdx%hashes.length],false);
 },3000);
 
 /* SCROLL REVEAL */
@@ -1416,6 +1465,7 @@ function runDemo(){
     },1500);
     demoVis("dr-note",1800);
     demoVis("dr-verify",2100);
+    setTimeout(function(){ lastRealSealAt=Date.now(); advanceChain(hash.replace("sha256:",""),true); },1350);
   },800);
 }
 

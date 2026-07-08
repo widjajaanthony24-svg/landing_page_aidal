@@ -65,14 +65,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 /* STICKY HEADER */
 .sticky-header{position:sticky;top:0;left:0;right:0;z-index:100;}
 
-/* COUNTDOWN BAR */
-.top-deadline{background:var(--color-black);border-bottom:1px solid #1A1A1A;padding:8px 4rem;display:flex;align-items:center;justify-content:center;gap:1.25rem;font-size:12px;}
-.top-deadline-label{color:#6B6560;letter-spacing:0.08em;text-transform:uppercase;font-size:10px;font-weight:500;}
-.top-deadline-count{color:var(--color-accent);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;}
-.top-deadline-text{color:#9A918A;font-size:11px;}
-.top-deadline-sep{color:#333;}
-.top-deadline-cta{color:var(--color-black);background:var(--color-accent);text-decoration:none;font-size:11px;font-weight:600;padding:4px 12px;border-radius:4px;}
-.top-deadline-cta:hover{background:#B8955A;}
 
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid #E0D8CE;background:var(--color-cream);}
@@ -524,7 +516,6 @@ nav .logo .logo-fallback{display:none!important;}
 
 /* RESPONSIVE */
 @media(max-width:960px){
-  .top-deadline{padding:8px 1.5rem;font-size:10px;gap:1rem;}
   nav{padding:0 1.5rem;height:52px;}
   .nav-links{display:none;}
   .hero-inner{grid-template-columns:1fr;}
@@ -553,10 +544,6 @@ nav .logo .logo-fallback{display:none!important;}
   /* Tighten hero-left bottom so stats → credibility bar gap ≤ 32px */
   .hero-left{padding-bottom:1.5rem;}
 
-  /* Fix 1 — countdown bar: legible font sizes on mobile */
-  .top-deadline-count{font-size:13px;}
-  .top-deadline-label,.top-deadline-text{font-size:11px;}
-
   /* Fix 2 — hero stats: equal-width 3-column grid, no overflow */
   .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);width:100%;}
   .hero-stat{padding:14px 8px;border-right:1px solid #D8CFC4;}
@@ -573,13 +560,6 @@ nav .logo .logo-fallback{display:none!important;}
 
   /* Fix 5 — hero paragraph: fully contained, no right-edge clip */
   .hero-sub{max-width:100%;padding-right:0;word-break:break-word;}
-}
-
-/* ── VERY SMALL SCREENS (≤480px): strip countdown bar to essentials ── */
-@media(max-width:480px){
-  /* Fix 1 cont. — hide label, fines text, and both separators; keep only count + CTA */
-  .top-deadline-label,.top-deadline-text,.top-deadline-sep{display:none;}
-  .top-deadline{gap:0.75rem;justify-content:center;}
 }
 </style>
 </head>
@@ -609,14 +589,6 @@ nav .logo .logo-fallback{display:none!important;}
     <li><a href="#get-key" class="nav-cta">Get API Key</a></li>
   </ul>
 </nav>
-<div class="top-deadline">
-  <span class="top-deadline-label">EU AI Act deadline</span>
-  <span class="top-deadline-count" id="countdown">74d remaining</span>
-  <span class="top-deadline-sep">·</span>
-  <span class="top-deadline-text">Fines up to €30M for non-compliance</span>
-  <span class="top-deadline-sep">·</span>
-  <a href="#get-key" class="top-deadline-cta">Get compliant now →</a>
-</div>
 </div>
 
 <div class="hero-wrapper">
@@ -631,7 +603,7 @@ nav .logo .logo-fallback{display:none!important;}
         <a href="https://youtu.be/i9gs1EUyb80?si=hKREBJz2GFf8yTkM" target="_blank" rel="noopener" class="btn-ghost">Watch 2-minute demo</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="hero-stat-num" id="days-stat">74</span><span class="hero-stat-label">Days to deadline</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">&lt;1s</span><span class="hero-stat-label">Seal time</span></div>
         <div class="hero-stat"><span class="hero-stat-num">7</span><span class="hero-stat-label">Jurisdictions</span></div>
         <div class="hero-stat"><span class="hero-stat-num">30m</span><span class="hero-stat-label">To integrate</span></div>
       </div>
@@ -930,7 +902,6 @@ nav .logo .logo-fallback{display:none!important;}
 <section class="section">
   <div class="section-eyebrow reveal">Why AIDAL</div>
   <h2 class="reveal delay-1">Cheaper, faster,<br><em>already built.</em></h2>
-  <span id="days-stat2" style="display:none"></span>
   <div class="comparison-table reveal delay-1">
     <div class="cmp-thead">
       <span class="cmp-thead-empty"></span>
@@ -1241,17 +1212,6 @@ nav .logo .logo-fallback{display:none!important;}
 </footer>
 
 <script>
-/* COUNTDOWN */
-var deadline=new Date("2026-08-01T00:00:00");
-function tick(){
-  var diff=deadline-new Date();
-  if(diff<=0){document.getElementById("countdown").textContent="DEADLINE PASSED";return;}
-  var d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-  document.getElementById("countdown").textContent=d+"d "+h+"h "+m+"m "+s+"s remaining";
-  document.getElementById("days-stat").textContent=d;
-  document.getElementById("days-stat2").textContent=d;
-}
-tick();setInterval(tick,1000);
 
 /* AMBIENT */
 var ac=document.getElementById("ambient-canvas"),actx=ac.getContext("2d"),at=0;

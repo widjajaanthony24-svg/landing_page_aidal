@@ -34,7 +34,7 @@ export function JurisdictionsSection() {
                   className="rounded-sm shadow-sm"
                   unoptimized
                 />
-                <span className="flex items-center gap-1.5 rounded bg-primary px-2 py-0.5 text-[10px] font-semibold tracking-wide text-primary-foreground uppercase">
+                <span className="flex items-center gap-1.5 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold tracking-wide text-primary-foreground uppercase">
                   <span className="size-1.5 rounded-full bg-accent" />
                   Active
                 </span>

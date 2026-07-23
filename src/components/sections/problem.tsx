@@ -1,26 +1,32 @@
+import { MessageCircleQuestion, DatabaseZap, Gavel, ShieldCheck } from "lucide-react";
+
 const cells = [
   {
     badge: "Gap 1",
     title: "No explanation",
     body: "When an AI denies a loan or flags a transaction, neither the company nor the customer can explain why — in a way that satisfies a regulator or stands up in court.",
+    icon: MessageCircleQuestion,
     dark: false,
   },
   {
     badge: "Gap 2",
     title: "No audit trail",
     body: "AI decisions live in databases that can be edited. There is no tamper-proof record of what was decided, when, by which model, and with what confidence.",
+    icon: DatabaseZap,
     dark: false,
   },
   {
     badge: "Gap 3",
     title: "Regulators are arriving",
     body: "The EU AI Act, Singapore MAS FEAT, Indonesia OJK, and UAE VARA all mandate explainable, auditable AI decisions. MAS FEAT, OJK, and VARA are enforced today — not someday. The EU AI Act's high-risk deadline was pushed to December 2027, but enterprise procurement and audit-trail buildout take months, so it's closer than it looks. Most companies have nothing.",
+    icon: Gavel,
     dark: false,
   },
   {
     badge: "Solution",
     title: "AIDAL solves all three",
     body: "One API call logs every decision with a cryptographic proof, an AI-generated explanation, and automatic compliance checking. Regulators verify everything in seconds.",
+    icon: ShieldCheck,
     dark: true,
   },
 ];
@@ -47,15 +53,21 @@ export function ProblemSection() {
                 : "bg-secondary p-10 transition-colors hover:bg-secondary/70"
             }
           >
-            <span
-              className={
-                cell.dark
-                  ? "mb-4 inline-block rounded bg-background px-2.5 py-0.5 text-[10px] font-semibold text-foreground"
-                  : "mb-4 inline-block rounded bg-primary px-2.5 py-0.5 text-[10px] font-semibold text-primary-foreground"
-              }
-            >
-              {cell.badge}
-            </span>
+            <div className="mb-5 flex items-center justify-between">
+              <span
+                className={
+                  cell.dark
+                    ? "inline-block rounded-full bg-background px-2.5 py-0.5 text-[10px] font-semibold text-foreground"
+                    : "inline-block rounded-full bg-primary px-2.5 py-0.5 text-[10px] font-semibold text-primary-foreground"
+                }
+              >
+                {cell.badge}
+              </span>
+              <cell.icon
+                className={cell.dark ? "size-4 text-primary-foreground/50" : "size-4 text-muted-foreground/60"}
+                strokeWidth={1.5}
+              />
+            </div>
             <h3 className="mb-2 text-[1.0625rem] font-semibold">{cell.title}</h3>
             <p
               className={

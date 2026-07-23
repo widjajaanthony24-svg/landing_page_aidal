@@ -83,7 +83,7 @@ export function SignupSection() {
         <button
           onClick={getApiKey}
           disabled={loading}
-          className="mt-1 w-full rounded-md bg-primary py-3.5 text-[0.9375rem] font-semibold text-primary-foreground transition-opacity hover:opacity-85 disabled:opacity-45"
+          className="mt-1 w-full rounded-full bg-primary py-3.5 text-[0.9375rem] font-semibold text-primary-foreground transition-opacity hover:opacity-85 disabled:opacity-45"
         >
           {loading ? "Creating your key..." : "Get My API Key →"}
         </button>

@@ -37,7 +37,7 @@ export function VerifySection() {
               href="https://aidal-dashboard.vercel.app/verify"
               target="_blank"
               rel="noopener"
-              className="rounded-md bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
+              className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
             >
               Verify a record →
             </a>
@@ -45,7 +45,7 @@ export function VerifySection() {
               href="https://github.com/widjajaanthony24-svg/aidal-anchors"
               target="_blank"
               rel="noopener"
-              className="meta-text rounded-md border border-primary px-6 py-3 text-[10px] tracking-[0.15em] text-muted-foreground uppercase transition-colors hover:bg-secondary"
+              className="meta-text rounded-full border border-primary px-6 py-3 text-[10px] tracking-[0.15em] text-muted-foreground uppercase transition-colors hover:bg-secondary"
             >
               View anchor log →
             </a>

@@ -136,9 +136,12 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-size: 1.125rem;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
+    /* Linear's actual computed values: 16px body, 15px paragraphs, 1.5 line-height,
+       normal letter-spacing — noticeably tighter/denser than a typical marketing
+       site. Confirmed by inspecting linear.app directly rather than guessing. */
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: normal;
   }
   html {
     @apply font-sans;

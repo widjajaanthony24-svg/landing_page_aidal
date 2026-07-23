@@ -44,7 +44,7 @@ export function PdfShowcaseSection() {
           <a
             href="/sample-report.pdf"
             download="AIDAL_Sample_Compliance_Report.pdf"
-            className="mt-8 inline-block rounded-md bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
+            className="mt-8 inline-block rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
           >
             Download sample report →
           </a>

@@ -42,7 +42,7 @@ export function PricingSection() {
             <a
               href={tier.href ?? "#get-key"}
               className={cn(
-                "block rounded-md py-2.5 text-center text-sm font-semibold transition-colors",
+                "block rounded-full py-2.5 text-center text-sm font-semibold transition-colors",
                 tier.featured
                   ? "bg-primary text-primary-foreground hover:opacity-85"
                   : "border border-border hover:bg-secondary",

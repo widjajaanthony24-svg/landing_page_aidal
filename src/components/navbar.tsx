@@ -13,15 +13,8 @@ export function Navbar() {
   return (
     <div className="sticky top-4 z-50 px-4 md:px-8">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full border border-white/10 bg-primary px-4 text-primary-foreground shadow-lg md:px-6">
-        <Link href="/" className="flex h-[60px] w-[160px] items-center overflow-hidden rounded-md bg-primary">
-          <Image
-            src="/Copy_of_AIDAL.png"
-            alt="AIDAL."
-            width={175}
-            height={175}
-            className="relative -top-[58px] -left-[5px] w-[175px] max-w-none shrink-0"
-            priority
-          />
+        <Link href="/" className="flex items-center">
+          <Image src="/aidal-logo.png" alt="AIDAL." width={1304} height={364} className="h-7 w-auto" priority />
         </Link>
         <ul className="hidden items-center gap-8 md:flex">
           {links.map((l) => (

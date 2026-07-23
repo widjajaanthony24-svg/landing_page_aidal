@@ -12,7 +12,7 @@ export function HeroSection() {
             <span className="size-1.5 shrink-0 rounded-full bg-accent" />
             AI compliance infrastructure
           </div>
-          <h1 className="mb-6 text-4xl leading-[1.1] font-bold md:text-6xl">
+          <h1 className="mb-6 text-4xl leading-[1.05] font-bold md:text-[64px]">
             Can you explain an AI decision <span className="font-accent text-accent">six months later</span>?
           </h1>
           <p className="mb-10 max-w-[440px] text-[1.0625rem] leading-relaxed text-muted-foreground">
@@ -63,7 +63,23 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-        <div className="relative hidden min-h-[calc(100vh-104px)] items-center justify-center border-l border-border bg-background px-8 py-10 md:flex">
+        <div className="relative hidden min-h-[calc(100vh-104px)] items-center justify-center overflow-hidden border-l border-border bg-background px-8 py-10 md:flex">
+          {/* soft radial glow behind the monitor — Linear's signature product-shot
+              treatment, translated into AIDAL's gold accent instead of their blue */}
+          <div
+            className="pointer-events-none absolute top-1/2 left-1/2 size-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-[100px]"
+            style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)" }}
+            aria-hidden="true"
+          />
+          {/* faint dot-grid texture, subtle enough to stay in the background */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.4]"
+            style={{
+              backgroundImage: "radial-gradient(circle, var(--border) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+            aria-hidden="true"
+          />
           <RetroMonitor>
             <DemoWidget />
             <HashPanel />

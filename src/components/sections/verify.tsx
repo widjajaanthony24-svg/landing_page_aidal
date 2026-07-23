@@ -1,15 +1,20 @@
+import { KeyRound, GitCommitVertical, ShieldAlert } from "lucide-react";
+
 const cards = [
   {
     tag: "How it works",
     body: "Company gives regulator an audit ID. Regulator pastes it into the verify page. Green = untampered. No sensitive data revealed.",
+    icon: KeyRound,
   },
   {
     tag: "Daily anchor log",
     body: "Every 24 hours AIDAL publishes a master hash to GitHub — permanent and verifiable even if AIDAL goes offline.",
+    icon: GitCommitVertical,
   },
   {
     tag: "Why this matters",
     body: "AWS and Azure cannot do this. AIDAL's proof exists independently of AIDAL. That is a fundamentally different level of trust.",
+    icon: ShieldAlert,
   },
 ];
 
@@ -59,7 +64,10 @@ export function VerifySection() {
                 i !== cards.length - 1 ? "border-b border-border" : ""
               }`}
             >
-              <div className="mb-2 text-[10px] font-semibold tracking-wide text-accent uppercase">{c.tag}</div>
+              <div className="mb-2.5 flex items-center gap-2">
+                <c.icon className="size-3.5 text-accent" strokeWidth={2} />
+                <span className="text-[10px] font-semibold tracking-wide text-accent uppercase">{c.tag}</span>
+              </div>
               <p className="text-sm leading-relaxed text-muted-foreground">{c.body}</p>
             </div>
           ))}

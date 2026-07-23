@@ -14,7 +14,14 @@ export function Navbar() {
     <div className="sticky top-4 z-50 px-4 md:px-8">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full border border-white/10 bg-primary px-4 text-primary-foreground shadow-lg md:px-6">
         <Link href="/" className="flex items-center">
-          <Image src="/aidal-logo.png" alt="AIDAL." width={1304} height={364} className="h-7 w-auto" priority />
+          <Image
+            src="/aidal-logo.png"
+            alt="AIDAL."
+            width={1304}
+            height={364}
+            className="h-7 w-auto max-w-none shrink-0"
+            priority
+          />
         </Link>
         <ul className="hidden items-center gap-8 md:flex">
           {links.map((l) => (

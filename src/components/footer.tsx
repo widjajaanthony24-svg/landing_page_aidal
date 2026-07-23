@@ -16,7 +16,13 @@ export function Footer() {
     <footer className="border-t border-border bg-secondary px-6 py-12 md:px-16">
       <div className="mb-8 flex flex-col justify-between gap-8 md:flex-row md:items-start">
         <div className="flex flex-col gap-3">
-          <Image src="/aidal-logo-black.png" alt="AIDAL." width={1304} height={364} className="h-6 w-auto" />
+          <Image
+            src="/aidal-logo-black.png"
+            alt="AIDAL."
+            width={1304}
+            height={364}
+            className="h-6 w-auto max-w-none shrink-0 self-start"
+          />
           <p className="text-xs text-muted-foreground">
             Indonesia · contact:{" "}
             <a href="mailto:anthony@tryaidal.com" className="underline">

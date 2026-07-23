@@ -71,14 +71,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-display);font
 /* STICKY HEADER */
 .sticky-header{position:sticky;top:0;left:0;right:0;z-index:100;}
 
-/* COUNTDOWN BAR */
-.top-deadline{background:var(--color-black);border-bottom:1px solid #1A1A1A;padding:8px 4rem;display:flex;align-items:center;justify-content:center;gap:1.25rem;font-size:12px;}
-.top-deadline-label{color:#6B6560;letter-spacing:0.08em;text-transform:uppercase;font-size:10px;font-weight:500;}
-.top-deadline-count{color:var(--color-accent);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;}
-.top-deadline-text{color:#9A918A;font-size:11px;}
-.top-deadline-sep{color:#333;}
-.top-deadline-cta{color:var(--color-black);background:var(--color-accent);text-decoration:none;font-size:11px;font-weight:600;padding:4px 12px;border-radius:4px;}
-.top-deadline-cta:hover{background:#B8955A;}
 
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px;border-bottom:1px solid #E0D8CE;background:var(--color-cream);}
@@ -113,9 +105,19 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem
 .live-dot{width:5px;height:5px;border-radius:50%;background:#00D37F;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .hash-list{display:flex;flex-direction:column;gap:4px;}
-.hash-row{font-family:'JetBrains Mono','Courier New',monospace;font-size:10px;color:#2E3A4E;display:flex;align-items:center;gap:8px;transition:color .3s;}
+.hash-row{font-family:'JetBrains Mono','Courier New',monospace;font-size:10px;color:#2E3A4E;display:flex;align-items:center;gap:8px;transition:color .3s,opacity .45s ease,transform .45s ease;opacity:1;transform:translateY(0);}
 .hash-row.active{color:#00D37F;}
+.hash-row.enter{opacity:0;transform:translateY(8px);}
+.hash-row.leaving{opacity:0;transform:translateY(-6px);}
+.hash-row.just-sealed span{animation:seal-glow 1.4s ease-out;}
+@keyframes seal-glow{0%{text-shadow:0 0 10px rgba(0,211,127,.9)}100%{text-shadow:0 0 0 rgba(0,211,127,0)}}
 .hash-row-dot{width:3px;height:3px;border-radius:50%;background:currentColor;flex-shrink:0;}
+@media (prefers-reduced-motion: no-preference){
+  .story-arrow{animation:arrow-nudge 2.2s ease-in-out infinite;}
+  .story-arrow:nth-of-type(4){animation-delay:.22s;}
+  .story-arrow:nth-of-type(6){animation-delay:.44s;}
+}
+@keyframes arrow-nudge{0%,100%{transform:translateX(0);opacity:1;}50%{transform:translateX(4px);opacity:.6;}}
 
 /* HERO TYPOGRAPHY */
 .hero-eyebrow{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.75rem;display:flex;align-items:center;gap:12px;font-weight:500;}
@@ -153,6 +155,23 @@ h1 em{font-style:normal;color:var(--muted);}
 .trust-icon{width:22px;height:22px;border-radius:50%;background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .trust-icon svg{width:11px;height:11px;stroke:var(--color-accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .trust-sep{width:1px;height:14px;background:#D8CFC4;flex-shrink:0;}
+
+/* STORY FLOW — problem → solution narrative, replaces feature checklist */
+.story-flow{padding:3.5rem 4rem;border-bottom:1px solid #D8CFC4;background:var(--color-cream);}
+.story-flow-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1.75rem;flex-wrap:wrap;}
+.story-step{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:140px;}
+.story-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--color-text-muted);margin-bottom:10px;}
+.story-step p{font-family:'Playfair Display',Georgia,serif;font-size:1.1875rem;font-weight:700;color:var(--text);line-height:1.3;margin:0;}
+.story-step--answer .story-num{color:var(--color-accent);}
+.story-step--answer p{color:var(--color-accent);}
+.story-arrow{font-size:1.375rem;color:#C7BCAC;flex-shrink:0;}
+.story-arrow--answer{color:var(--color-accent);}
+@media (max-width:900px){
+  .story-flow{padding:2.5rem 1.5rem;}
+  .story-flow-inner{flex-direction:column;gap:0.85rem;}
+  .story-arrow{transform:rotate(90deg);}
+  .story-step{min-width:0;}
+}
 
 /* SECTION BASE */
 .section{max-width:1200px;margin:0 auto;padding:8rem 4rem;}
@@ -511,7 +530,6 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
 
 /* RESPONSIVE */
 @media(max-width:960px){
-  .top-deadline{padding:8px 1.5rem;font-size:10px;gap:1rem;}
   nav{padding:0 1.5rem;height:52px;}
   .nav-links{display:none;}
   .hero-inner{grid-template-columns:1fr;}
@@ -540,10 +558,6 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
   /* Tighten hero-left bottom so stats → credibility bar gap ≤ 32px */
   .hero-left{padding-bottom:1.5rem;}
 
-  /* Fix 1 — countdown bar: legible font sizes on mobile */
-  .top-deadline-count{font-size:13px;}
-  .top-deadline-label,.top-deadline-text{font-size:11px;}
-
   /* Fix 2 — hero stats: equal-width 3-column grid, no overflow */
   .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);width:100%;}
   .hero-stat{padding:14px 8px;border-right:1px solid #D8CFC4;}
@@ -560,13 +574,6 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
 
   /* Fix 5 — hero paragraph: fully contained, no right-edge clip */
   .hero-sub{max-width:100%;padding-right:0;word-break:break-word;}
-}
-
-/* ── VERY SMALL SCREENS (≤480px): strip countdown bar to essentials ── */
-@media(max-width:480px){
-  /* Fix 1 cont. — hide label, fines text, and both separators; keep only count + CTA */
-  .top-deadline-label,.top-deadline-text,.top-deadline-sep{display:none;}
-  .top-deadline{gap:0.75rem;justify-content:center;}
 }
 </style>
 </head>
@@ -596,14 +603,6 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
     <li><a href="#get-key" class="nav-cta">Get API Key</a></li>
   </ul>
 </nav>
-<div class="top-deadline">
-  <span class="top-deadline-label">EU AI Act high-risk deadline</span>
-  <span class="top-deadline-count" id="countdown">74d remaining</span>
-  <span class="top-deadline-sep">·</span>
-  <span class="top-deadline-text">Fines up to €15M or 3% of global turnover · OJK, MAS FEAT &amp; VARA already active</span>
-  <span class="top-deadline-sep">·</span>
-  <a href="#get-key" class="top-deadline-cta">Get audit-ready now →</a>
-</div>
 </div>
 
 <div class="hero-wrapper">
@@ -611,14 +610,14 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-eyebrow"><span class="eyebrow-line"></span>AI compliance infrastructure</div>
-      <h1>Every AI decision,<br>audit-ready.</h1>
-      <p class="hero-sub">The only API that makes every AI decision cryptographically provable, regulator-ready, and permanently verifiable — before the auditor asks.</p>
+      <h1>Can you explain an AI decision six months later?</h1>
+      <p class="hero-sub">AIDAL automatically creates tamper-evident evidence, human-readable explanations, and compliance-ready reports for every AI decision.</p>
       <div class="hero-actions">
-        <a href="#get-key" class="btn-primary">Get your free API key</a>
-        <a href="/sample-report.pdf" download="AIDAL_Sample_Compliance_Report.pdf" class="btn-ghost">See a sample report</a>
+        <a href="#get-key" class="btn-primary">Log your first AI decision</a>
+        <a href="https://youtu.be/i9gs1EUyb80?si=hKREBJz2GFf8yTkM" target="_blank" rel="noopener" class="btn-ghost">Watch 2-minute demo</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="hero-stat-num" id="days-stat">74</span><span class="hero-stat-label">Days to deadline</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">&lt;1s</span><span class="hero-stat-label">Seal time</span></div>
         <div class="hero-stat"><span class="hero-stat-num">7</span><span class="hero-stat-label">Jurisdictions</span></div>
         <div class="hero-stat"><span class="hero-stat-num">30m</span><span class="hero-stat-label">To integrate</span></div>
       </div>
@@ -697,7 +696,7 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
           <div class="hash-list" id="hash-list">
             <div class="hash-row"><div class="hash-row-dot"></div><span>a7f3c9b2e4d81f06c3a9...</span></div>
             <div class="hash-row"><div class="hash-row-dot"></div><span>3e8b2a91c7f04d22b185...</span></div>
-            <div class="hash-row active" id="latest-hash"><div class="hash-row-dot"></div><span>f2c7a3e9b1d58031e742...</span></div>
+            <div class="hash-row active"><div class="hash-row-dot"></div><span>f2c7a3e9b1d58031e742...</span></div>
           </div>
         </div>
       </div>
@@ -727,18 +726,28 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
   </div>
 </div>
 
-<div class="trust-bar">
-  <div class="trust-item reveal delay-1"><div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>SHA-256 tamper-proof chain</div>
-  <div class="trust-sep"></div>
-  <div class="trust-item reveal delay-2"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>7 jurisdiction modules live</div>
-  <div class="trust-sep"></div>
-  <div class="trust-item reveal delay-3"><div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>30-minute integration</div>
-  <div class="trust-sep"></div>
-  <div class="trust-item reveal delay-4"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>AI explanation per decision</div>
-  <div class="trust-sep"></div>
-  <div class="trust-item reveal"><div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Free during beta</div>
-  <div class="trust-sep"></div>
-  <div class="trust-item reveal"><div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Regulation text mapped article by article</div>
+<div class="story-flow">
+  <div class="story-flow-inner">
+    <div class="story-step reveal delay-1">
+      <span class="story-num">01</span>
+      <p>AI makes<br>a decision.</p>
+    </div>
+    <div class="story-arrow" aria-hidden="true">→</div>
+    <div class="story-step reveal delay-2">
+      <span class="story-num">02</span>
+      <p>Someone asks<br>&ldquo;Why?&rdquo;</p>
+    </div>
+    <div class="story-arrow" aria-hidden="true">→</div>
+    <div class="story-step reveal delay-3">
+      <span class="story-num">03</span>
+      <p>Nobody<br>knows.</p>
+    </div>
+    <div class="story-arrow story-arrow--answer" aria-hidden="true">→</div>
+    <div class="story-step story-step--answer reveal delay-4">
+      <span class="story-num">04</span>
+      <p>AIDAL already<br>has the answer.</p>
+    </div>
+  </div>
 </div>
 
 <hr class="divider">
@@ -907,7 +916,6 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
 <section class="section">
   <div class="section-eyebrow reveal">Why AIDAL</div>
   <h2 class="reveal delay-1">Cheaper, faster,<br><em>already built.</em></h2>
-  <span id="days-stat2" style="display:none"></span>
   <div class="comparison-table reveal delay-1">
     <div class="cmp-thead">
       <span class="cmp-thead-empty"></span>
@@ -1231,17 +1239,6 @@ footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash
 </footer>
 
 <script>
-/* COUNTDOWN */
-var deadline=new Date("2027-12-02T00:00:00");
-function tick(){
-  var diff=deadline-new Date();
-  if(diff<=0){document.getElementById("countdown").textContent="DEADLINE PASSED";return;}
-  var d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-  document.getElementById("countdown").textContent=d+"d "+h+"h "+m+"m "+s+"s remaining";
-  document.getElementById("days-stat").textContent=d;
-  document.getElementById("days-stat2").textContent=d;
-}
-tick();setInterval(tick,1000);
 
 /* AMBIENT */
 var ac=document.getElementById("ambient-canvas"),actx=ac.getContext("2d"),at=0;
@@ -1275,23 +1272,62 @@ function animD(){
 }
 window.addEventListener("resize",resizeD);resizeD();animD();
 
-/* HASH PANEL */
+/* HASH PANEL — ambient rotation and a real "Seal This Decision" both flow
+   through advanceChain() so the two widgets read as one continuous story,
+   and neither mechanism fights the other over fixed row indices/IDs. */
 var hashes=["a7f3c9b2e4d81f06c3a9","3e8b2a91c7f04d22b185","f2c7a3e9b1d58031e742","8d4f1c6a2e93b74503f1","c9b3e7f2a14d0863d529","1a8d4f7c3e2b9650a847","b5e2c8f1a7d34092fc60","4d7a3c9e2f810b56a193"];
 var hIdx=2,HC="0123456789abcdef";
 function rnd(n){var s="";for(var i=0;i<n;i++)s+=HC[Math.floor(Math.random()*16)];return s;}
-setInterval(function(){
-  hIdx++;
-  var h=hashes[hIdx%hashes.length];
-  var rows=document.getElementById("hash-list").querySelectorAll(".hash-row");
-  rows[0].querySelector("span").textContent=rows[1].querySelector("span").textContent;
-  rows[0].classList.remove("active");
-  rows[1].querySelector("span").textContent=rows[2].querySelector("span").textContent;
-  rows[1].classList.remove("active");
-  var el=document.getElementById("latest-hash");
+var lastRealSealAt=0;
+
+function advanceChain(fullHash,isReal){
+  var list=document.getElementById("hash-list");
+  if(!list)return;
+
+  var row=document.createElement("div");
+  row.className="hash-row enter";
+  row.innerHTML='<div class="hash-row-dot"></div><span></span>';
+  list.appendChild(row);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){row.classList.remove("enter");});});
+
+  var span=row.querySelector("span");
   var sc=0,iv=setInterval(function(){
-    el.querySelector("span").textContent=rnd(20)+"...";sc++;
-    if(sc>7){clearInterval(iv);el.querySelector("span").textContent=h+"...";el.classList.add("active");}
+    span.textContent=rnd(20)+"...";sc++;
+    if(sc>7){
+      clearInterval(iv);
+      span.textContent=fullHash.slice(0,20)+"...";
+      // Demote every currently-active row in the same tick this one goes active —
+      // keeps overlapping ambient/real updates from ever leaving two rows lit.
+      var actives=list.querySelectorAll(".hash-row.active");
+      for(var i=0;i<actives.length;i++){actives[i].classList.remove("active","just-sealed");}
+      row.classList.add("active");
+      if(isReal)row.classList.add("just-sealed");
+    }
   },45);
+
+  var rows=list.querySelectorAll(".hash-row");
+  if(rows.length>3){
+    trimChain();
+  }
+}
+
+function trimChain(){
+  var list=document.getElementById("hash-list");
+  if(!list)return;
+  var rows=Array.prototype.slice.call(list.querySelectorAll(".hash-row:not(.leaving)"));
+  while(rows.length>3){
+    var oldest=rows.shift();
+    oldest.classList.add("leaving");
+    (function(node){
+      setTimeout(function(){ if(node.parentNode)node.parentNode.removeChild(node); },450);
+    })(oldest);
+  }
+}
+
+setInterval(function(){
+  if(Date.now()-lastRealSealAt<4500)return; // let a real seal hold the spotlight before ambient noise resumes
+  hIdx++;
+  advanceChain(hashes[hIdx%hashes.length],false);
 },3000);
 
 /* SCROLL REVEAL */
@@ -1416,6 +1452,7 @@ function runDemo(){
     },1500);
     demoVis("dr-note",1800);
     demoVis("dr-verify",2100);
+    setTimeout(function(){ lastRealSealAt=Date.now(); advanceChain(hash.replace("sha256:",""),true); },1350);
   },800);
 }
 

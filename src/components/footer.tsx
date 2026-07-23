@@ -59,17 +59,7 @@ export function Footer() {
             Security
           </a>
         </p>
-        <p className="whitespace-nowrap text-xs text-muted-foreground">
-          © 2026 AIDAL · UI components from{" "}
-          <a
-            href="https://skiper-ui.com"
-            target="_blank"
-            rel="noopener"
-            className="underline underline-offset-2"
-          >
-            Skiper UI
-          </a>
-        </p>
+        <p className="whitespace-nowrap text-xs text-muted-foreground">© 2026 AIDAL</p>
       </div>
     </footer>
   );

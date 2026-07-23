@@ -7,9 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-display);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-display);
+  --font-accent: var(--font-accent);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -75,8 +76,16 @@
   --chart-5: oklch(0.269 0 0);
   --radius: 0.5rem;
 
-  /* Condensed serif display font, tiered letter-spacing (see design notes in README) */
+  /* Condensed serif display font, tiered letter-spacing (see design notes in README).
+     Reserved for h1/h2 only — body copy uses --font-inter (see below). */
   --font-display: "Times New Roman MT Condensed", "Times New Roman", Times, "Noto Serif Condensed", serif;
+
+  /* Body / nav / buttons / labels / footer — everything that isn't a headline or the
+     one accent phrase per headline. */
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* One italic phrase per headline, sparingly — see hero h1 for the only current use. */
+  --font-accent: "Instrument Serif", Georgia, serif;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -134,9 +143,18 @@
   html {
     @apply font-sans;
   }
-  /* Display/heading tier (~32px+): condensed serif reads tighter here */
+  /* Display/heading tier (~32px+): condensed serif reads tighter here. Explicit
+     font-family here since body now defaults to Inter (--font-sans) — headlines
+     keep the existing display serif regardless of that change. */
   h1, h2 {
+    font-family: var(--font-display);
     letter-spacing: -0.03em;
+  }
+  /* One italic accent phrase per headline — see hero h1. Applied via .font-accent,
+     never as a default on h1/h2 themselves. */
+  .font-accent {
+    font-family: var(--font-accent);
+    font-style: italic;
   }
   /* Labels/meta/footer tier: smallest text breaks first under negative tracking */
   footer, .meta-text {

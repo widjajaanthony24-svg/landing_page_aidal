@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="h4_Pl1tveXrN5n1NC7cR_L0XrjOdTRrDy20oY4_Wt6o" />
-<meta name="description" content="Tamper-proof audit trail for every AI decision. One API call. Cryptographically sealed, regulator-ready, publicly verifiable. EU AI Act, MAS FEAT, OJK, VARA compliant. Free to start.">
+<meta name="description" content="Tamper-proof audit trail for every AI decision. One API call. Cryptographically sealed, regulator-ready, publicly verifiable. Built for EU AI Act, MAS FEAT, OJK, VARA requirements. Free to start.">
 <link rel="icon" type="image/png" href="logo.png">
 <!-- B-6: Content Security Policy
      script-src unsafe-inline required for inline <script> blocks.
@@ -22,7 +22,7 @@
 }
 </script>
 <title>AIDAL. — AI Decision Accountability Layer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Noto+Serif+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   /* ── Black & Cream palette ── */
@@ -57,10 +57,16 @@
   --cream-faint:  #6B6560;
   --accent-hover: #1A1A1A;   /* very dark for hover states */
   --bg-alt2:      #E8DDD0;
+
+  /* Condensed serif display font. "Times New Roman MT Condensed" is a licensed
+     Monotype font with no free @font-face source — it will only render for visitors
+     who happen to have it installed; everyone else gets the Noto Serif Condensed /
+     Times New Roman fallbacks. Swap in a @font-face block if we license a .woff2. */
+  --font-display: "Times New Roman MT Condensed", "Times New Roman", Times, "Noto Serif Condensed", serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:1.0625rem;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-display);font-size:1.125rem;line-height:1.6;letter-spacing:-0.01em;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
 /* STICKY HEADER */
 .sticky-header{position:sticky;top:0;left:0;right:0;z-index:100;}
@@ -114,7 +120,7 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:0 4rem
 /* HERO TYPOGRAPHY */
 .hero-eyebrow{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.75rem;display:flex;align-items:center;gap:12px;font-weight:500;}
 .eyebrow-line{display:block;width:20px;height:1px;background:var(--border);}
-h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.5rem,5vw,3.75rem);font-weight:700;line-height:1.1;letter-spacing:-0.01em;color:var(--text);margin-bottom:1.5rem;}
+h1{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,3.75rem);font-weight:700;line-height:1.1;letter-spacing:-0.03em;color:var(--text);margin-bottom:1.5rem;}
 h1 em{font-style:normal;color:var(--muted);}
 .hero-sub{font-size:1.0625rem;color:var(--text-secondary);max-width:440px;line-height:1.75;margin-bottom:2.5rem;font-weight:400;}
 .hero-actions{display:flex;gap:1rem;align-items:center;margin-bottom:3rem;flex-wrap:wrap;}
@@ -152,7 +158,7 @@ h1 em{font-style:normal;color:var(--muted);}
 .section{max-width:1200px;margin:0 auto;padding:8rem 4rem;}
 .section-eyebrow{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;display:flex;align-items:center;gap:12px;font-weight:500;}
 .section-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--border);}
-h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.75rem,3vw,2.375rem);font-weight:700;line-height:1.18;letter-spacing:-0.01em;color:var(--text);margin-bottom:1.5rem;}
+h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.375rem);font-weight:700;line-height:1.18;letter-spacing:-0.03em;color:var(--text);margin-bottom:1.5rem;}
 h2 em{font-style:normal;color:var(--muted);}
 .divider{border:none;border-top:1px solid var(--border);}
 
@@ -495,6 +501,14 @@ nav .logo .logo-fallback{display:none!important;}
 .deadline-cta .btn-primary{background:#f0ebe0!important;color:#1a1a1a!important;}
 .deadline-cta .btn-primary:hover{background:#e8dfd0!important;}
 
+/* TYPOGRAPHY — tiered letter-spacing/line-height compensation for the condensed
+   serif switch. h1/h2 (~32px+) get -0.03em; body copy inherits -0.01em from body
+   (h3 is only ~15-17px on this page, so it stays in the body-copy tier rather than
+   the heading tier — otherwise a 15px condensed serif with -0.03em tracking starts
+   crowding letters). Meta/label/footer text resets to 0 since the smallest text
+   breaks first under negative tracking. */
+footer,.jur-checklist li,.price-unit,.price-integration,.cmp-row-alt small,.hash-row,.dr-badge-txt,.credibility-items span,.trust-item,.signup-trust-signals{letter-spacing:0;}
+
 /* RESPONSIVE */
 @media(max-width:960px){
   .top-deadline{padding:8px 1.5rem;font-size:10px;gap:1rem;}
@@ -583,12 +597,12 @@ nav .logo .logo-fallback{display:none!important;}
   </ul>
 </nav>
 <div class="top-deadline">
-  <span class="top-deadline-label">EU AI Act deadline</span>
+  <span class="top-deadline-label">EU AI Act high-risk deadline</span>
   <span class="top-deadline-count" id="countdown">74d remaining</span>
   <span class="top-deadline-sep">·</span>
-  <span class="top-deadline-text">Fines up to €30M for non-compliance</span>
+  <span class="top-deadline-text">Fines up to €15M or 3% of global turnover · OJK, MAS FEAT &amp; VARA already active</span>
   <span class="top-deadline-sep">·</span>
-  <a href="#get-key" class="top-deadline-cta">Get compliant now →</a>
+  <a href="#get-key" class="top-deadline-cta">Get audit-ready now →</a>
 </div>
 </div>
 
@@ -735,7 +749,7 @@ nav .logo .logo-fallback{display:none!important;}
   <div class="grid-2">
     <div class="grid-cell reveal"><span class="gap-badge">Gap 1</span><h3>No explanation</h3><p>When an AI denies a loan or flags a transaction, neither the company nor the customer can explain why — in a way that satisfies a regulator or stands up in court.</p></div>
     <div class="grid-cell dark reveal delay-1"><span class="gap-badge">Gap 2</span><h3>No audit trail</h3><p>AI decisions live in databases that can be edited. There is no tamper-proof record of what was decided, when, by which model, and with what confidence.</p></div>
-    <div class="grid-cell dark reveal delay-2"><span class="gap-badge">Gap 3</span><h3>Regulators are arriving</h3><p>The EU AI Act, Singapore MAS FEAT, Indonesia OJK, and UAE VARA all mandate explainable, auditable AI decisions. The deadline is August 2026. Most companies have nothing.</p></div>
+    <div class="grid-cell dark reveal delay-2"><span class="gap-badge">Gap 3</span><h3>Regulators are arriving</h3><p>The EU AI Act, Singapore MAS FEAT, Indonesia OJK, and UAE VARA all mandate explainable, auditable AI decisions. MAS FEAT, OJK, and VARA are enforced today — not someday. The EU AI Act's high-risk deadline was pushed to December 2027, but enterprise procurement and audit-trail buildout take months, so it's closer than it looks. Most companies have nothing.</p></div>
     <div class="grid-cell reveal delay-3"><span class="gap-badge solution">Solution</span><h3>AIDAL solves all three</h3><p>One API call logs every decision with a cryptographic proof, an AI-generated explanation, and automatic compliance checking. Regulators verify everything in seconds.</p></div>
   </div>
 </section>
@@ -774,7 +788,7 @@ nav .logo .logo-fallback{display:none!important;}
         &nbsp;&nbsp;<span class="ck">"audit_id"</span>: <span class="cs">"aud_a7f3c9b2..."</span>,<br>
         &nbsp;&nbsp;<span class="ck">"hash"</span>: <span class="cs">"sha256:3e8b2a91..."</span>,<br>
         &nbsp;&nbsp;<span class="ck">"explanation"</span>: <span class="cs">"Loan approved..."</span>,<br>
-        &nbsp;&nbsp;<span class="ck">"compliance"</span>: {<span class="ck">"status"</span>: <span class="cv">"COMPLIANT"</span>}<br>}
+        &nbsp;&nbsp;<span class="ck">"rules_check"</span>: {<span class="ck">"status"</span>: <span class="cv">"PASSED"</span>}<br>}
       </div>
     </div>
   </div>
@@ -922,7 +936,7 @@ nav .logo .logo-fallback{display:none!important;}
     </div>
     <div class="cmp-row">
       <span class="cmp-row-label">Jurisdiction compliance</span>
-      <span class="cmp-row-aidal">4 modules live</span>
+      <span class="cmp-row-aidal">7 modules live</span>
       <span class="cmp-row-alt">Hire a lawyer per region<small>MAS FEAT ≠ OJK ≠ EU AI Act</small></span>
     </div>
     <div class="cmp-row">
@@ -939,7 +953,7 @@ nav .logo .logo-fallback{display:none!important;}
   <div class="section-eyebrow reveal">Who uses AIDAL</div>
   <h2 class="reveal delay-1">Built for anyone<br><em>using AI to make decisions.</em></h2>
   <div class="clients-row">
-    <div class="client-card reveal"><div class="client-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><h3>Fintech and lending</h3><p>Credit decisions, loan approvals, risk scoring. Every decision logged, every rejection explainable. OJK, MAS, and EU compliant.</p></div>
+    <div class="client-card reveal"><div class="client-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><h3>Fintech and lending</h3><p>Credit decisions, loan approvals, risk scoring. Every decision logged, every rejection explainable. Mapped to OJK, MAS FEAT, and EU AI Act requirements.</p></div>
     <div class="client-card reveal delay-1"><div class="client-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Insurance</h3><p>Claims approval, underwriting, fraud flagging. Full audit trail that satisfies regulators and silences complaints.</p></div>
     <div class="client-card reveal delay-2"><div class="client-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><h3>HR and hiring</h3><p>AI screening decisions. The EU AI Act classifies these as high-risk. AIDAL makes every hiring decision contestable.</p></div>
   </div>
@@ -948,9 +962,9 @@ nav .logo .logo-fallback{display:none!important;}
 <div class="deadline-cta">
   <canvas id="dcv"></canvas>
   <div class="deadline-cta-inner">
-    <div class="reveal-left"><div class="big-date">Aug<br>2026.</div><div class="big-date-sub">EU AI Act — high-risk AI deadline</div></div>
+    <div class="reveal-left"><div class="big-date">Dec<br>2027.</div><div class="big-date-sub">EU AI Act — high-risk AI deadline</div></div>
     <div class="reveal-right">
-      <p style="font-size:14px;color:#4A5668;line-height:1.9;margin-bottom:2.5rem;">Every company using AI for credit, insurance, healthcare, or employment must have audit trails, explainability, and contestation mechanisms. Non-compliance: fines up to €30M or 6% of global revenue.</p>
+      <p style="font-size:14px;color:#4A5668;line-height:1.9;margin-bottom:2.5rem;">The EU's Digital Omnibus pushed the high-risk deadline for credit, insurance, and employment AI systems from Aug 2026 to Dec 2, 2027 — but audit-trail buildout, model documentation, and procurement take 12–18 months, so 2027 is closer than it looks. Non-compliance: fines up to €15M or 3% of global annual turnover. Meanwhile Indonesia's OJK, Singapore's MAS FEAT, and UAE's VARA already require this today.</p>
       <a href="#get-key" class="btn-primary">Get your API key now</a>
     </div>
   </div>
@@ -980,7 +994,7 @@ nav .logo .logo-fallback{display:none!important;}
     <div class="legal-body">
       <div class="legal-badge reveal"><div class="legal-badge-dot"></div>Regulatory research</div>
       <h2 class="reveal delay-1" style="font-size:clamp(26px,3.5vw,44px);margin-bottom:1.5rem">Built from the<br><em>actual regulation text.</em></h2>
-      <p class="reveal delay-2">Every jurisdiction module was built by reading the regulation documents directly — POJK No. 11, MAS FEAT Principles, EU AI Act Articles 9–17, and VARA 2024.</p>
+      <p class="reveal delay-2">Every jurisdiction module was built by reading the regulation documents directly — POJK No. 11, MAS FEAT Principles, EU AI Act Articles 9–17, VARA 2024, FCA SYSC 3/SM&amp;CR, CFPB Circulars &amp; ECOA Reg B, and APRA CPS 234/230 — across all seven jurisdictions we support.</p>
       <p class="reveal delay-3">Are you a compliance lawyer with MAS FEAT or OJK expertise? <a href="https://mail.google.com/mail/?view=cm&to=anthony@tryaidal.com&subject=Legal%20Advisor%20%E2%80%94%20AIDAL" target="_blank" class="legal-link">We'd like to speak with you →</a></p>
     </div>
     <div class="legal-cards reveal-right">
@@ -999,6 +1013,18 @@ nav .logo .logo-fallback{display:none!important;}
       <div class="legal-card">
         <div class="legal-card-row"><h4>VARA 2024 — UAE</h4><span class="legal-tag d">Framework mapped</span></div>
         <p>VARA 2024 AI &amp; Technology Governance Framework requirements fully implemented.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-card-row"><h4>FCA — United Kingdom</h4><span class="legal-tag d">Framework mapped</span></div>
+        <p>SYSC 3 explainability, SM&amp;CR senior-manager accountability, PS 22/3 bias testing, and SR 11/9 model documentation implemented.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-card-row"><h4>CFPB — United States</h4><span class="legal-tag d">Circulars mapped</span></div>
+        <p>ECOA Regulation B, CFPB Circulars 2022-03 &amp; 2023-03, and Fair Credit Reporting Act adverse-action requirements implemented.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-card-row"><h4>APRA — Australia</h4><span class="legal-tag d">Standards mapped</span></div>
+        <p>CPS 234 information security, CPS 230 operational risk, and ASIC's 2026 AI Governance Letter requirements implemented.</p>
       </div>
     </div>
   </div>
@@ -1051,7 +1077,7 @@ nav .logo .logo-fallback{display:none!important;}
           <div class="pdf-mock-section-label">Executive summary</div>
           <div class="pdf-mock-row"><span>Reporting period</span><span>Q1 2026</span></div>
           <div class="pdf-mock-row"><span>Decisions logged</span><span>4,821</span></div>
-          <div class="pdf-mock-row"><span>Compliant rate</span><span class="pdf-mock-green">98.7%</span></div>
+          <div class="pdf-mock-row"><span>Rules-passed rate</span><span class="pdf-mock-green">98.7%</span></div>
           <div class="pdf-mock-row"><span>Jurisdiction</span><span>SG — MAS FEAT</span></div>
           <div class="pdf-mock-cert">
             <span>✓ Chain integrity verified</span>
@@ -1074,6 +1100,8 @@ nav .logo .logo-fallback{display:none!important;}
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can we self-host AIDAL for data sovereignty requirements?<span class="faq-arr">+</span></button><div class="faq-a"><strong>Yes — on the Enterprise plan.</strong> We offer an on-premise deployment option for organisations with data residency requirements (e.g. Indonesia POJK data localisation, EU data sovereignty mandates). Contact us at anthony@tryaidal.com to discuss your requirements.</div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens if AIDAL shuts down?<span class="faq-arr">+</span></button><div class="faq-a">Nothing. Every day AIDAL publishes a master hash to a <strong>public GitHub repository</strong> independent of AIDAL's servers. Your records can be cryptographically verified forever, even if AIDAL disappears.</div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">We already log decisions in our database. Why AIDAL?<span class="faq-arr">+</span></button><div class="faq-a">Your database can be edited — a regulator knows this. AIDAL's SHA-256 hash chain makes tampering <strong>mathematically detectable</strong>. It also adds AI explanations, compliance checking, and a regulator-ready PDF.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does the hash chain prove every decision was logged, or just that logged decisions weren't altered?<span class="faq-arr">+</span></button><div class="faq-a">Just the latter, today. The hash chain makes it <strong>mathematically detectable</strong> if a decision that was submitted to AIDAL is later altered or deleted — that's tamper-evidence, not completeness. It does not currently prove your system sent AIDAL every decision it made. If you need submission-completeness guarantees — reconciling your internal decision count against AIDAL's logged count — talk to us; reconciliation reporting is on our roadmap.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Who audits AIDAL itself — SOC 2, penetration testing, bug bounty?<span class="faq-arr">+</span></button><div class="faq-a">Honest answer: not yet, beyond what's below. <strong>True today:</strong> daily SHA-256 anchors published to a <a href="https://github.com/widjajaanthony24-svg/aidal-anchors" target="_blank" style="color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(26,43,74,0.3)">public GitHub log</a>, AES-256 encryption at rest, TLS 1.3 in transit, and per-tenant data isolation — see our <a href="/security.html" style="color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(26,43,74,0.3)">Security page</a>. <strong>Roadmap, not done:</strong> a SOC 2 audit of AIDAL's own infrastructure, an independent penetration test, and a bug bounty program. (Our AI subprocessor, Groq, holds SOC 2 Type II — that covers Groq, not AIDAL.) We'll update this the day any of those change.</div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does integration actually take?<span class="faq-arr">+</span></button><div class="faq-a"><strong>Under 30 minutes.</strong> One API call after your model runs. No SDK, no infrastructure. <a href="https://aidal-production.up.railway.app/docs" target="_blank" style="color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(26,43,74,0.3)">API docs →</a></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">We're not regulated yet. Should we still use AIDAL?<span class="faq-arr">+</span></button><div class="faq-a">Regulation is coming. Retrofitting an audit trail after a regulator asks for it is significantly harder. Beta is free. The cost of starting today is zero.</div></div>
   </div>
@@ -1092,7 +1120,7 @@ nav .logo .logo-fallback{display:none!important;}
         <li>Full API access</li>
         <li>AI-generated explanations</li>
         <li>Tamper-proof audit log</li>
-        <li>4 jurisdiction modules</li>
+        <li>7 jurisdiction modules</li>
         <li>Public verify page</li>
       </ul>
       <button class="price-btn ghost-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get API key free</button>
@@ -1112,7 +1140,6 @@ nav .logo .logo-fallback{display:none!important;}
       <button class="price-btn ghost-btn" onclick="document.getElementById('get-key').scrollIntoView({behavior:'smooth'})">Get started</button>
     </div>
     <div class="price-card featured reveal delay-2">
-      <span class="most-requested">Most requested</span>
       <span class="price-label">Professional</span>
       <span class="price-amt">$2,500</span>
       <span class="price-unit">per month · 500,000 decisions</span>
@@ -1141,7 +1168,7 @@ nav .logo .logo-fallback{display:none!important;}
       <a href="mailto:anthony@tryaidal.com?subject=AIDAL%20Enterprise" class="price-btn ghost-btn">Contact us</a>
     </div>
   </div>
-  <p class="reveal" style="margin-top:1rem;font-size:11px;color:var(--muted);">All plans include SHA-256 tamper-proof chain and public audit trail. No credit card required for Free tier.</p>
+  <p class="reveal" style="margin-top:1rem;font-size:11px;color:var(--muted);">All plans include SHA-256 tamper-proof chain and public audit trail. No credit card required for Free tier. Running at million-decision scale? Free, Starter, and Professional cap at 1k–500k/month — <a href="mailto:anthony@tryaidal.com?subject=AIDAL%20Enterprise%20Volume" style="color:var(--color-black);text-decoration:underline;">talk to us about Enterprise</a> for unlimited volume.</p>
 </section>
 
 <section class="signup-section" id="get-key">
@@ -1182,7 +1209,7 @@ nav .logo .logo-fallback{display:none!important;}
         <img src="Copy_of_AIDAL.png" alt="AIDAL."/>
       </div>
       <div class="footer-address">
-        Singapore · contact: <a href="mailto:anthony@tryaidal.com">anthony@tryaidal.com</a>
+        Indonesia · contact: <a href="mailto:anthony@tryaidal.com">anthony@tryaidal.com</a>
       </div>
     </div>
     <div class="footer-right">
@@ -1205,7 +1232,7 @@ nav .logo .logo-fallback{display:none!important;}
 
 <script>
 /* COUNTDOWN */
-var deadline=new Date("2026-08-01T00:00:00");
+var deadline=new Date("2027-12-02T00:00:00");
 function tick(){
   var diff=deadline-new Date();
   if(diff<=0){document.getElementById("countdown").textContent="DEADLINE PASSED";return;}
@@ -1367,7 +1394,7 @@ function runDemo(){
   function rndHex(n){var s="";for(var i=0;i<n;i++)s+=hex[Math.floor(Math.random()*16)];return s;}
   var auditId="aud_"+rndHex(8);
   var hash="sha256:"+rndHex(32);
-  var compLabel="COMPLIANT — "+(jurLabel[jur]||jur);
+  var compLabel="RULES CHECK PASSED — "+(jurLabel[jur]||jur);
 
   setTimeout(function(){
     btn.disabled=false;

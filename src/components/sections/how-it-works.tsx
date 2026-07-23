@@ -65,27 +65,63 @@ export function HowItWorksSection() {
               <span className="size-2 rounded-full bg-[#1E2A3A]" />
             </div>
           </div>
-          <pre className="overflow-x-auto rounded-b-lg border border-[#1E2A3A] bg-[#0D1117] p-7 font-mono text-[11.5px] leading-loose text-[#6B7A8D]">
-{`# After your model runs
-`}<span className="text-[#F1F5F9]">requests.post</span>(
-  <span className="text-[#FCA5A5]">&quot;https://aidal-production.up.railway.app/decision&quot;</span>,
-  headers={"{"}<span className="text-[#7DD3FC]">&quot;Authorization&quot;</span>: <span className="text-[#FCA5A5]">&quot;Bearer aidal_live_xxxx&quot;</span>{"}"},
-  json={"{"}
-    <span className="text-[#7DD3FC]">&quot;decision_type&quot;</span>: <span className="text-[#86EFAC]">&quot;loan_approval&quot;</span>,
-    <span className="text-[#7DD3FC]">&quot;model_used&quot;</span>: <span className="text-[#86EFAC]">&quot;xgboost-v2&quot;</span>,
-    <span className="text-[#7DD3FC]">&quot;input_features&quot;</span>: <span className="text-[#86EFAC]">applicant_data</span>,
-    <span className="text-[#7DD3FC]">&quot;output&quot;</span>: <span className="text-[#86EFAC]">model_result</span>,
-    <span className="text-[#7DD3FC]">&quot;jurisdiction&quot;</span>: <span className="text-[#86EFAC]">&quot;SG&quot;</span>
-  {"}"})
-{"\n"}
-{`# Response in <1 second
-`}{"{"}
-  <span className="text-[#7DD3FC]">&quot;audit_id&quot;</span>: <span className="text-[#FCA5A5]">&quot;aud_a7f3c9b2...&quot;</span>,
-  <span className="text-[#7DD3FC]">&quot;hash&quot;</span>: <span className="text-[#FCA5A5]">&quot;sha256:3e8b2a91...&quot;</span>,
-  <span className="text-[#7DD3FC]">&quot;explanation&quot;</span>: <span className="text-[#FCA5A5]">&quot;Loan approved...&quot;</span>,
-  <span className="text-[#7DD3FC]">&quot;rules_check&quot;</span>: {"{"}<span className="text-[#7DD3FC]">&quot;status&quot;</span>: <span className="text-[#86EFAC]">&quot;PASSED&quot;</span>{"}"}
-{"}"}
-          </pre>
+          <div className="overflow-x-auto rounded-b-lg border border-[#1E2A3A] bg-[#0D1117] p-7 font-mono text-[11.5px] leading-loose text-[#6B7A8D]">
+            <div># After your model runs</div>
+            <div>
+              <span className="text-[#F1F5F9]">requests.post</span>(
+            </div>
+            <div className="pl-4">
+              <span className="text-[#FCA5A5]">&quot;https://aidal-production.up.railway.app/decision&quot;</span>,
+            </div>
+            <div className="pl-4">
+              headers={"{"}<span className="text-[#7DD3FC]">&quot;Authorization&quot;</span>:{" "}
+              <span className="text-[#FCA5A5]">&quot;Bearer aidal_live_xxxx&quot;</span>{"}"},
+            </div>
+            <div className="pl-4">json={"{"}</div>
+            <div className="pl-8">
+              <span className="text-[#7DD3FC]">&quot;decision_type&quot;</span>:{" "}
+              <span className="text-[#86EFAC]">&quot;loan_approval&quot;</span>,
+            </div>
+            <div className="pl-8">
+              <span className="text-[#7DD3FC]">&quot;model_used&quot;</span>:{" "}
+              <span className="text-[#86EFAC]">&quot;xgboost-v2&quot;</span>,
+            </div>
+            <div className="pl-8">
+              <span className="text-[#7DD3FC]">&quot;input_features&quot;</span>:{" "}
+              <span className="text-[#86EFAC]">applicant_data</span>,
+            </div>
+            <div className="pl-8">
+              <span className="text-[#7DD3FC]">&quot;output&quot;</span>:{" "}
+              <span className="text-[#86EFAC]">model_result</span>,
+            </div>
+            <div className="pl-8">
+              <span className="text-[#7DD3FC]">&quot;jurisdiction&quot;</span>:{" "}
+              <span className="text-[#86EFAC]">&quot;SG&quot;</span>
+            </div>
+            <div className="pl-4">{"}"})</div>
+            <div>&nbsp;</div>
+            <div># Response in &lt;1 second</div>
+            <div>{"{"}</div>
+            <div className="pl-4">
+              <span className="text-[#7DD3FC]">&quot;audit_id&quot;</span>:{" "}
+              <span className="text-[#FCA5A5]">&quot;aud_a7f3c9b2...&quot;</span>,
+            </div>
+            <div className="pl-4">
+              <span className="text-[#7DD3FC]">&quot;hash&quot;</span>:{" "}
+              <span className="text-[#FCA5A5]">&quot;sha256:3e8b2a91...&quot;</span>,
+            </div>
+            <div className="pl-4">
+              <span className="text-[#7DD3FC]">&quot;explanation&quot;</span>:{" "}
+              <span className="text-[#FCA5A5]">&quot;Loan approved...&quot;</span>,
+            </div>
+            <div className="pl-4">
+              <span className="text-[#7DD3FC]">&quot;rules_check&quot;</span>: {"{"}
+              <span className="text-[#7DD3FC]">&quot;status&quot;</span>:{" "}
+              <span className="text-[#86EFAC]">&quot;PASSED&quot;</span>
+              {"}"}
+            </div>
+            <div>{"}"}</div>
+          </div>
         </div>
       </div>
     </section>

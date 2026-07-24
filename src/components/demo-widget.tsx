@@ -30,13 +30,14 @@ export function DemoWidget() {
   }
 
   return (
-    <div className="w-full max-w-[340px] border border-white/8 bg-[#0a0c10] text-[#f0ebe0]">
+    <div className="flex min-h-0 flex-1 flex-col border border-white/8 bg-[#0a0c10] text-[#f0ebe0]">
       <div className="flex items-center gap-2 border-b border-white/6 bg-white/[0.015] px-3.5 py-2">
         <div className="size-1.5 shrink-0 animate-pulse rounded-full bg-[#0A6E4F]" />
         <span className="font-sans text-[9px] tracking-[4px] text-[#3A3A38] uppercase">
           Live Audit Chain Demo
         </span>
       </div>
+      <div className="flex-1 overflow-y-auto">
       <div className="space-y-3.5 px-3.5 pt-3.5">
         <div>
           <label className="mb-1 block font-sans text-[9px] tracking-[2px] text-[#4A4A48] uppercase">
@@ -121,6 +122,7 @@ export function DemoWidget() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

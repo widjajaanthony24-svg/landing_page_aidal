@@ -29,7 +29,7 @@ export function HashPanel() {
   }, []);
 
   return (
-    <div className="rounded-md border border-[#1E2A3A] bg-[#111827]/97 p-4">
+    <div className="shrink-0 rounded-md border border-[#1E2A3A] bg-[#111827]/97 p-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-[10px] tracking-[1.5px] text-[#4A5668] uppercase">Audit chain</span>
         <span className="flex items-center gap-1.5 text-[10px] tracking-[1.5px] text-[#00D37F] uppercase">

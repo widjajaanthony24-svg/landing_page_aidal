@@ -17,8 +17,9 @@ export function DeadlineCtaSection() {
             The EU&apos;s Digital Omnibus pushed the high-risk deadline for credit, insurance, and employment
             AI systems from Aug 2026 to Dec 2, 2027 — but audit-trail buildout, model documentation, and
             procurement take 12–18 months, so 2027 is closer than it looks. Non-compliance: fines up to €15M
-            or 3% of global annual turnover. Meanwhile Indonesia&apos;s OJK, Singapore&apos;s MAS FEAT, and
-            UAE&apos;s VARA already require this today.
+            or 3% of global annual turnover. Meanwhile Singapore&apos;s MAS FEAT and UAE&apos;s VARA already
+            apply today, and Indonesia&apos;s OJK has published AI governance guidance for banks (non-binding,
+            but built on binding IT-governance rules).
           </p>
           <a
             href="#get-key"

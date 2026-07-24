@@ -5,7 +5,7 @@ const callouts = [
   },
   {
     title: "Per-decision explanations",
-    body: "Every AI decision explained in plain language. Required by EU AI Act Art 13, MAS FEAT, and OJK POJK No.11.",
+    body: "Every AI decision explained in plain language. Required by EU AI Act Art 13, MAS FEAT, and OJK's 2025 AI governance guidance.",
   },
   {
     title: "Jurisdiction compliance mapping",

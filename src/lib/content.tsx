@@ -4,8 +4,8 @@ export const jurisdictions = [
     country: "Indonesia",
     name: "OJK Indonesia",
     items: [
-      "POJK No.11/2022 compliance",
-      "Explainability required",
+      "OJK AI governance guidance (2025)",
+      "Explainability recommended",
       "5-year record retention",
       "Risk classification logging",
     ],
@@ -86,7 +86,7 @@ export const jurisdictions = [
 ];
 
 export const legalCards = [
-  { title: "POJK No.11 — Indonesia", tag: "OJK 2022", body: "Enforces POJK No. 11/POJK.03/2022 required fields, explainability standard, and 5-year retention." },
+  { title: "OJK AI Governance — Indonesia", tag: "Guidance mapped (2025)", body: "Aligns with OJK's 2025 AI governance guidance for banks (non-binding) and POJK No. 11/POJK.03/2022's binding IT-governance and retention rules." },
   { title: "MAS FEAT — Singapore", tag: "Principles mapped", body: "Checks Fairness, Ethics, Accountability, and Transparency on every financial AI decision." },
   { title: "EU AI Act — Articles 9–17", tag: "Articles mapped", body: "Article 12 automatic logging and Article 13 plain-language explanations on every decision." },
   { title: "VARA 2024 — UAE", tag: "Framework mapped", body: "VARA 2024 AI & Technology Governance Framework requirements fully implemented." },

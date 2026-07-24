@@ -1,6 +1,6 @@
 import { Fingerprint, Globe2, Clock, FileText, CheckCircle2, Search } from "lucide-react";
 
-const builtFor = ["EU AI Act", "MAS FEAT", "OJK POJK No.11", "VARA UAE", "FCA UK", "CFPB US", "APRA AU"];
+const builtFor = ["EU AI Act", "MAS FEAT", "OJK AI Governance (2025)", "VARA UAE", "FCA UK", "CFPB US", "APRA AU"];
 
 const trustItems = [
   { icon: Fingerprint, label: "SHA-256 tamper-proof chain" },

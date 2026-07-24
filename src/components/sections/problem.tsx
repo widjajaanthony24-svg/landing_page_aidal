@@ -18,7 +18,7 @@ const cells = [
   {
     badge: "Gap 3",
     title: "Regulators are arriving",
-    body: "The EU AI Act, Singapore MAS FEAT, Indonesia OJK, and UAE VARA all mandate explainable, auditable AI decisions. MAS FEAT, OJK, and VARA are enforced today — not someday. The EU AI Act's high-risk deadline was pushed to December 2027, but enterprise procurement and audit-trail buildout take months, so it's closer than it looks. Most companies have nothing.",
+    body: "The EU AI Act, Singapore MAS FEAT, Indonesia OJK, and UAE VARA all point the same direction: explainable, auditable AI decisions. MAS FEAT and VARA apply today; OJK has published AI governance guidance for banks. The EU AI Act's high-risk deadline was pushed to December 2027, but enterprise procurement and audit-trail buildout take months, so it's closer than it looks. Most companies have nothing.",
     icon: Gavel,
     dark: false,
   },

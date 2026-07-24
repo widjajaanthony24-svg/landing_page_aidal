@@ -1,7 +1,7 @@
 import { AnimatedNumber } from "@/components/animated-number";
 import { DemoWidget } from "@/components/demo-widget";
 import { HashPanel } from "@/components/hash-panel";
-import { RetroComputer3D } from "@/components/retro-computer-3d-loader";
+import { RetroComputer } from "@/components/retro-computer";
 
 export function HeroSection() {
   return (
@@ -64,10 +64,10 @@ export function HeroSection() {
           </div>
         </div>
         <div className="relative hidden min-h-[calc(100vh-104px)] items-center justify-center overflow-hidden border-l border-border bg-background md:flex">
-          <RetroComputer3D>
+          <RetroComputer>
             <DemoWidget />
             <HashPanel />
-          </RetroComputer3D>
+          </RetroComputer>
         </div>
       </div>
     </div>

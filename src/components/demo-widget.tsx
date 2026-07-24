@@ -37,7 +37,7 @@ export function DemoWidget() {
           Live Audit Chain Demo
         </span>
       </div>
-      <div className="flex-1 overflow-y-auto">
+      <div className="min-h-0 flex-1 overflow-y-auto">
       <div className="space-y-3.5 px-3.5 pt-3.5">
         <div>
           <label className="mb-1 block font-sans text-[9px] tracking-[2px] text-[#4A4A48] uppercase">

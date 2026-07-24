@@ -1,5 +1,13 @@
+import { Check, Sparkles, Rocket, Star, Building2 } from "lucide-react";
 import { pricingTiers } from "@/lib/content";
 import { cn } from "@/lib/utils";
+
+const tierIcons: Record<string, typeof Sparkles> = {
+  Free: Sparkles,
+  Starter: Rocket,
+  Professional: Star,
+  Enterprise: Building2,
+};
 
 export function PricingSection() {
   return (
@@ -14,7 +22,9 @@ export function PricingSection() {
         <em className="text-muted-foreground not-italic">Scale when you&apos;re ready.</em>
       </h2>
       <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-4">
-        {pricingTiers.map((tier) => (
+        {pricingTiers.map((tier) => {
+          const TierIcon = tierIcons[tier.label] ?? Sparkles;
+          return (
           <div
             key={tier.label}
             className={cn(
@@ -22,9 +32,12 @@ export function PricingSection() {
               tier.featured && "z-10 m-[-1px] rounded-lg border-2 border-primary",
             )}
           >
-            <span className="mb-6 block text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
-              {tier.label}
-            </span>
+            <div className="mb-6 flex items-center justify-between">
+              <span className="text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
+                {tier.label}
+              </span>
+              <TierIcon className="size-4 text-accent" strokeWidth={1.5} />
+            </div>
             <span className="mb-1 block font-mono text-4xl font-semibold">{tier.price}</span>
             <span className="mb-2 block text-xs text-muted-foreground">{tier.unit}</span>
             <span className="mb-6 block text-[11px] font-medium text-accent">{tier.integration}</span>
@@ -34,7 +47,9 @@ export function PricingSection() {
                   key={f}
                   className="flex items-center gap-2 border-b border-border py-1.5 text-sm text-foreground/80 last:border-b-0"
                 >
-                  <span className="size-1 shrink-0 rounded-full bg-accent" />
+                  <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-accent/15">
+                    <Check className="size-2.5 text-accent" strokeWidth={3} />
+                  </span>
                   {f}
                 </li>
               ))}
@@ -51,7 +66,8 @@ export function PricingSection() {
               {tier.cta}
             </a>
           </div>
-        ))}
+          );
+        })}
       </div>
       <p className="mt-4 text-[11px] text-muted-foreground">
         All plans include SHA-256 tamper-proof chain and public audit trail. No credit card required for Free

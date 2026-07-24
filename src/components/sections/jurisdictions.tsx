@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Check } from "lucide-react";
 import { jurisdictions } from "@/lib/content";
 
 export function JurisdictionsSection() {
@@ -46,12 +47,12 @@ export function JurisdictionsSection() {
                     key={item}
                     className="relative border-b border-border py-1 pl-5 text-[12.5px] text-muted-foreground last:border-b-0"
                   >
-                    <span className="absolute left-0 text-[11px] font-bold text-accent">✓</span>
+                    <Check className="absolute left-0 top-1 size-3 text-accent" strokeWidth={3} />
                     {item}
                   </li>
                 ))}
               </ul>
-              <span className="meta-text inline-block rounded border border-border bg-secondary px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
+              <span className="meta-text inline-block rounded-full border border-border bg-secondary px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
                 {j.retention}
               </span>
             </div>

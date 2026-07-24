@@ -1,7 +1,7 @@
 import { AnimatedNumber } from "@/components/animated-number";
 import { DemoWidget } from "@/components/demo-widget";
 import { HashPanel } from "@/components/hash-panel";
-import { RetroMonitor } from "@/components/retro-monitor";
+import { RetroComputer3D } from "@/components/retro-computer-3d-loader";
 
 export function HeroSection() {
   return (
@@ -63,27 +63,11 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-        <div className="relative hidden min-h-[calc(100vh-104px)] items-center justify-center overflow-hidden border-l border-border bg-background px-8 py-10 md:flex">
-          {/* soft radial glow behind the monitor — Linear's signature product-shot
-              treatment, translated into AIDAL's gold accent instead of their blue */}
-          <div
-            className="pointer-events-none absolute top-1/2 left-1/2 size-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-[100px]"
-            style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)" }}
-            aria-hidden="true"
-          />
-          {/* faint dot-grid texture, subtle enough to stay in the background */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.4]"
-            style={{
-              backgroundImage: "radial-gradient(circle, var(--border) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-            }}
-            aria-hidden="true"
-          />
-          <RetroMonitor>
+        <div className="relative hidden min-h-[calc(100vh-104px)] items-center justify-center overflow-hidden border-l border-border bg-background md:flex">
+          <RetroComputer3D>
             <DemoWidget />
             <HashPanel />
-          </RetroMonitor>
+          </RetroComputer3D>
         </div>
       </div>
     </div>
